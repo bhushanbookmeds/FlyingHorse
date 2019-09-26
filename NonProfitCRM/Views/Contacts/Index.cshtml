@@ -1,0 +1,207 @@
+﻿@model IEnumerable<NonProfitCRM.Models.Contact>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_SiteLayout.cshtml";
+}
+
+<!--
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+<table class="table">
+    <thead>
+
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.OrgId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ParentContactId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PhoneNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DonorScore)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProfilePicture)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FacebookProfile)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.InstagramProfile)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TwitterProfile)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AddressLine1)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AddressLine2)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AddressStreet)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AddressCity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AddressState)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AddressCountry)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AddressZipcode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ContactType)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrgId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ParentContactId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PhoneNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DonorScore)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProfilePicture)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FacebookProfile)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.InstagramProfile)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TwitterProfile)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AddressLine1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AddressLine2)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AddressStreet)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AddressCity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AddressState)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AddressCountry)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AddressZipcode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ContactType.Name)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+-->
+
+<!-- Page-Title -->
+<div class="row">
+    <div class="col-sm-12">
+        <div class="page-title-box">
+            <div class="float-right">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="javascript:void(0);">Contacts</a></li>
+                    <li class="breadcrumb-item active">View All</li>
+                </ol>
+            </div>
+            <h4 class="page-title">Contacts</h4>
+        </div><!--end page-title-box-->
+    </div><!--end col-->
+</div>
+<!-- end page title end breadcrumb -->
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <a asp-action="Create" class="btn btn-primary px-4 btn-rounded float-right mt-0 mb-3">+ Add New</a>
+                <h4 class="header-title mt-0">Contacts Details</h4>
+                <div class="table-responsive dash-social">
+                    <table id="datatable" class="table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Phone No</th>
+                                <th>Donor Score</th>
+                                <th>City</th>
+                                <th>Country</th>
+                                <th>Social</th>
+                                <th>Action</th>
+                            </tr><!--end tr-->
+                        </thead>
+
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td><img src="../assets/images/users/user-10.jpg" alt="" class="thumb-sm rounded-circle mr-2"><a asp-action="Details" asp-route-Id=@item.Id>@Html.DisplayFor(modelItem => item.Name)</a></td>
+                                    <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.PhoneNumber)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.DonorScore)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.AddressCity)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.AddressCountry)</td>
+                                    <td>
+                                        <span class="fa-facebook"></span>
+                                        <span class="fa-twitter"></span>
+                                        <span class="fa-instagram"></span>
+                                    </td>
+                                    <td>
+                                        <a asp-action="Edit" class="mr-2"><i class="fas fa-edit text-info font-16"></i></a>
+                                        <a asp-action="Delete"><i class="fas fa-trash-alt text-danger font-16"></i></a>
+                                    </td>
+                                </tr><!--end tr-->
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div><!--end card-body-->
+        </div><!--end card-->
+    </div> <!--end col-->
+</div><!--end row-->
