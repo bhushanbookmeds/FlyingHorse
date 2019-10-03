@@ -58,6 +58,8 @@ namespace NonProfitCRM.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,OrgId,Name,ContactTypeId,ParentContactId,PhoneNumber,Email,DonorScore,ProfilePicture,FacebookProfile,InstagramProfile,TwitterProfile,AddressLine1,AddressLine2,AddressStreet,AddressCity,AddressState,AddressCountry,AddressZipcode")] Contact contact)
+
+
         {
             if (ModelState.IsValid)
             {
@@ -86,6 +88,7 @@ namespace NonProfitCRM.Controllers
             }
             ViewData["ContactTypeId"] = new SelectList(_unitOfWork.ContactTypeRepository.GetAll(), "Id", "Name", contact.ContactTypeId);
             return View(contact);
+            
         }
 
         // POST: Contacts/Edit/5
@@ -99,11 +102,12 @@ namespace NonProfitCRM.Controllers
             {
                 return NotFound();
             }
-
+            
             if (ModelState.IsValid)
             {
                 try
                 {
+                    contact.OrgId = orgId;
                     _unitOfWork.ContactRepository.Update(contact);
                     await _unitOfWork.SaveAsync();
 
@@ -163,5 +167,6 @@ namespace NonProfitCRM.Controllers
             }
             return true;
         }
+        
     }
 }
