@@ -28,6 +28,7 @@ namespace NonProfitCRM.Models
         public virtual DbSet<UserRole> UserRole { get; set; }
         public virtual DbSet<UserRoleMapping> UserRoleMapping { get; set; }
         public virtual DbSet<Users> Users { get; set; }
+        public virtual DbSet<Project> Project { get; set; }  
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -214,6 +215,32 @@ namespace NonProfitCRM.Models
                     .WithMany(p => p.Event)
                     .HasForeignKey(d => d.OrgId)
                     .HasConstraintName("FK_Event_Organization");
+            });
+
+            modelBuilder.Entity<Project>(entity =>
+            {
+                entity.Property(e => e.AddressCity).HasMaxLength(50);
+
+                entity.Property(e => e.AddressCountry).HasMaxLength(50);
+
+                entity.Property(e => e.AddressLine1).HasMaxLength(128);
+
+                entity.Property(e => e.AddressLine2).HasMaxLength(128);
+
+                entity.Property(e => e.AddressState).HasMaxLength(50);
+
+                entity.Property(e => e.AddressStreet).HasMaxLength(128);
+
+                entity.Property(e => e.AddressZipcode).HasMaxLength(50);
+
+                entity.Property(e => e.Date).HasColumnType("datetime");
+
+                entity.Property(e => e.OrgId).HasMaxLength(128);
+
+                entity.HasOne(d => d.Org)
+                    .WithMany(p => p.Project)
+                    .HasForeignKey(d => d.OrgId)
+                    .HasConstraintName("FK_Project_Organization");
             });
 
             modelBuilder.Entity<Organization>(entity =>
