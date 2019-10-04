@@ -130,7 +130,7 @@ namespace NonProfitCRM.Models
 
             modelBuilder.Entity<Donation>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
+                entity.Property(e => e.Id);
 
                 entity.Property(e => e.Date).HasColumnType("datetime");
 
