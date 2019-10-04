@@ -67,8 +67,8 @@
                             </div>
 
 
-                            <!--
-                                <div class="form-group row">
+
+                            @*<div class="form-group row">
                                     <label class="col-sm-4 col-form-label text-right" asp-for="FacebookProfile">Facebook Profile</label>
                                     <div class="col-sm-8">
                                         <input class="form-control" type="text" id="example-text-input" asp-for="FacebookProfile">
@@ -85,11 +85,7 @@
                                     <div class="col-sm-8">
                                         <input class="form-control" type="text" asp-for="TwitterProfile">
                                     </div>
-                                </div>
-                            </div>
-                                    -->
-
-
+                                </div>*@
 
                             <div class="form-group row">
                                 <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="AddressLine1">Address Line 1</label>
@@ -98,67 +94,72 @@
                                     <span asp-validation-for="AddressLine1" class="text-danger"></span>
                                 </div>
                             </div>
+
+
+
                             <div class="form-group row">
                                 <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="AddressLine2">Address Line 2</label>
                                 <div class="col-sm-8">
                                     <input class="form-control" type="text" asp-for="AddressLine2">
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-lg-6">
-                        
-                        
-                        <div class="form-group row">
-                            <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="AddressStreet">Street</label>
-                            <div class="col-sm-8">
-                                <input class="form-control" type="text" asp-for="AddressStreet">
-                                <span asp-validation-for="AddressStreet" class="text-danger"></span>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="AddressCity">City</label>
-                            <div class="col-sm-8">
-                                <input class="form-control" type="text" asp-for="AddressCity">
-                                <span asp-validation-for="AddressCity" class="text-danger"></span>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="AddressState">State</label>
-                            <div class="col-sm-8">
-                                <input class="form-control" type="text" asp-for="AddressState">
-                                <span asp-validation-for="AddressState" class="text-danger"></span>
-                            </div>
+
+
                         </div>
 
-                        <div class="form-group row">
-                            <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="AddressZipcode">Zip code</label>
-                            <div class="col-sm-8">
-                                <input class="form-control" type="text" asp-for="AddressZipcode" required>
-                                <span asp-validation-for="AddressZipcode" class="text-danger"></span>
+                        <div class="col-lg-6">
+
+                            <div class="form-group row">
+                                <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="AddressStreet">Street</label>
+                                <div class="col-sm-8">
+                                    <input class="form-control" type="text" asp-for="AddressStreet">
+                                    <span asp-validation-for="AddressStreet" class="text-danger"></span>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-4 col-form-label text-right" asp-for="AddressCountry">Country</label>
-                            <div class="col-sm-8">
-                                <select class="custom-select" asp-for="AddressCountry" required>
-                                    <option selected="">Select</option>
-                                    <option value="India">India</option>
-                                    <option value="USA">USA</option>
-                                </select>
-                                <span asp-validation-for="AddressCountry" class="text-danger"></span>
+                            <div class="form-group row">
+                                <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="AddressCity">City</label>
+                                <div class="col-sm-8">
+                                    <input class="form-control" type="text" asp-for="AddressCity">
+                                    <span asp-validation-for="AddressCity" class="text-danger"></span>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-sm-12 text-right">
-                                <input type="submit" value="Submit" class="col-sm-3 btn btn-primary" />
+                            <div class="form-group row">
+                                <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="AddressState">State</label>
+                                <div class="col-sm-8">
+                                    <input class="form-control" type="text" asp-for="AddressState">
+                                    <span asp-validation-for="AddressState" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="AddressZipcode">Zip code</label>
+                                <div class="col-sm-8">
+                                    <input class="form-control" type="text" asp-for="AddressZipcode" required>
+                                    <span asp-validation-for="AddressZipcode" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-form-label text-right" asp-for="AddressCountry">Country</label>
+                                <div class="col-sm-8">
+                                    <select class="custom-select" asp-for="AddressCountry" required>
+                                        <option selected="">Select</option>
+                                        <option value="India">India</option>
+                                        <option value="USA">USA</option>
+                                    </select>
+                                    <span asp-validation-for="AddressCountry" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-12 text-right">
+                                    <input type="submit" value="Add" class="col-sm-3 btn btn-primary" />
+                                </div>
                             </div>
                         </div>
                     </div>
-          </div>
-            </form>
-        </div><!--end card-body-->
-    </div><!--end card-->
-</div><!--end col-->
+                </form>
+            </div><!--end card-body-->
+        </div><!--end card-->
+    </div><!--end col-->
 </div>
 
 

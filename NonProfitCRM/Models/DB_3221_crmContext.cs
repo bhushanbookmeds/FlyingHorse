@@ -28,7 +28,8 @@ namespace NonProfitCRM.Models
         public virtual DbSet<UserRole> UserRole { get; set; }
         public virtual DbSet<UserRoleMapping> UserRoleMapping { get; set; }
         public virtual DbSet<Users> Users { get; set; }
-        public virtual DbSet<Project> Project { get; set; }  
+        public virtual DbSet<Project> Project { get; set; }
+        public virtual DbSet<Country> Country { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
