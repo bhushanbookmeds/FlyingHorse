@@ -34,8 +34,8 @@ namespace NonProfitCRM.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Data Source=DESKTOP-616KLHU;Initial Catalog=CRMDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+                #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+                optionsBuilder.UseSqlServer("Data Source=tcp:s08.everleap.com;Persist Security Info=True;User ID=DB_3221_crm_user;Password=summi786");
             }
         }
 
@@ -130,7 +130,7 @@ namespace NonProfitCRM.Models
 
             modelBuilder.Entity<Donation>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
+                entity.Property(e => e.Id);
 
                 entity.Property(e => e.Date).HasColumnType("datetime");
 
