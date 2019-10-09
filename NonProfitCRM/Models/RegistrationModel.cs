@@ -10,7 +10,8 @@ namespace NonProfitCRM.Models
     {
         public int Id { get; set; }
 
-        public string OrgId { get; set; }
+        [Required(ErrorMessage = "please select organization name")]
+        public string OrgId { get; set; } = "00000-00000";
 
         [Required(ErrorMessage = "please enter user name")]
         public string Name { get; set; }
@@ -58,6 +59,7 @@ namespace NonProfitCRM.Models
         //[Required]
         public string AddressZipcode { get; set; }
 
+        [Required(ErrorMessage ="please select user role")]
         public int UserRoleId { get; set; }
     }
 }

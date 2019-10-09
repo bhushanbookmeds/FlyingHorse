@@ -1,0 +1,92 @@
+﻿@model IEnumerable<NonProfitCRM.Models.Users>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_SiteLayout.cshtml";
+}
+<style>
+    .elipse {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        width: 80%;
+        display: block;
+        white-space: nowrap;
+    }
+</style>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="page-title-box">
+            <div class="float-right">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="javascript:void(0);">Users</a></li>
+                    <li class="breadcrumb-item active">View All</li>
+                </ol>
+            </div>
+            <h4 class="page-title">Users</h4>
+        </div><!--end page-title-box-->
+    </div><!--end col-->
+</div>
+<!-- end page title end breadcrumb -->
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <a asp-action="Create" class="btn btn-primary px-4 btn-rounded float-right mt-0 mb-3">+ Add New</a>
+                <h4 class="header-title mt-0">Contacts Details</h4>
+                <div class="table-responsive dash-social">
+                    <table id="datatable" class="table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Phone Number</th>
+                                <th>Address</th>
+                                <th>Action</th>
+                            </tr><!--end tr-->
+                        </thead>
+
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td><a asp-action="Details" asp-route-Id=@item.Id>@Html.DisplayFor(modelItem => item.Name)</a></td>
+                                    <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.PhoneNumber)</td>
+                                    <td>
+                                        @{ var address = item.AddressStreet + " " + item.AddressLine1 + " " + item.AddressLine2 + " " + item.AddressCity + " " + item.AddressState + " " + item.AddressCountry + " " + item.AddressZipcode; }
+                                        <span class="elipse">
+                                            @address
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <a asp-controller="User" asp-action="Edit" asp-route-id=@item.Id class="mr-2"><i class="fas fa-edit text-info font-16"></i></a>
+                                        <a><i class="fas fa-trash-alt text-danger font-16" onclick="DeleteUser(@item.Id)"></i></a>
+                                    </td>
+                                </tr><!--end tr-->
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div><!--end card-body-->
+        </div><!--end card-->
+    </div> <!--end col-->
+</div><!--end row-->
+
+<script>
+    function DeleteUser(id) {
+        if (confirm('Are you sure to delete the record')) {
+            $.ajax({
+                type: 'Delete',
+                url: '@Url.Action("Delete","User")' + '/' + id,
+                data: {},
+                datatype: 'application/json',
+                success: function (data) {
+                    window.location.reload();
+                },
+                error: function (err) {
+                    alert(err);
+                }
+            });
+        }
+    }
+</script>

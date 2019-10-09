@@ -19,6 +19,15 @@ namespace NonProfitCRM.Services
             this._encryptionService = encryptionService;
         }
 
+        public async Task DeleteUser(Users user)
+        {
+            if (user == null)
+                throw new ArgumentNullException(nameof(user));
+
+            _unitOfWork.UsersRepository.Delete(user);
+            await _unitOfWork.SaveAsync();
+        }
+
         public async Task<Users> GetUserById(int id)
         {
             try
@@ -46,13 +55,16 @@ namespace NonProfitCRM.Services
             }catch(Exception ex) { return null; }
         }
 
-        public async Task<IEnumerable<Users>> GetUsers()
+        public async Task<IEnumerable<Users>> GetUsers(string orgId = null)
         {
             try
             {
-                var users = await _unitOfWork.UsersRepository.GetAllAsync();
+                var users = from user in _unitOfWork.UsersRepository.GetDbSet()
+                            select user;
+                if (!string.IsNullOrWhiteSpace(orgId))
+                    users = users.Where(u => u.OrgId.Equals(orgId));           
 
-                return users;
+                return users.ToList();
             }
             catch (Exception) { return null; }
         }
@@ -84,9 +96,35 @@ namespace NonProfitCRM.Services
             catch (Exception ex) { return false; }
         }
 
-        public async Task UpdateUser(RegistrationModel user)
+        public async Task UpdateUser(Users user)
         {
-            throw new NotImplementedException();
+            if (user == null)
+                throw new ArgumentNullException(nameof(user));
+
+            _unitOfWork.UsersRepository.Update(user);
+            await _unitOfWork.SaveAsync();
+        }
+
+        public async Task UpdateUserRole(int userId,int userRoleId)
+        {
+            try
+            {
+                if (userId <= 0 && userRoleId <= 0)
+                    throw new ArgumentNullException();
+
+                var userRoleMapping = await _unitOfWork.UserRoleMappingRepository.GetAsync(ur => ur.UserId == userId);
+
+                userRoleMapping.RoleId = userRoleId;
+                userRoleMapping.UserId = userId;
+
+                _unitOfWork.UserRoleMappingRepository.Update(userRoleMapping);
+                await _unitOfWork.SaveAsync();
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+        
         }
     }
 }

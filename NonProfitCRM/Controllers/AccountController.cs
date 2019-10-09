@@ -65,7 +65,6 @@ namespace NonProfitCRM.Controllers
             return View(loginModel);
         }
 
-        [HttpPost]
         public async Task<IActionResult> LogOut()
         {
             await _authenticationService.SignOut();
@@ -73,7 +72,7 @@ namespace NonProfitCRM.Controllers
             return RedirectToAction("Login", "Account");
         }
 
-       // [Authorize]
+        //[Authorize]
         public virtual IActionResult Register()
         {
             var model = new RegistrationModel();
@@ -97,6 +96,7 @@ namespace NonProfitCRM.Controllers
 
                 model.OrgId = loggedInCustomer.OrgId;
                 model.CreatedBy = loggedInCustomer.Id;
+                model.UserRoleId = (int)UserRoleEnum.Organization;
 
                 var registrationResult = await _userService.RegisterUser(model);
 
