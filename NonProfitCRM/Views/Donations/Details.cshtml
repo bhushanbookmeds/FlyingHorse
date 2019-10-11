@@ -1,0 +1,107 @@
+﻿@model NonProfitCRM.Models.Donation
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_SiteLayout.cshtml";
+}
+<!-- Page-Title -->
+<div class="row">
+    <div class="col-sm-12">
+        <div class="page-title-box">
+            <div class="float-right">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="javascript:void(0);">Contacts</a></li>
+                    <li class="breadcrumb-item active">Add New</li>
+                </ol>
+            </div>
+            <h4 class="page-title">Add Contact</h4>
+        </div><!--end page-title-box-->
+    </div><!--end col-->
+</div>
+<h2>Details</h2>
+
+<div>
+    <h4>Donation</h4>
+    <hr />
+    <hr />
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.GuestDonation)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.GuestDonation)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.GuestEmail)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.GuestEmail)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Amount)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Amount)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.RecurringDonation)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.RecurringDonation)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Date)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Date)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Campaign)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Campaign.OrgId)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Contact)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Contact.Name)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.DonationType)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.DonationType.Name)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Event)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Event.Id)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Org)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Org.Id)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.TransactionType)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.TransactionType.Name)
+                        </dd>
+                    </dl>
+                </div>
+                <div>
+                    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+                    <a asp-action="Index">Back to List</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
