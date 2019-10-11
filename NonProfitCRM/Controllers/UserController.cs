@@ -52,6 +52,22 @@ namespace NonProfitCRM.Controllers
             }
         }
 
+        public async Task<IActionResult> Details(int id)
+        {
+            if (id < 0)
+            {
+                return NotFound();
+            }
+
+            var user = await _userService.GetUserById(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return View(user);
+        }
+
         public async Task<IActionResult> Create()
         {
             var model = new RegistrationModel();
@@ -168,6 +184,8 @@ namespace NonProfitCRM.Controllers
             return Ok();
         }
 
+        #region Utilities
+
         private Users PrepareUserModel(RegistrationModel registrationModel, Users user)
         {
             user.Name = registrationModel.Name;
@@ -196,5 +214,7 @@ namespace NonProfitCRM.Controllers
             ViewBag.Organizations = new SelectList(organizations, "Id", "Name");
             ViewBag.UserRoles = new SelectList(userRoles, "Id", "Name");
         }
+
+        #endregion
     }
 }
