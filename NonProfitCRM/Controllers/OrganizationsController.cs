@@ -22,6 +22,7 @@ namespace NonProfitCRM.Controllers
         }
 
         // GET: Organizations
+        [Authorize(Roles ="Admin")]
         public async Task<IActionResult> Index()
         {
             var orgs = await _unitOfWork.OrganizationRepository.GetManyAsync(org=> !org.Name.Equals("Admin") && org.Id != "6562F517-EE73-4378-B9BD-8A8F64BB051C");
