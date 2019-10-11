@@ -12,6 +12,7 @@ namespace NonProfitCRM.Models
             Event = new HashSet<Event>();
             Pledge = new HashSet<Pledge>();
             Users = new HashSet<Users>();
+            Project = new HashSet<Project>();
         }
 
         public string Id { get; set; }
@@ -31,6 +32,7 @@ namespace NonProfitCRM.Models
         public ICollection<Campaign> Campaign { get; set; }
         public ICollection<Donation> Donation { get; set; }
         public ICollection<Event> Event { get; set; }
+        public ICollection<Project> Project { get; set; }
         public ICollection<Pledge> Pledge { get; set; }
         public ICollection<Users> Users { get; set; }
     }

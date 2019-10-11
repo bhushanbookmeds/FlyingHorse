@@ -28,6 +28,8 @@ namespace NonProfitCRM.Data
         private GenericRepository<Donation> donationRepository;
         private GenericRepository<Event> eventRepository;
         private GenericRepository<Pledge> pledgeRepository;
+        private GenericRepository<Project> projectRepository;
+        private GenericRepository<Country> CountriesRepository;
 
         #endregion
 
@@ -168,6 +170,15 @@ namespace NonProfitCRM.Data
             }
         }
 
+        public GenericRepository<Project> ProjectRepository
+        {
+            get
+            {
+                if (this.projectRepository == null)
+                    this.projectRepository = new GenericRepository<Project>(_context);
+                return projectRepository;
+            }
+        }
 
         #region Public member methods...
         /// <summary>
