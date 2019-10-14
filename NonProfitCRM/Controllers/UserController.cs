@@ -60,6 +60,7 @@ namespace NonProfitCRM.Controllers
             }
 
             var user = await _userService.GetUserById(id);
+            
             if (user == null)
             {
                 return NotFound();
