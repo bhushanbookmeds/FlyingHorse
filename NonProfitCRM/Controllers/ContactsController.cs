@@ -15,6 +15,7 @@ namespace NonProfitCRM.Controllers
         private readonly UnitOfWork _unitOfWork;
         private readonly string orgId;
 
+
         public ContactsController()
         {
             _unitOfWork = new UnitOfWork();
@@ -67,7 +68,7 @@ namespace NonProfitCRM.Controllers
 
                 _unitOfWork.ContactRepository.Insert(contact);
                 await _unitOfWork.SaveAsync();
-                
+
                 return RedirectToAction(nameof(Index));
             }
             ViewData["ContactTypeId"] = new SelectList(_unitOfWork.ContactTypeRepository.GetAll(), "Id", "Name", contact.ContactTypeId);
@@ -88,7 +89,7 @@ namespace NonProfitCRM.Controllers
             }
             ViewData["ContactTypeId"] = new SelectList(_unitOfWork.ContactTypeRepository.GetAll(), "Id", "Name", contact.ContactTypeId);
             return View(contact);
-            
+
         }
 
         // POST: Contacts/Edit/5
@@ -102,7 +103,7 @@ namespace NonProfitCRM.Controllers
             {
                 return NotFound();
             }
-            
+
             if (ModelState.IsValid)
             {
                 try
@@ -154,7 +155,7 @@ namespace NonProfitCRM.Controllers
             var contact = await _unitOfWork.ContactRepository.GetByIDAsync(id);
             _unitOfWork.ContactRepository.Delete(contact);
             await _unitOfWork.SaveAsync();
-            
+
             return RedirectToAction(nameof(Index));
         }
 
@@ -167,6 +168,17 @@ namespace NonProfitCRM.Controllers
             }
             return true;
         }
-        
+        // GET: Contacts/Countries/6
+      /* public IActionResult Country(int id)
+        {
+            var Country=_unitOfWork.ContactRepository.GetByID(Id)
+            List<Country> CountryList = new List<Country>();
+            CountryList = (from product in _unitOfWork.Country select product).ToList();
+            CountryList.Insert(0, new Country { Id = 0, Country = "Select" });
+            ViewBag.ListOfCountries = CountryList;
+            return View();
+
+
+        }*/
     }
 }

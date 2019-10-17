@@ -28,12 +28,14 @@ namespace NonProfitCRM.Models
         public virtual DbSet<UserRole> UserRole { get; set; }
         public virtual DbSet<UserRoleMapping> UserRoleMapping { get; set; }
         public virtual DbSet<Users> Users { get; set; }
-        public virtual DbSet<Project> Project { get; set; }  
+        public virtual DbSet<Project> Project { get; set; }
+        public virtual DbSet<Country> Country { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
+
                 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
                 optionsBuilder.UseSqlServer(@"Data Source=PCCS-0007\SQLEXPRESS;Initial Catalog=DB_3221_crm;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
             }

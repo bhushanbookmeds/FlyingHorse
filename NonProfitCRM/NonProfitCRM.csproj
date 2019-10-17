@@ -1,8 +1,15 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Views\Countries\**" />
+    <Content Remove="Views\Countries\**" />
+    <EmbeddedResource Remove="Views\Countries\**" />
+    <None Remove="Views\Countries\**" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="8.0.0" />

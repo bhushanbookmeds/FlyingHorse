@@ -25,8 +25,7 @@ namespace NonProfitCRM.Models
         [DisplayName("PhoneNumber")]
         public string PhoneNumber { get; set; }
         [Required(ErrorMessage = "Field can't be empty.")]
-        [RegularExpression(@"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z",
-        ErrorMessage = "Please enter correct email address")]
+        [RegularExpression("^[a-z0-9_\\+-]+(\\.[a-z0-9_\\+-]+)*@[a-z0-9-]+(\\.[a-z0-9]+)*\\.([a-z]{2,4})$", ErrorMessage = "Invalid email format.")]
         [DisplayName("Email")]
         public string Email { get; set; }
         public decimal? DonorScore { get; set; }
