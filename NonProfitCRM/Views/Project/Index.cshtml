@@ -1,0 +1,182 @@
+﻿@model IEnumerable<NonProfitCRM.Models.Project>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_SiteLayout.cshtml";
+}
+
+<!--
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+<table class="table">
+    <thead>
+
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.OrgId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AllocatedFund)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalExpenses)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AddressLine1)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AddressLine2)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AddressStreet)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AddressCity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AddressState)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AddressCountry)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AddressZipcode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProjectType)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+
+
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OrgId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                 <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalExpenses)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AllocatedFund)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+               <td>
+                @Html.DisplayNameFor(model => model.AddressLine1)
+            </td>
+            <td>
+                @Html.DisplayNameFor(model => model.AddressLine2)
+            </td>
+            <td>
+                @Html.DisplayNameFor(model => model.AddressStreet)
+            </td>
+            <td>
+                @Html.DisplayNameFor(model => model.AddressCity)
+            </td>
+            <td>
+                @Html.DisplayNameFor(model => model.AddressState)
+            </td>
+            <td>
+                @Html.DisplayNameFor(model => model.AddressCountry)
+            </td>
+            <td>
+                @Html.DisplayNameFor(model => model.AddressZipcode)
+            </td>
+            <td>
+                @Html.DisplayNameFor(model => model.ProjectType)
+            </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProjectType.Name)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<!-- Page-Title -->
+<div class="row">
+    <div class="col-sm-12">
+        <div class="page-title-box">
+            <div class="float-right">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="javascript:void(0);">Project</a></li>
+                    <li class="breadcrumb-item active">View All</li>
+                </ol>
+            </div>
+            <h4 class="page-title">Project</h4>
+        </div><!--end page-title-box-->
+    </div><!--end col-->
+</div>
+<!-- end page title end breadcrumb -->
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <a asp-action="Create" class="btn btn-primary px-4 btn-rounded float-right mt-0 mb-3">+ Add New</a>
+                <h4 class="header-title mt-0">Project Details</h4>
+                <div class="table-responsive dash-social">
+                    <table id="datatable" class="table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Start Date</th>
+                                <th>Close Date</th>
+                                <th>Allocated Fund</th>
+                                <th>City</th>
+                                <th>Country</th>
+                            </tr><!--end tr-->
+                        </thead>
+
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                            <tr>
+                                <td><img src="../assets/images/users/user-10.jpg" alt="" class="thumb-sm rounded-circle mr-2"><a asp-action="Details" asp-route-Id=@item.Id>@Html.DisplayFor(modelItem => item.Name)</a></td>
+
+                                <td>@Html.DisplayFor(modelItem => item.Date)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Date)</td>
+                                <td>@Html.DisplayFor(modelItem => item.AllocatedFund)</td>
+                                <td>@Html.DisplayFor(modelItem => item.AddressCity)</td>
+                                <td>@Html.DisplayFor(modelItem => item.AddressCountry)</td>
+
+
+                                <td>
+                                    <a asp-controller="Project" asp-action="Edit" asp-route-Id=@item.Id class="mr-2"><i class="fas fa-edit text-info font-16" onclick="return confirm('Are you sure to edit the record')"></i></a>
+                                    <a asp-controller="Project" asp-action="Delete" asp-route-Id="@item.Id"><i class="fas fa-trash-alt text-danger font-16" onclick="return confirm('Are you sure to delete the record')"></i></a>
+                                </td>
+                            </tr><!--end tr-->
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div><!--end card-body-->
+        </div><!--end card-->
+    </div> <!--end col-->
+</div><!--end row-->

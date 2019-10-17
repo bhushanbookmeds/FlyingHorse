@@ -35,7 +35,7 @@ namespace NonProfitCRM.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Server=tcp:s08.everleap.com;Initial Catalog=DB_3221_crm;User ID=DB_3221_crm_user;Password=;");
+                optionsBuilder.UseSqlServer(@"Server=SYED-MOHAMMED-Q\SQLEXPRESS;Initial Catalog=CRM_DB;Trusted_Connection=True");
             }
         }
 
@@ -155,6 +155,7 @@ namespace NonProfitCRM.Models
                     .HasForeignKey(d => d.DonationTypeId)
                     .HasConstraintName("FK_Donation_DonationType");
 
+
                 entity.HasOne(d => d.Event)
                     .WithMany(p => p.Donation)
                     .HasForeignKey(d => d.EventId)
@@ -237,11 +238,26 @@ namespace NonProfitCRM.Models
 
                 entity.Property(e => e.OrgId).HasMaxLength(128);
 
+                entity.Property(e => e.Name).IsRequired();
                 entity.HasOne(d => d.Org)
                     .WithMany(p => p.Project)
                     .HasForeignKey(d => d.OrgId)
                     .HasConstraintName("FK_Project_Organization");
+
+                entity.HasOne(d => d.ProjectType)
+                    .WithMany(p => p.Project)
+                    .HasForeignKey(d => d.ProjectTypeId)
+                    .HasConstraintName("FK_Project_ProjectType");
             });
+            modelBuilder.Entity<ProjectType>(entity =>
+            {
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.OrgId).HasMaxLength(128);
+            });
+
 
             modelBuilder.Entity<Organization>(entity =>
             {
