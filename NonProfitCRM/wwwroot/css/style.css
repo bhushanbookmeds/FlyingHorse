@@ -71,6 +71,13 @@ body {
   margin: 10px 0;
 }
 
+
+#output_image 
+{
+    max-width: 150px;
+}
+
+
 h1 {
   line-height: 43px;
   font-size: 36px;
@@ -496,7 +503,6 @@ small {
 
 .navbar-brand.navbar-scroll-brand {
   margin: 8px;
-  display: block;
   background-color: white;
   width: 100%;
   margin-bottom: 20px;
@@ -6550,7 +6556,7 @@ dt {
 }
 
 .met-profile .met-profile-main .met-profile_user-detail .met-user-name {
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 600;
   color: #ffffff;
   margin-bottom: 6px;
