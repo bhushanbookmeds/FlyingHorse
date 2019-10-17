@@ -14,10 +14,7 @@
     <script src="~/js/waves.min.js"></script>
     <script src="~/js/jquery.slimscroll.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.10.0/jquery.timepicker.min.js"></script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
-
-
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
     <!-- App css -->
     <link href="~/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="~/css/icons.css" rel="stylesheet" type="text/css" />
@@ -286,8 +283,8 @@
                             <h6 class="menu-title">Upload Donations</h6>
                         </div>
                         <ul class="nav">
-                            <li class="nav-item"><a class="nav-link" asp-controller="UploadDonations" asp-action="SyncWithBankAccount"></i>Sync With Bank Account</a></li>
-                            <li class="nav-item"><a class="nav-link" asp-controller="UploadDonations" asp-action="ImportDonationsFromAnExcel"></i>Import Donations From An Excel</a></li>
+                            <li class="nav-item"><a class="nav-link" asp-controller="UploadDonations" asp-action="SyncWithBankAccount"><i class="dripicons-view-apps"></i>Sync With Bank Account</a></li>
+                            <li class="nav-item"><a class="nav-link" asp-controller="UploadDonations" asp-action="ImportDonationsFromAnExcel"><i class="dripicons-plus"></i>Import Donations From An Excel</a></li>
                         </ul>
                     </div><!-- end 0f Upload Donations -->
                     <div id="MenuPledges" class="main-icon-menu-pane">
@@ -339,12 +336,7 @@
     </div>
     <!-- end page-wrapper -->
     <!-- jQuery  -->
-    @*<script src="~/js/jquery.min.js"></script>
-    <script src="~/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/metisMenu.min.js"></script>
-    <script src="~/js/waves.min.js"></script>
-    <script src="~/js/jquery.slimscroll.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.10.0/jquery.timepicker.min.js"></script>*@
+
     @RenderSection("Scripts", required: false)
 
     <script src="~/js/app.js"></script>
