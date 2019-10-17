@@ -17,10 +17,14 @@ namespace NonProfitCRM.Models
         public bool? Closed { get; set; }
         public int? DonationId { get; set; }
 
+        public int? VolunteersId { get; set; }
+
         public Campaign Campaign { get; set; }
         public Contact Contact { get; set; }
         public Donation Donation { get; set; }
         public Event Event { get; set; }
         public Organization Org { get; set; }
+
+        public Volunteers Volunteers { get; set; }
     }
 }

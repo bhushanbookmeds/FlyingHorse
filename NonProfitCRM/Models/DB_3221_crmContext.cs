@@ -31,13 +31,16 @@ namespace NonProfitCRM.Models
         public virtual DbSet<Project> Project { get; set; }
         public virtual DbSet<Country> Country { get; set; }
 
+        public virtual DbSet<Volunteers>Volunteers { get; set; }
+     
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
 
                 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Data Source=tcp:s08.everleap.com;Persist Security Info=True;User ID=DB_3221_crm_user;Password=summi786");
+                optionsBuilder.UseSqlServer(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=CRM;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
             }
         }
 
@@ -130,6 +133,7 @@ namespace NonProfitCRM.Models
                     .HasMaxLength(50);
             });
 
+
             modelBuilder.Entity<Donation>(entity =>
             {
                 entity.Property(e => e.Id);
@@ -183,6 +187,42 @@ namespace NonProfitCRM.Models
                 entity.Property(e => e.OrgId).HasMaxLength(128);
             });
 
+
+            modelBuilder.Entity<Volunteers>(entity =>
+            {         
+
+              
+                entity.Property(e => e.OrgId)
+                    .IsRequired()
+                    .HasMaxLength(128);
+
+                entity.Property(e => e.Name).IsRequired().HasMaxLength(255);
+
+                entity.Property(e => e.PhoneNumber);
+                   
+
+                entity.Property(e => e.Age);
+
+                entity.Property(e => e.Email).HasMaxLength(255);
+
+                entity.Property(e => e.AddressLine1).HasMaxLength(255);
+
+                entity.Property(e => e.AddressLine2).HasMaxLength(255);
+
+                entity.Property(e => e.AddressStreet).HasMaxLength(255);
+
+                entity.Property(e => e.AddressCity).HasMaxLength(255);
+
+                entity.Property(e => e.AddressState).HasMaxLength(255);
+
+                entity.Property(e => e.AddressCountry).HasMaxLength(255);
+
+                entity.Property(e => e.AddressZipcode).HasMaxLength(6);
+
+
+            });
+
+          
             modelBuilder.Entity<Event>(entity =>
             {
                 entity.Property(e => e.AddressCity).HasMaxLength(50);
@@ -315,6 +355,11 @@ namespace NonProfitCRM.Models
                     .HasForeignKey(d => d.OrgId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Pledge_Organization");
+
+             /*   entity.HasOne(d => d.Volunteers)
+                   .WithMany(p => p.Pledge)
+                   .HasForeignKey(d => d.VolunteersId)
+                   .HasConstraintName("FK_Pledge_Volunteers");*/
             });
 
             modelBuilder.Entity<TransactionType>(entity =>
