@@ -8,7 +8,7 @@
 
     <!-- App favicon -->
     @*<link rel="shortcut icon" href="../assets/images/favicon.ico">*@
-
+    <script src="~/js/jquery.min.js"></script>
     <!-- App css -->
     <link href="~/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="~/css/icons.css" rel="stylesheet" type="text/css" />
@@ -279,8 +279,8 @@
                             <h6 class="menu-title">Upload Donations</h6>
                         </div>
                         <ul class="nav">
-                            <li class="nav-item"><a class="nav-link" asp-controller="UploadDonations" asp-action="SyncWithBankAccount"></i>Sync With Bank Account</a></li>
-                            <li class="nav-item"><a class="nav-link" asp-controller="UploadDonations" asp-action="ImportDonationsFromAnExcel"></i>Import Donations From An Excel</a></li>
+                            <li class="nav-item"><a class="nav-link" asp-controller="UploadDonations" asp-action="SyncWithBankAccount"><i class="dripicons-view-apps"></i>Sync With Bank Account</a></li>
+                            <li class="nav-item"><a class="nav-link" asp-controller="UploadDonations" asp-action="ImportDonationsFromAnExcel"><i class="dripicons-plus"></i>Import Donations From An Excel</a></li>
                         </ul>
                     </div><!-- end 0f Upload Donations -->
                     <div id="MenuPledges" class="main-icon-menu-pane">
@@ -312,7 +312,7 @@
     </div>
     <!-- end page-wrapper -->
     <!-- jQuery  -->
-    <script src="~/js/jquery.min.js"></script>
+    
     <script src="~/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/metisMenu.min.js"></script>
     <script src="~/js/waves.min.js"></script>
