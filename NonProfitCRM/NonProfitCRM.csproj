@@ -5,15 +5,23 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.App" />
-    <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="2.1.1" />
-    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.9" />
+
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\Countries\" />
     <Folder Include="wwwroot\Banners\" />
+    <Compile Remove="Views\Countries\**" />
+    <Content Remove="Views\Countries\**" />
+    <EmbeddedResource Remove="Views\Countries\**" />
+    <None Remove="Views\Countries\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="8.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.9" />
+
   </ItemGroup>
 
 </Project>
