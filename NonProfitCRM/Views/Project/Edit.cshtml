@@ -1,88 +1,68 @@
-﻿@model NonProfitCRM.Models.Contact
+﻿@model NonProfitCRM.Models.Project
 
 @{
     ViewData["Title"] = "Edit";
     Layout = "~/Views/Shared/_SiteLayout.cshtml";
+
 }
 
-<h2>Edit</h2>
+<h2>Edit Project</h2>
 
-<h4>Contact</h4>
 <hr />
-
-<div class="row">
-    <div class="col-lg-12">
-        <div class="card">
-            <v class="card-body">
-                <form asp-action="Edit">
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="form-group row">
-                                <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="Name">Name</label>
-                                <div class="col-sm-8">
-                                    <input class="form-control" type="text" id="example-text-input" asp-for="Name" required>
-                                    <span asp-validation-for="Name" class="text-danger"></span>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-sm-4 col-form-label text-right" asp-for="ContactTypeId">Type</label>
-                                @*<div class="col-sm-8">
-
-                                                    @Html.DropDownList("ContactTypeId", new SelectList((System.Collections.IEnumerable)ViewData["ContactTypeId"]), "Select", new { @class = "form-control" });
-                    @Html.DropDownList("ContactTypeId", new SelectList(ViewBag.ContactType, "Id", "Name"), "Name", new { @class = "form-control" })
-                                                    @Html.DropDownListFor(x => x.ContactTypeId, new SelectList(ViewBag.ContactType, "Id", "Name"))
-                                                </div>*@
-                                <div class="col-sm-8">
-                                    <select class="custom-select" asp-for="ContactTypeId">
-                                        <option selected="">Select</option>
-                                        <option value="1">Individual</option>
-                                        <option value="2">Organization</option>
-                                    </select>
-                                    <span asp-validation-for="ContactTypeId" class="text-danger"></span>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="example-phone-input" class="col-sm-4 col-form-label text-right" asp-for="PhoneNumber">Phone Number</label>
-                                <div class="col-sm-8">
-                                    <input class="form-control" type="text" id="startDate" asp-for="PhoneNumber" required>
-                                    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="example-email-input" class="col-sm-4 col-form-label text-right" asp-for="Email">Email</label>
-                                <div class="col-sm-8">
-                                    <input class="form-control" type="email" id="example-date-input" asp-for="Email" required>
-                                    <span asp-validation-for="Email" class="text-danger"></span>
-                                </div>
-                            </div>
-
-                        </div>
-                      
-
-                        <!--
-                       <div class="form-group row">
-                            <label class="col-sm-4 col-form-label text-right" asp-for="FacebookProfile">Facebook Profile</label>
+<div class="col-lg-12">
+    <div class="card">
+        <div class="card-body">
+            <form asp-action="Edit">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group row">
+                            <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="Name">Name</label>
                             <div class="col-sm-8">
-                                <input class="form-control" type="text" id="example-text-input" asp-for="FacebookProfile">
-                                <span asp-validation-for="FacebookProfile" class="text-danger"></span>
+                                <input class="form-control" type="text" id="example-text-input" asp-for="Name" required>
+                                <span asp-validation-for="Name" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="InstagramProfile">Instagram Profile</label>
+                            <label class="col-sm-4 col-form-label text-right" asp-for="ProjectTypeId">Project Type</label>
                             <div class="col-sm-8">
-                                <input class="form-control" type="text" asp-for="InstagramProfile">
-                                <span asp-validation-for="InstagramProfile" class="text-danger"></span>
+
+                                @Html.DropDownList("ProjectTypeId", (SelectList)ViewBag.ProjectType, "Select", new { @class = "form-control" })
+                                <span asp-validation-for="ProjectTypeId" class="text-danger"></span>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group row">
+                            <label for="example-number-input" class="col-sm-4 col-form-label text-right" asp-for="AllocatedFund">Allocated Fund</label>
+                            <div class="col-sm-8">
+                                <input class="form-control" type="number" id="startDate" asp-for="AllocatedFund" required>
+                                <span asp-validation-for="AllocatedFund" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="TwitterProfile">Twitter Profile</label>
+                            <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="Description">Description</label>
                             <div class="col-sm-8">
-                                <input class="form-control" type="text" asp-for="TwitterProfile">
-                                <span asp-validation-for="TwitterProfile" class="text-danger"></span>
+                                <textarea class="form-control" asp-for="Description" rows="4" cols="45"></textarea>
+                                <span asp-validation-for="Description" class="text-danger"></span>
                             </div>
                         </div>
-                    </div>-->
-                    
+
+                        <div class="form-group row">
+                            <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="Date">Start Date</label>
+                            <div class="col-sm-8">
+                                <input class="form-control" type="date" id="example-text-input" asp-for="Date" required>
+                                <span asp-validation-for="Date" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="Date">Close Date</label>
+                            <div class="col-sm-8">
+                                <input class="form-control" type="date" id="example-text-input" asp-for="Date" required>
+                                <span asp-validation-for="Date" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
 
                     <div class="col-lg-6">
                         <div class="form-group row">
@@ -124,7 +104,7 @@
                         <div class="form-group row">
                             <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="AddressZipcode">Zip code</label>
                             <div class="col-sm-8">
-                                <input class="form-control" type="text" asp-for="AddressZipcode" required>
+                                <input class="form-control" type="number" asp-for="AddressZipcode" required>
                                 <span asp-validation-for="AddressZipcode" class="text-danger"></span>
                             </div>
                         </div>
@@ -139,25 +119,21 @@
                                 <span asp-validation-for="AddressCountry" class="text-danger"></span>
                             </div>
                         </div>
-
                         <div class="form-group row">
                             <div class="col-sm-12 text-right">
+
                                 <input type="submit" value="Save" class="col-sm-3 btn btn-primary" />
-                                
                             </div>
                         </div>
                     </div>
-                  
+                </div>
             </form>
-        </div><!--end card-body-->
-    </div><!--end card-->
-</div><!--end col-->
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+        </div>
+    </div>
+</div><!--end card-body-->
+ @*@Html.Partial("Expenditures", Model.Expenditures)*@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
 
-EDIT

@@ -38,9 +38,8 @@ namespace NonProfitCRM.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-
                 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=CRM;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+                optionsBuilder.UseSqlServer(@"Data Source=PCCS-0007\SQLEXPRESS;Initial Catalog=DB_3221_crm;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
             }
         }
 
@@ -161,6 +160,7 @@ namespace NonProfitCRM.Models
                     .HasForeignKey(d => d.DonationTypeId)
                     .HasConstraintName("FK_Donation_DonationType");
 
+
                 entity.HasOne(d => d.Event)
                     .WithMany(p => p.Donation)
                     .HasForeignKey(d => d.EventId)
@@ -190,8 +190,6 @@ namespace NonProfitCRM.Models
 
             modelBuilder.Entity<Volunteers>(entity =>
             {         
-
-              
                 entity.Property(e => e.OrgId)
                     .IsRequired()
                     .HasMaxLength(128);
@@ -200,7 +198,6 @@ namespace NonProfitCRM.Models
 
                 entity.Property(e => e.PhoneNumber);
                    
-
                 entity.Property(e => e.Age);
 
                 entity.Property(e => e.Email).HasMaxLength(255);
@@ -218,7 +215,6 @@ namespace NonProfitCRM.Models
                 entity.Property(e => e.AddressCountry).HasMaxLength(255);
 
                 entity.Property(e => e.AddressZipcode).HasMaxLength(6);
-
 
             });
 
@@ -239,7 +235,19 @@ namespace NonProfitCRM.Models
 
                 entity.Property(e => e.AddressZipcode).HasMaxLength(50);
 
-                entity.Property(e => e.Date).HasColumnType("datetime");
+                entity.Property(e => e.StartDate).HasColumnType("datetime");
+
+                entity.Property(e => e.EndDate).HasColumnType("datetime");
+
+                entity.Property(e => e.StartTime).HasMaxLength(50);
+
+                entity.Property(e => e.EndTime).HasMaxLength(50);
+
+                entity.Property(e => e.Description).HasMaxLength(500);
+
+                entity.Property(e => e.ImagePath).HasMaxLength(500);
+
+                entity.Ignore(e=>e.ImageFile);
 
                 entity.Property(e => e.OrgId).HasMaxLength(128);
 
@@ -279,11 +287,26 @@ namespace NonProfitCRM.Models
 
                 entity.Property(e => e.OrgId).HasMaxLength(128);
 
+                entity.Property(e => e.Name).IsRequired();
                 entity.HasOne(d => d.Org)
                     .WithMany(p => p.Project)
                     .HasForeignKey(d => d.OrgId)
                     .HasConstraintName("FK_Project_Organization");
+
+                entity.HasOne(d => d.ProjectType)
+                    .WithMany(p => p.Project)
+                    .HasForeignKey(d => d.ProjectTypeId)
+                    .HasConstraintName("FK_Project_ProjectType");
             });
+            modelBuilder.Entity<ProjectType>(entity =>
+            {
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.OrgId).HasMaxLength(128);
+            });
+
 
             modelBuilder.Entity<Organization>(entity =>
             {
