@@ -35,8 +35,8 @@ namespace NonProfitCRM.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-                #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Data Source=tcp:s08.everleap.com;Persist Security Info=True;User ID=DB_3221_crm_user;Password=summi786");
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+                optionsBuilder.UseSqlServer(@"Data Source=DESKTOP-LV68E9F\ADNANSQL;Initial Catalog=NonProfit;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
             }
         }
 
@@ -198,7 +198,19 @@ namespace NonProfitCRM.Models
 
                 entity.Property(e => e.AddressZipcode).HasMaxLength(50);
 
-                entity.Property(e => e.Date).HasColumnType("datetime");
+                entity.Property(e => e.StartDate).HasColumnType("datetime");
+
+                entity.Property(e => e.EndDate).HasColumnType("datetime");
+
+                entity.Property(e => e.StartTime).HasMaxLength(50);
+
+                entity.Property(e => e.EndTime).HasMaxLength(50);
+
+                entity.Property(e => e.Description).HasMaxLength(500);
+
+                entity.Property(e => e.ImagePath).HasMaxLength(500);
+
+                entity.Ignore(e=>e.ImageFile);
 
                 entity.Property(e => e.OrgId).HasMaxLength(128);
 

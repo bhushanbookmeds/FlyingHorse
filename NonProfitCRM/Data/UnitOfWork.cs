@@ -29,7 +29,7 @@ namespace NonProfitCRM.Data
         private GenericRepository<Event> eventRepository;
         private GenericRepository<Pledge> pledgeRepository;
         private GenericRepository<Project> projectRepository;
-        private GenericRepository<Country> CountriesRepository;
+        //private GenericRepository<Country> CountriesRepository;
 
         #endregion
 

@@ -43,22 +43,28 @@
                             @foreach (var item in Model)
                             {
                                 <tr>
-                                    <td><img src="../assets/images/users/user-10.jpg" alt="" class="thumb-sm rounded-circle mr-2">
-                                    <a asp-action="Details" asp-route-Id=@item.Id>@Html.DisplayFor(modelItem => item.Name)</a></td>
-                                    
-                                    <td>@Html.DisplayFor(modelItem => item.Date)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.AddressStreet)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.AddressCity)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.AddressCountry)</td>
+                                    <td>
+                                        <img src="@item.ImagePath" alt="" class="thumb-sm rounded-circle mr-2">
+                                        <a asp-action="Details" asp-route-Id=@item.Id style="text-transform: capitalize;">@Html.DisplayFor(modelItem => item.Name)</a>
+                                    </td>
+
+                                    <td>@Html.DisplayFor(modelItem => item.StartDate)</td>
+                                    <td style="text-transform: capitalize;">@Html.DisplayFor(modelItem => item.AddressStreet)</td>
+                                    <td style="text-transform: capitalize;">@Html.DisplayFor(modelItem => item.AddressCity)</td>
+                                    <td style="text-transform: capitalize;">@Html.DisplayFor(modelItem => item.AddressCountry)</td>
                                     <td>
                                         <span class="fa-facebook"></span>
                                         <span class="fa-twitter"></span>
                                         <span class="fa-instagram"></span>
                                     </td>
                                     <td>
-                                        <a asp-controller="Events" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-                                        <a asp-action="Edit" class="mr-2"><i class="fas fa-edit text-info font-16"></i></a>
-                                        <a asp-action="Delete"><i class="fas fa-trash-alt text-danger font-16"></i></a>
+                                        <a asp-controller="Events" asp-action="Edit" asp-route-id="@item.Id" class="mr-2">
+                                            <i class="fas fa-edit text-info font-16"></i>
+                                        </a>
+
+                                        <a asp-controller="Events" asp-action="Delete" asp-route-id="@item.Id" class="mr-2">
+                                            <i class="fas fa-trash-alt text-danger font-16"></i>
+                                        </a>
                                     </td>
                                 </tr><!--end tr-->
                             }
