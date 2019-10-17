@@ -308,6 +308,7 @@ namespace NonProfitCRM.Data
             return await DbSet.FirstAsync<TEntity>(predicate);
         }
 
+
         #endregion
     }
 }

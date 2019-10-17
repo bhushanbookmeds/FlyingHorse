@@ -21,10 +21,13 @@ namespace NonProfitCRM.Models
         [RegularExpression(@"^[\D]*$", ErrorMessage = "Use letters only please")]
         [DisplayName("Name")]
         public string Name { get; set; }
+
         [Required(ErrorMessage = "Field can't be empty.")]
         [DisplayName("Date")]
 
         [DataType(DataType.Date)]
+
+
         public DateTime? Date { get; set; }
         public decimal? TotalExpenses { get; set; }
         [Required(ErrorMessage = "Field can't be empty.")]
