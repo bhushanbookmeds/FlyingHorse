@@ -42,7 +42,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-4 col-form-label text-right" asp-for="ContactTypeId">Type <span class="mandate" style="color:red">*</span> </label>
                                 <div class="col-sm-8">
-                                    @Html.DropDownList("ContactTypeId", (SelectList)ViewBag.ContactTypeId, "Select", new { @class = "form-control", required = true, onchange = "changetextbox()" })
+                                    @Html.DropDownList("ContactTypeId", (SelectList)ViewBag.ContactTypeId, "Select", new { @class = "form-control", required = true})
                                     <span asp-validation-for="ContactTypeId" id="contacttype" class="text-danger"></span>
 
                                 </div>
@@ -68,7 +68,7 @@
                             <div class="form-group row">
                                 <label for="example-email-input" class="col-sm-4 col-form-label text-right" asp-for="Email">Email <span class="mandate" style="color:red">*</span> </label>
                                 <div class="col-sm-8">
-                                    <input class="form-control" type="email" id="example-date-input" asp-for="Email" required placeholder="Enter a valid email-id">
+                                    <input class="form-control" type="email" id="Email" asp-for="Email" required placeholder="Enter a valid email-id">
                                     @*<script src="email-validation.js"></script>*@
                                     <span asp-validation-for="Email" id="mail" class="text-danger"></span>
                                 </div>
@@ -76,19 +76,19 @@
                             <div class="form-group row">
                                 <label class="col-sm-4 col-form-label text-right" asp-for="FacebookProfile">Facebook Profile</label>
                                 <div class="col-sm-8">
-                                    <input class="form-control" type="text" id="example-text-input" asp-for="FacebookProfile">
+                                    <input class="form-control" type="text" id="facebook" asp-for="FacebookProfile">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="InstagramProfile">Instagram Profile</label>
                                 <div class="col-sm-8">
-                                    <input class="form-control" type="text" asp-for="InstagramProfile">
+                                    <input class="form-control" type="text" id="insta" asp-for="InstagramProfile">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="TwitterProfile">Twitter Profile</label>
                                 <div class="col-sm-8">
-                                    <input class="form-control" type="text" asp-for="TwitterProfile">
+                                    <input class="form-control" type="text" id="twitter" asp-for="TwitterProfile">
                                 </div>
                             </div>
 
@@ -107,7 +107,7 @@
 
                                 <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="Gender">Gender<span class="mandate" style="color:red">*</span></label>
                                     
-                                <div class="col-sm-6">
+                                <div class="col-sm-6" id="Gender">
 
                                     <input name="Gender" type="radio" value="Male" />  Male
                                     <input name="Gender" type="radio" value="Female" /> Female
@@ -163,7 +163,7 @@
                             <div class="form-group row">
                                 <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="AddressZipcode">Zip code <span class="mandate" style="color:red">*</span> </label>
                                 <div class="col-sm-8">
-                                    <input class="form-control" type="text" asp-for="AddressZipcode" required placeholder="Enter a valid zipcode">
+                                    <input class="form-control" type="text" asp-for="AddressZipcode" id="AddressZipcode" required placeholder="Enter a valid zipcode">
                                     <span asp-validation-for="AddressZipcode" id="zipcode" class="text-danger"></span>
                                 </div>
                             </div>
