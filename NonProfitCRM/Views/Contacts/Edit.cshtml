@@ -27,10 +27,11 @@
                             <div class="form-group row">
                                 <label class="col-sm-4 col-form-label text-right" asp-for="ContactTypeId">Type</label>
                                 @*<div class="col-sm-8">
-                                                @Html.DropDownList("ContactTypeId", new SelectList((System.Collections.IEnumerable)ViewData["ContactTypeId"]), "Select", new { @class = "form-control" });
-                @Html.DropDownList("ContactTypeId", new SelectList(ViewBag.ContactType, "Id", "Name"), "Name", new { @class = "form-control" })
-                                                @Html.DropDownListFor(x => x.ContactTypeId, new SelectList(ViewBag.ContactType, "Id", "Name"))
-                                            </div>*@
+
+                                                    @Html.DropDownList("ContactTypeId", new SelectList((System.Collections.IEnumerable)ViewData["ContactTypeId"]), "Select", new { @class = "form-control" });
+                    @Html.DropDownList("ContactTypeId", new SelectList(ViewBag.ContactType, "Id", "Name"), "Name", new { @class = "form-control" })
+                                                    @Html.DropDownListFor(x => x.ContactTypeId, new SelectList(ViewBag.ContactType, "Id", "Name"))
+                                                </div>*@
                                 <div class="col-sm-8">
                                     <select class="custom-select" asp-for="ContactTypeId">
                                         <option selected="">Select</option>
