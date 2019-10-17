@@ -4,15 +4,23 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
 
+ 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNet.Mvc" Version="5.2.7" />
-    <PackageReference Include="Microsoft.AspNetCore.App" />
-    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.9" />
+    <Folder Include="wwwroot\Banners\" />
+    <Compile Remove="Views\Countries\**" />
+    <Content Remove="Views\Countries\**" />
+    <EmbeddedResource Remove="Views\Countries\**" />
+    <None Remove="Views\Countries\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\Countries\" />
+    <PackageReference Include="AutoMapper" Version="8.0.0" />
+       <PackageReference Include="Microsoft.AspNet.Mvc" Version="5.2.7" />
+
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.9" />
+
   </ItemGroup>
 
 </Project>

@@ -1,0 +1,77 @@
+﻿@model IEnumerable<NonProfitCRM.Models.Event>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_SiteLayout.cshtml";
+}
+
+<!-- Page-Title -->
+<div class="row">
+    <div class="col-sm-12">
+        <div class="page-title-box">
+            <div class="float-right">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="javascript:void(0);">Events</a></li>
+                    <li class="breadcrumb-item active">View All</li>
+                </ol>
+            </div>
+            <h4 class="page-title">Events</h4>
+        </div><!--end page-title-box-->
+    </div><!--end col-->
+</div>
+<!-- end page title end breadcrumb -->
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <a asp-action="Create" class="btn btn-primary px-4 btn-rounded float-right mt-0 mb-3">+ Add New</a>
+                <h4 class="header-title mt-0">Events Details</h4>
+                <div class="table-responsive dash-social">
+                    <table id="datatable" class="table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Date</th>
+                                <th>Address</th>
+                                <th>City</th>
+                                <th>Country</th>
+                                <th>Social</th>
+                                <th>Action</th>
+                            </tr><!--end tr-->
+                        </thead>
+
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        <img src="@item.ImagePath" alt="" class="thumb-sm rounded-circle mr-2">
+                                        <a asp-action="Details" asp-route-Id=@item.Id style="text-transform: capitalize;">@Html.DisplayFor(modelItem => item.Name)</a>
+                                    </td>
+
+                                    <td>@Html.DisplayFor(modelItem => item.StartDate)</td>
+                                    <td style="text-transform: capitalize;">@Html.DisplayFor(modelItem => item.AddressStreet)</td>
+                                    <td style="text-transform: capitalize;">@Html.DisplayFor(modelItem => item.AddressCity)</td>
+                                    <td style="text-transform: capitalize;">@Html.DisplayFor(modelItem => item.AddressCountry)</td>
+                                    <td>
+                                        <span class="fa-facebook"></span>
+                                        <span class="fa-twitter"></span>
+                                        <span class="fa-instagram"></span>
+                                    </td>
+                                    <td>
+                                        <a asp-controller="Events" asp-action="Edit" asp-route-id="@item.Id" class="mr-2">
+                                            <i class="fas fa-edit text-info font-16"></i>
+                                        </a>
+
+                                        <a asp-controller="Events" asp-action="Delete" asp-route-id="@item.Id" class="mr-2">
+                                            <i class="fas fa-trash-alt text-danger font-16"></i>
+                                        </a>
+                                    </td>
+                                </tr><!--end tr-->
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div><!--end card-body-->
+        </div><!--end card-->
+    </div> <!--end col-->
+</div><!--end row-->
