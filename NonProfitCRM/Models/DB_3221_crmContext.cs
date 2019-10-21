@@ -237,7 +237,7 @@ namespace NonProfitCRM.Models
 
                 entity.Property(e => e.AddressStreet).HasMaxLength(128);
 
-                entity.Property(e => e.AddressZipcode).HasMaxLength(50);
+                entity.Property(e => e.AddressZipcode).HasMaxLength(6);
 
                 entity.Property(e => e.Date).HasColumnType("datetime");
 

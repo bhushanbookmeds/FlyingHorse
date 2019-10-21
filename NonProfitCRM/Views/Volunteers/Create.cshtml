@@ -32,24 +32,24 @@
                             <div class="form-group row">
                                 <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="Name">Name<span class="mandatory" style="color:Red;font-size:20px">*</span></label>
                                 <div class="col-sm-8">
-                                    <input class="form-control"  type="text" id="example-text-input" asp-for="Name">
+                                    <input class="form-control"  type="text" name="Name" id="example-text-input" asp-for="Name">
                                     <span asp-validation-for="Name" class="text-danger"></span>
                                 </div>
                             </div>
                           
                             <div class="form-group row">
-                                <label for="example-phone-input" class="col-sm-4 col-form-label text-right" asp-for="PhoneNumber">Phone Number</label>
+                                <label for="example-phone-input" class="col-sm-4 col-form-label text-right" asp-for="PhoneNumber">Phone Number<span class="mandatory" style="color:Red;font-size:20px">*</span></label>
                                 <div class="col-sm-8">
-                                    <input class="form-control" type="text" id="startDate" asp-for="PhoneNumber" required>
-                                    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                                    <input class="form-control" type="text" name="PhoneNumber"  asp-for="PhoneNumber" >
+                                    @*<span asp-validation-for="PhoneNumber" class="text-danger"></span>*@
                                 </div>
                             </div>
 
 
                             <div class="form-group row">
-                                <label for="example-age-input" class="col-sm-4 col-form-label text-right" asp-for="Age">Age</label>
+                                <label for="example-age-input" class="col-sm-4 col-form-label text-right" asp-for="Age">Age<span class="mandatory" style="color:Red;font-size:20px">*</span></label>
                                 <div class="col-sm-8">
-                                    <input class="form-control" type="text" id="startDate" asp-for="Age" required>
+                                    <input class="form-control" type="text" name="Age" id="startDate" asp-for="Age" required>
                                     <span asp-validation-for="Age" class="text-danger"></span>
                                 </div>
                             </div>
@@ -57,9 +57,9 @@
 
 
                             <div class="form-group row">
-                                <label for="example-email-input" class="col-sm-4 col-form-label text-right" asp-for="Email">Email</label>
+                                <label for="example-email-input" class="col-sm-4 col-form-label text-right" asp-for="Email">Email<span class="mandatory" style="color:Red;font-size:20px">*</span></label>
                                 <div class="col-sm-8">
-                                    <input class="form-control" type="email" id="example-date-input" asp-for="Email" required>
+                                    <input class="form-control" type="email" name="Email" id="example-date-input" asp-for="Email" required>
                                     <span asp-validation-for="Email" class="text-danger"></span>
                                 </div>
                             </div>
@@ -86,9 +86,9 @@
                                 </div>*@
 
                             <div class="form-group row">
-                                <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="AddressLine1">Address Line 1</label>
+                                <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="AddressLine1">Address Line 1<span class="mandatory" style="color:Red;font-size:20px">*</span></label>
                                 <div class="col-sm-8">
-                                    <input class="form-control" type="text" asp-for="AddressLine1">
+                                    <input class="form-control" type="text" name="AddressLine1" asp-for="AddressLine1">
                                     <span asp-validation-for="AddressLine1" class="text-danger"></span>
                                 </div>
                             </div>
@@ -98,7 +98,7 @@
                             <div class="form-group row">
                                 <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="AddressLine2">Address Line 2</label>
                                 <div class="col-sm-8">
-                                    <input class="form-control" type="text" asp-for="AddressLine2">
+                                    <input class="form-control" type="text" name="AddressLine2" asp-for="AddressLine2">
                                 </div>
                             </div>
 
@@ -108,38 +108,38 @@
                         <div class="col-lg-6">
 
                             <div class="form-group row">
-                                <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="AddressStreet">Street</label>
+                                <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="AddressStreet">Street<span class="mandatory" style="color:Red;font-size:20px">*</span></label>
                                 <div class="col-sm-8">
-                                    <input class="form-control" type="text" asp-for="AddressStreet">
+                                    <input class="form-control" type="text" name="AddressStreet" asp-for="AddressStreet">
                                     <span asp-validation-for="AddressStreet" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="AddressCity">City</label>
+                                <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="AddressCity">City<span class="mandatory" style="color:Red;font-size:20px">*</span></label>
                                 <div class="col-sm-8">
-                                    <input class="form-control" type="text" asp-for="AddressCity">
+                                    <input class="form-control" type="text" name="AddressCity" asp-for="AddressCity">
                                     <span asp-validation-for="AddressCity" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="AddressState">State</label>
+                                <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="AddressState">State<span class="mandatory" style="color:Red;font-size:20px">*</span></label>
                                 <div class="col-sm-8">
-                                    <input class="form-control" type="text" asp-for="AddressState">
+                                    <input class="form-control" type="text" name="AddressState" asp-for="AddressState">
                                     <span asp-validation-for="AddressState" class="text-danger"></span>
                                 </div>
                             </div>
 
                             <div class="form-group row">
-                                <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="AddressZipcode">Zip code</label>
+                                <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="AddressZipcode">Zip code<span class="mandatory" style="color:Red;font-size:20px">*</span></label>
                                 <div class="col-sm-8">
-                                    <input class="form-control" type="text" asp-for="AddressZipcode" required>
+                                    <input class="form-control" type="text" name="AddressZipcode" asp-for="AddressZipcode" required>
                                     <span asp-validation-for="AddressZipcode" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-sm-4 col-form-label text-right" asp-for="AddressCountry">Country</label>
+                                <label class="col-sm-4 col-form-label text-right" asp-for="AddressCountry">Country<span class="mandatory" style="color:Red;font-size:20px">*</span></label>
                                 <div class="col-sm-8">
-                                    <select class="custom-select" asp-for="AddressCountry" required>
+                                    <select class="custom-select" name="AddressCountry" asp-for="AddressCountry" required>
                                         <option selected="">Select</option>
                                         <option value="India">INDIA</option>
                                         <option value="USA">USA</option>
@@ -158,6 +158,17 @@
                                         <option value="VIETNAM">VIETNAM</option>
                                     </select>
                                     <span asp-validation-for="AddressCountry" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="InstagramProfile">Instagram Profile</label>
+                                <div class="col-sm-8">
+                                    <div class="input-group">
+                                        <span class="input-group-prepend">
+                                            <picture type="picture" class="btn btn-primary"><i class="fab fa-instagram"></i></picture>
+                                        </span>
+                                        <input class="form-control" type="text" id="insta" asp-for="InstagramProfile">
+                                    </div>
                                 </div>
                             </div>
                             <div class="form-group row">
