@@ -29,7 +29,8 @@ namespace NonProfitCRM.Models
         public virtual DbSet<UserRoleMapping> UserRoleMapping { get; set; }
         public virtual DbSet<Users> Users { get; set; }
         public virtual DbSet<Project> Project { get; set; }
-        public virtual DbSet<Country> Country { get; set; }
+       // public virtual DbSet<Country> Country { get; set; }
+       // public virtual DbSet<State> State { get; set; }
 
         public virtual DbSet<Volunteers>Volunteers { get; set; }
      
@@ -39,8 +40,9 @@ namespace NonProfitCRM.Models
             if (!optionsBuilder.IsConfigured)
             {
                 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer(@"Data Source=PCCS-0007\SQLEXPRESS;Initial Catalog=DB_3221_crm;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
-            }
+
+                optionsBuilder.UseSqlServer("Data Source=DESKTOP-616KLHU;Initial Catalog=CRMDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+             }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -446,6 +448,32 @@ namespace NonProfitCRM.Models
                     .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK_Users_Organization");
             });
+            //modelBuilder.Entity<Country>(entity =>
+            //{
+            //    entity.Property(e => e.TwoLetterISOCode).HasMaxLength(50);
+
+            //    entity.Property(e => e.Name).HasMaxLength(250);
+
+            //    entity.Property(e => e.ThreeLetterISOCode).HasMaxLength(50);
+
+            //    entity.Property(e => e.NumericISOCode);
+
+            //    entity.Property(e => e.PhoneCode);
+            //});
+            //modelBuilder.Entity<State>(entity =>
+            //{
+            //    entity.Property(e => e.CountryId);
+
+            //    entity.Property(e => e.Name).HasMaxLength(100);
+
+            //    entity.Property(e => e.Abbreviation).HasMaxLength(100);
+
+            //    entity.HasOne(s => s.Country)
+            //        .WithMany(c => c.State)
+            //        .HasForeignKey(s => s.CountryId)
+            //        .HasConstraintName("FK_State_Country_CountryId");
+            //});
+
         }
     }
 }
