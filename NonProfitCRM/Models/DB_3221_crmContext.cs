@@ -29,6 +29,9 @@ namespace NonProfitCRM.Models
         public virtual DbSet<UserRoleMapping> UserRoleMapping { get; set; }
         public virtual DbSet<Users> Users { get; set; }
         public virtual DbSet<Project> Project { get; set; }
+        public virtual DbSet<ProjectType> ProjectType { get; set; }
+        public virtual DbSet<Expenditures> Expenditures { get; set; }
+
         public virtual DbSet<Country> Country { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -38,8 +41,8 @@ namespace NonProfitCRM.Models
 
 
 
-                #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer(@"Data Source=PCCS-0007\SQLEXPRESS;Initial Catalog=DB_3221_crm;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+                optionsBuilder.UseSqlServer(@"Server=SYED-MOHAMMED-Q\SQLEXPRESS;Database=CRM_DB;Trusted_Connection=True");
 
             }
         }
@@ -215,7 +218,7 @@ namespace NonProfitCRM.Models
 
                 entity.Property(e => e.ImagePath).HasMaxLength(500);
 
-                entity.Ignore(e=>e.ImageFile);
+                entity.Ignore(e => e.ImageFile);
 
                 entity.Property(e => e.OrgId).HasMaxLength(128);
 
@@ -251,9 +254,11 @@ namespace NonProfitCRM.Models
 
                 entity.Property(e => e.AddressZipcode).HasMaxLength(50);
 
-                entity.Property(e => e.Date).HasColumnType("datetime");
+                entity.Property(e => e.StartDate).HasColumnType("datetime");
+                entity.Property(e => e.EndDate).HasColumnType("datetime");
 
                 entity.Property(e => e.OrgId).HasMaxLength(128);
+                entity.Property(e => e.Lead).IsRequired();
 
                 entity.Property(e => e.Name).IsRequired();
                 entity.HasOne(d => d.Org)
@@ -274,8 +279,17 @@ namespace NonProfitCRM.Models
 
                 entity.Property(e => e.OrgId).HasMaxLength(128);
             });
-
-
+            modelBuilder.Entity<Expenditures>(entity =>
+            {
+                entity.Property(e => e.Id);
+                entity.Property(e => e.ProjectId).HasMaxLength(128);
+                entity.Property(e => e.Name).IsRequired();
+                entity.Property(e => e.Date).HasColumnType("datetime");
+                entity.Property(e => e.Submitter).IsRequired();
+                entity.Property(e => e.Amount).HasColumnType("decimal(18, 2)");
+                
+                entity.Property(e => e.Invoice);
+            });
             modelBuilder.Entity<Organization>(entity =>
             {
                 entity.Property(e => e.Id)
@@ -309,106 +323,106 @@ namespace NonProfitCRM.Models
                 entity.Property(e => e.StartDate).HasColumnType("datetime");
             });
 
-            modelBuilder.Entity<Pledge>(entity =>
-            {
-                entity.Property(e => e.Date).HasColumnType("datetime");
+                modelBuilder.Entity<Pledge>(entity =>
+                {
+                    entity.Property(e => e.Date).HasColumnType("datetime");
 
-                entity.Property(e => e.OrgId)
-                    .IsRequired()
-                    .HasMaxLength(128);
+                    entity.Property(e => e.OrgId)
+                        .IsRequired()
+                        .HasMaxLength(128);
 
-                entity.Property(e => e.PhoneNumber)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
+                    entity.Property(e => e.PhoneNumber)
+                        .HasMaxLength(50)
+                        .IsUnicode(false);
 
-                entity.HasOne(d => d.Campaign)
-                    .WithMany(p => p.Pledge)
-                    .HasForeignKey(d => d.CampaignId)
-                    .HasConstraintName("FK_Pledge_Campaign");
+                    entity.HasOne(d => d.Campaign)
+                        .WithMany(p => p.Pledge)
+                        .HasForeignKey(d => d.CampaignId)
+                        .HasConstraintName("FK_Pledge_Campaign");
 
-                entity.HasOne(d => d.Contact)
-                    .WithMany(p => p.Pledge)
-                    .HasForeignKey(d => d.ContactId)
-                    .HasConstraintName("FK_Pledge_Contact");
+                    entity.HasOne(d => d.Contact)
+                        .WithMany(p => p.Pledge)
+                        .HasForeignKey(d => d.ContactId)
+                        .HasConstraintName("FK_Pledge_Contact");
 
-                entity.HasOne(d => d.Donation)
-                    .WithMany(p => p.Pledge)
-                    .HasForeignKey(d => d.DonationId)
-                    .HasConstraintName("FK_Pledge_Donation");
+                    entity.HasOne(d => d.Donation)
+                        .WithMany(p => p.Pledge)
+                        .HasForeignKey(d => d.DonationId)
+                        .HasConstraintName("FK_Pledge_Donation");
 
-                entity.HasOne(d => d.Event)
-                    .WithMany(p => p.Pledge)
-                    .HasForeignKey(d => d.EventId)
-                    .HasConstraintName("FK_Pledge_Event");
+                    entity.HasOne(d => d.Event)
+                        .WithMany(p => p.Pledge)
+                        .HasForeignKey(d => d.EventId)
+                        .HasConstraintName("FK_Pledge_Event");
 
-                entity.HasOne(d => d.Org)
-                    .WithMany(p => p.Pledge)
-                    .HasForeignKey(d => d.OrgId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Pledge_Organization");
-            });
+                    entity.HasOne(d => d.Org)
+                        .WithMany(p => p.Pledge)
+                        .HasForeignKey(d => d.OrgId)
+                        .OnDelete(DeleteBehavior.ClientSetNull)
+                        .HasConstraintName("FK_Pledge_Organization");
+                });
 
-            modelBuilder.Entity<TransactionType>(entity =>
-            {
-                entity.Property(e => e.Name)
-                    .IsRequired()
-                    .HasMaxLength(50);
+                modelBuilder.Entity<TransactionType>(entity =>
+                {
+                    entity.Property(e => e.Name)
+                        .IsRequired()
+                        .HasMaxLength(50);
 
-                entity.Property(e => e.OrgId).HasMaxLength(128);
-            });
+                    entity.Property(e => e.OrgId).HasMaxLength(128);
+                });
 
-            modelBuilder.Entity<UserRole>(entity =>
-            {
-                entity.Property(e => e.Name).HasMaxLength(50);
-            });
+                modelBuilder.Entity<UserRole>(entity =>
+                {
+                    entity.Property(e => e.Name).HasMaxLength(50);
+                });
 
-            modelBuilder.Entity<UserRoleMapping>(entity =>
-            {
-                entity.HasOne(d => d.Role)
-                    .WithMany(p => p.UserRoleMapping)
-                    .HasForeignKey(d => d.RoleId)
-                    .HasConstraintName("FK_UserRoleMapping_Role");
+                modelBuilder.Entity<UserRoleMapping>(entity =>
+                {
+                    entity.HasOne(d => d.Role)
+                        .WithMany(p => p.UserRoleMapping)
+                        .HasForeignKey(d => d.RoleId)
+                        .HasConstraintName("FK_UserRoleMapping_Role");
 
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.UserRoleMapping)
-                    .HasForeignKey(d => d.UserId)
-                    .HasConstraintName("FK_UserRoleMapping_User");
-            });
+                    entity.HasOne(d => d.User)
+                        .WithMany(p => p.UserRoleMapping)
+                        .HasForeignKey(d => d.UserId)
+                        .HasConstraintName("FK_UserRoleMapping_User");
+                });
 
-            modelBuilder.Entity<Users>(entity =>
-            {
-                entity.Property(e => e.AddressCity).HasMaxLength(50);
+                modelBuilder.Entity<Users>(entity =>
+                {
+                    entity.Property(e => e.AddressCity).HasMaxLength(50);
 
-                entity.Property(e => e.AddressCountry).HasMaxLength(50);
+                    entity.Property(e => e.AddressCountry).HasMaxLength(50);
 
-                entity.Property(e => e.AddressLine1).HasMaxLength(128);
+                    entity.Property(e => e.AddressLine1).HasMaxLength(128);
 
-                entity.Property(e => e.AddressLine2).HasMaxLength(128);
+                    entity.Property(e => e.AddressLine2).HasMaxLength(128);
 
-                entity.Property(e => e.AddressState).HasMaxLength(50);
+                    entity.Property(e => e.AddressState).HasMaxLength(50);
 
-                entity.Property(e => e.AddressStreet).HasMaxLength(128);
+                    entity.Property(e => e.AddressStreet).HasMaxLength(128);
 
-                entity.Property(e => e.AddressZipcode).HasMaxLength(50);
+                    entity.Property(e => e.AddressZipcode).HasMaxLength(50);
 
-                entity.Property(e => e.Email).HasMaxLength(100);
+                    entity.Property(e => e.Email).HasMaxLength(100);
 
-                entity.Property(e => e.Name).HasMaxLength(100);
+                    entity.Property(e => e.Name).HasMaxLength(100);
 
-                entity.Property(e => e.OrgId).HasMaxLength(128);
+                    entity.Property(e => e.OrgId).HasMaxLength(128);
 
-                entity.Property(e => e.Password).HasMaxLength(50);
+                    entity.Property(e => e.Password).HasMaxLength(50);
 
-                entity.Property(e => e.PhoneNumber)
-                    .HasMaxLength(30)
-                    .IsUnicode(false);
+                    entity.Property(e => e.PhoneNumber)
+                        .HasMaxLength(30)
+                        .IsUnicode(false);
 
-                entity.HasOne(d => d.Org)
-                    .WithMany(p => p.Users)
-                    .HasForeignKey(d => d.OrgId)
-                    .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("FK_Users_Organization");
-            });
-        }
+                    entity.HasOne(d => d.Org)
+                        .WithMany(p => p.Users)
+                        .HasForeignKey(d => d.OrgId)
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasConstraintName("FK_Users_Organization");
+                });
+            }
     }
-}
+    }

@@ -40,20 +40,22 @@ namespace NonProfitCRM.Controllers
             {
                 return NotFound();
             }
+            var expenditures = await _unitOfWork.ExpendituresRepository.GetManyAsync(x=>x.ProjectId==id);
 
+            project.Expenditures = expenditures.ToList();
+           
+            ViewBag.TotalAmount = project.Expenditures.Sum(x => x.Amount);
+            
             return View(project);
         }
         // GET: Project/Create
         public IActionResult Create()
         {
-            var ProjectTypes = _unitOfWork.ProjectTypeRepository.GetAll().ToList();
-            ViewBag.ProjectType = new SelectList(ProjectTypes, "Id", "Name");
-            var OrgId = _unitOfWork.OrganizationRepository.GetAll().ToList();
-            ViewBag.OrgId = new SelectList(OrgId, "Id", "Name");
+
             var ProjectTypeId = _unitOfWork.ProjectTypeRepository.GetAll().ToList();
             ViewBag.ProjectTypeId = new SelectList(ProjectTypeId, "Id", "Name");
 
-            return View();
+            return View(new Project());
         }
 
         // POST: Projects/Create
@@ -61,7 +63,8 @@ namespace NonProfitCRM.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Date,Description,AllocatedFund,TotalExpenses,AddressLine1,AddressLine2,AddressStreet,AddressCity,AddressState,AddressCountry,AddressZipcode,ProjectTypeId")] Project project)
+        public async Task<IActionResult> Create([Bind("Id,Name,StartDate,EndDate,Description,AllocatedFund,TotalExpenses,AddressLine1," +
+            "AddressLine2,AddressStreet,AddressCity,AddressState,AddressCountry,AddressZipcode,ProjectTypeId")] Project project)
         {
             if (ModelState.IsValid)
             {
@@ -72,31 +75,46 @@ namespace NonProfitCRM.Controllers
 
                 return RedirectToAction(nameof(Index));
             }
-
-            ViewData["OrgId"] = new SelectList(_unitOfWork.ProjectTypeRepository.GetAll(), "Id", "Name", project.OrgId);
+            var ProjectTypeId = _unitOfWork.ProjectTypeRepository.GetAll().ToList();
+            ViewBag.ProjectTypeId = new SelectList(ProjectTypeId, "Id", "Name");
 
             return View(project);
         }
         [HttpPost]
-        public async Task<IActionResult> Expenditures(FormCollection formCollection)
+        public async Task<IActionResult> Expenditures(Expenditures expenditures)
         {
 
-            string name = formCollection["Name"];
-            DateTime date = DateTime.Parse(formCollection["Date"]);
-            string submitter = formCollection["Submitter"];
-            string amount = formCollection["Amount"];
-            string invoice = formCollection["Invoice"];
+            if(expenditures == null)
+               return Json(new { ReturnStatus = "error", ReturnData = new Object() });
 
-            //if (ModelState.IsValid)
-            //{
-            //    var expenditures = await _unitOfWork.ProjectRepository.GetByIDAsync();
-            //}
-            //return Json(Expenditures);
-            return View();
+            Expenditures expend = new Expenditures();
+            expend.ProjectId = expenditures.ProjectId;
+            expend.Name = expenditures.Name;
+            expend.Date = expenditures.Date;
+            expend.Submitter = expenditures.Submitter;
+            expend.Amount = expenditures.Amount;
+            //expend.Invoice = formCollection["Invoice"];
+            var expenditure = _unitOfWork.ExpendituresRepository.GetDbSet().FirstOrDefault(x => x.Name == expend.Name);
+            if (expenditure == null)
+            {
+                try
+                { 
+                _unitOfWork.ExpendituresRepository.Insert(expend);
+                await _unitOfWork.SaveAsync();
+                }
+                catch(Exception ex)
+                {
+                    throw ex;
+                }
+
+                return Json(new { ReturnStatus = "success", ReturnData = expend });
+
+
+            }
+            return Json(new { ReturnStatus = "error", ReturnData = new Object() });
         }
-
-            // GET: Projects/Edit/5
-            public async Task<IActionResult> Edit(int? id)
+        // GET: Projects/Edit/5
+        public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
             {
@@ -117,7 +135,7 @@ namespace NonProfitCRM.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,AllocatedFund,Description,TotalExpenses,Date,AddressLine1,AddressLine2,AddressStreet,AddressCity,AddressState,AddressCountry,AddressZipcode,")] Project project)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,AllocatedFund,Description,TotalExpenses,StartDate,EndDate,AddressLine1,AddressLine2,AddressStreet,AddressCity,AddressState,AddressCountry,AddressZipcode,")] Project project)
         {
             if (id != project.Id)
             {
@@ -191,5 +209,5 @@ namespace NonProfitCRM.Controllers
     }
 }
 
-   
+
 

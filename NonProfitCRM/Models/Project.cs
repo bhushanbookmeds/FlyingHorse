@@ -21,15 +21,21 @@ namespace NonProfitCRM.Models
         [RegularExpression(@"^[\D]*$", ErrorMessage = "Use letters only please")]
         [DisplayName("Name")]
         public string Name { get; set; }
+        public string Lead { get; set; }
 
         [Required(ErrorMessage = "Field can't be empty.")]
-        [DisplayName("Date")]
+        [DisplayName("Start Date")]
 
         [DataType(DataType.Date)]
 
+        public DateTime? StartDate { get; set; }
 
-        public DateTime? Date { get; set; }
+        [Required(ErrorMessage = "Field can't be empty.")]
+        [DataType(DataType.Date)]
+        [DisplayName("End Date")]
+        public DateTime? EndDate { get; set; }
         public decimal? TotalExpenses { get; set; }
+
         [Required(ErrorMessage = "Field can't be empty.")]
         [DisplayName("AddressLine1")]
         public string AddressLine1 { get; set; }
@@ -53,6 +59,7 @@ namespace NonProfitCRM.Models
         public string AddressZipcode { get; set; }
 
         public string Description { get; set; }
+        [UIHint("Currency")]
         [Required(ErrorMessage = "Field can't be empty.")]
         [DisplayName("AllocatedFund")]
         public decimal? AllocatedFund { get; set; }
