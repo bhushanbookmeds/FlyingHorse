@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -17,6 +18,13 @@ namespace NonProfitCRM.Data
         #region Private member variables...
         internal DB_3221_crmContext Context;
         internal DbSet<TEntity> DbSet;
+
+        public IEnumerable CampaignId { get; internal set; }
+        public IEnumerable Contact { get; internal set; }
+        public IEnumerable DonationType { get; internal set; }
+        public IEnumerable Event { get; internal set; }
+        public IEnumerable Organization { get; internal set; }
+        public IEnumerable TransactionType { get; internal set; }
         #endregion
 
 
