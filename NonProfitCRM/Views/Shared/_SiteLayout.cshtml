@@ -15,19 +15,9 @@
     <script src="~/js/metisMenu.min.js"></script>
     <script src="~/js/waves.min.js"></script>
     <script src="~/js/jquery.slimscroll.min.js"></script>
-
-    <script src="~/js/JavaScript.js"></script>
-    <script src="~/js/expend.js"></script>
-
-    
-
-  <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
     <script src="~/lib/jquery-validation/dist/additional-methods.min.js"></script>
-
-    <script src="~/js/ClientSideValidation.js"></script>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.10.0/jquery.timepicker.min.js"></script>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
     <script src="~/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/moment.js"></script>
@@ -37,14 +27,15 @@
     <script src="~/js/bootstrap-material-datetimepicker.js"></script>
     <script src="~/js/bootstrap-maxlength.min.js"></script>
     <script src="~/js/jquery.bootstrap-touchspin.min.js"></script>
-
+    <script src="~/js/JavaScript.js"></script>
+    <script src="~/js/expend.js"></script>
+    <script src="~/js/ClientSideValidation.js"></script>
     <!-- App css -->
-   <link href="~/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="~/css/icons.css" rel="stylesheet" type="text/css" />
     <link href="~/css/metisMenu.min.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.10.0/jquery.timepicker.min.css">
     <link href="https://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css" rel="Stylesheet" type="text/css" />
-
     <link href="~/css/daterangepicker.css" rel="stylesheet" />
     <link href="~/css/select2.min.css" rel="stylesheet" />
     <link href="~/css/bootstrap-colorpicker.min.css" rel="stylesheet" />
@@ -52,9 +43,8 @@
     <link href="~/css/jquery.bootstrap-touchspin.min.css" rel="stylesheet" />
     <link href="~/css/style.css" rel="stylesheet" type="text/css" />
     <!---pages-->
-
-
 </head>
+
 @{
     var IsUserAdmin = Context.User.IsInRole("Admin");
 }
@@ -144,9 +134,6 @@
            </g>
             </svg>
                     </a>
-
-
-
                     @if (!IsUserAdmin)
                     {
                         <a href="#MenuContacts" class="nav-link" data-toggle="tooltip-custom" data-placement="top" title="" data-original-title="Contacts">
@@ -282,9 +269,7 @@
                                 <li class="nav-item"><a class="nav-link" href="../analytics/analytics-reports.html"><i class="dripicons-trophy"></i>Donations</a></li>
                                 <li class="nav-item"><a class="nav-link" href="../analytics/analytics-reports.html"><i class="dripicons-broadcast"></i>Campaigns</a></li>
                                 <li class="nav-item"><a class="nav-link" href="../analytics/analytics-reports.html"><i class="dripicons-location"></i>Events</a></li>
-
-                        <li class="nav-item"><a class="nav-link" href="/Project/Index"><i class="dripicons-expand"></i>Projects</a></li>
-
+                                <li class="nav-item"><a class="nav-link" href="/Project/Index"><i class="dripicons-expand"></i>Projects</a></li>
                             }
                             else
                             {
@@ -337,8 +322,6 @@
                             <li class="nav-item"><a class="nav-link" asp-controller="Donation" asp-action="Index"><i class="dripicons-view-apps"></i>View All</a></li>
                             <li class="nav-item"><a class="nav-link" asp-controller="Donation" asp-action="Create"><i class="dripicons-plus"></i>Add a donation</a></li>
                             <li class="nav-item"><a class="nav-link" href="/Donations/DonationType"><i class="dripicons-lightbulb"></i>Donation Type</a></li>
-
-
                         </ul>
                     </div><!-- end Donations -->
                     <div id="UploadDonations" class="main-icon-menu-pane">
@@ -370,9 +353,6 @@
                         <ul class="nav">
                             <li class="nav-item"><a class="nav-link" href="/Volunteers/Index"><i class="dripicons-view-apps"></i>View All</a></li>
                             <li class="nav-item"><a class="nav-link" href="/Volunteers/Create"><i class="dripicons-plus"></i>Add a Volunteers</a></li>
-                            
-
-
                         </ul>
                     </div><!-- end Donations -->
 
@@ -392,10 +372,7 @@
                         </div>
                         <ul class="nav">
                             <li class="nav-item"><a class="nav-link" asp-controller="Project" asp-action="Index"><i class="dripicons-view-apps"></i>View All</a></li>
-
-
                             <li class="nav-item"><a class="nav-link" href="/Project/Create"><i class="dripicons-plus"></i>Add a Project</a></li>
-
                         </ul>
                     </div><!-- end  Project-->
 
@@ -461,21 +438,9 @@
     </div>
     <!-- end page-wrapper -->
     <!-- jQuery  -->
-
-
+    
     @RenderSection("Scripts", required: false)
     <script src="~/js/app.js"></script>
-
     <script src="~/js/jquery.forms-advanced.js"></script>
-    @*<script src="~/plugins/apexcharts.min.js"></script>
-
-
-        <script src="~/pages/jquery.analytics_dashboard.init.js"></script>*@
-
-  
-
-
-        <script src="../assets/pages/jquery.forms-advanced.js"></script>*@
-
 </body>
 </html>
