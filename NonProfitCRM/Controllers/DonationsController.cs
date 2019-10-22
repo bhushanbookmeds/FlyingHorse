@@ -24,23 +24,7 @@ namespace NonProfitCRM.Controllers
             var dB_3221_crmContext = _context.Donation.Include(d => d.Campaign).Include(d => d.Contact).Include(d => d.DonationType).Include(d => d.Event).Include(d => d.Org).Include(d => d.TransactionType);
             return View(await dB_3221_crmContext.ToListAsync());
         }
-        public ActionResult Search(string searchBy, string search)
-        {
-            if (searchBy == "PhoneNumber")
-            {
-                return View(_context.Contact.Where(x => x.PhoneNumber == search || search == null).ToList());
-            }
-            else
-            {
-                return View(_context.Contact.Where(x => x.Name.StartsWith(search) || search == null).ToList());
-            }
-        }
-        public ActionResult getContacts(string term)
-        {
-            return Json(_context.Contact.Where(c => c.Name.StartsWith(term)).Select(a => new { label = a.Name }));
-        }
-
-
+       
         // GET: Donations/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -68,13 +52,15 @@ namespace NonProfitCRM.Controllers
         // GET: Donations/Create
         public IActionResult Create()
         {
-            ViewData["CampaignId"] = new SelectList(_context.Campaign, "Id", "OrgId");
+            ViewData["CampaignId"] = new SelectList(_context.Campaign, "Id", "Name");
             ViewData["ContactId"] = new SelectList(_context.Contact, "Id", "Name");
             ViewData["DonationTypeId"] = new SelectList(_context.DonationType, "Id", "Name");
-            ViewData["EventId"] = new SelectList(_context.Event, "Id", "Id");
+            ViewData["EventId"] = new SelectList(_context.Event, "Id", "Name");
             ViewData["OrgId"] = new SelectList(_context.Organization, "Id", "Id");
             ViewData["TransactionTypeId"] = new SelectList(_context.TransactionType, "Id", "Name");
+           
             return View();
+            
         }
 
         // POST: Donations/Create
@@ -201,6 +187,32 @@ namespace NonProfitCRM.Controllers
         {
             return _context.Donation.Any(e => e.Id == id);
         }
-        
+         public IActionResult Search(string term)
+        {
+            int phoneNumber;
+            bool result = int.TryParse(term, out phoneNumber);
+            IQueryable<Contact> contacts;
+
+            if (result)
+                contacts = _context.Contact.Where(x => x.PhoneNumber.Contains(term));
+            else
+                contacts = _context.Contact.Where(x => x.Name.Contains(term));
+
+            var list = (from c in contacts
+                        select new
+                        {
+                            label = c.Name,
+                            id = c.Id.ToString()
+                        }).ToList();
+
+            return Json(list);
+        }
+        public async Task<IActionResult> GetContactDetails(int id)
+        {
+            var contact = await _context.Contact.FirstOrDefaultAsync(m => m.Id == id);
+
+            return Json(contact);
+        }
+
     }
 }

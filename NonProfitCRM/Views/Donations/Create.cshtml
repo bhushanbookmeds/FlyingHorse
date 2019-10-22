@@ -1,12 +1,13 @@
 ﻿@model NonProfitCRM.Models.Donation
 
+
 @{
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_SiteLayout.cshtml";
 }
-<link href="~/Content/themes/base/jquery-ui.css"
-      rel="stylesheet"
-      type="text/css" />
+<script src="~/js/jquery-ui.min.js"></script>
+<link href="~/css/jquery-ui.min.css" rel="stylesheet" />
+
 <!-- Page-Title -->
 <div class="row">
     <div class="col-sm-12">
@@ -27,114 +28,100 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-body">
-                <form asp-action="Create">
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <p>
-                                <b> Search By  </b>@Html.RadioButton("SearchBy", "PhoneNumber")PhoneNumber
-                                @Html.RadioButton("SearchBy", "Name")Name <br />
-                                @Html.TextBox("Search") <input type="submit" value="Search" />
+
+
+                <a asp-controller="Contacts" asp-action="Create" class="btn btn-primary px-2 btn-rounded float-right mt-0 mb-1">New user</a>
+
+
+                @* Removed for brevity *@
+
+                <div class="form-group">
+
+                    <div class="control-label col-md-12"> Search For Existing User</div>
+                    @*@Html.LabelFor(model => model.Contact.Name, htmlAttributes: new { @class = "control-label col-sm-4 " })*@
+                    <div class="col-md-6">
+                        @Html.EditorFor(model => model.Contact.Name, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Contact.Name, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                @* Removed for brevity *@
+
+                @section Scripts
+                    {
+
+                    <script type="text/javascript">
+                            $(document).ready(function ()
+                            {
+                                $('#Contact_Name').autocomplete({
+                                    delay: 500,
+                                    minLength: 1,
+                                    source: '@Url.Action("Search","Donations")',
+                                    select: function (event, ui)
+                                    {
+                                        //set tagids to save
+
+
+                                        $("#Contact_Name").val(ui.item.label);
+
+                                        //Tags for display
+                                        this.value = ui.item.label;
+                                        $('#Contact_Name').show();
+                                        debugger
+                                        selectFunction(ui.item.id);
+                                        return false;
+
+                                    }
+                                });
+                            });
+                        function selectFunction(id) {
+                            $.ajax({
+                                type: "GET",
+                                url: '@Url.Action("GetContactDetails","Donations")/' + id,
+                                data: {},
+                                contentType: "application/json; charset=utf-8",
+                                dataType: "json",
+                                success: function (data) {
+
+                                    if (data) {
+
+                                        $('#contactName').html(data.name);
+                                        $('#Contactphonenumber').html(data.phoneNumber);
+                                        $('#contactemail').html(data.email)
+                                        $('#contactAddressLine1').html(data.addressLine1)
+                                        $('#contactAddressLine2').html(data.addressLine2)
+                                        $('#contactAddressStreet').html(data.addressStreet)
+                                        $('#contactAddressCity').html(data.addressCity)
+                                        $('#contactAddressState').html(data.addressState)
+                                        $('#contactAddressZipcode').html(data.Zipcode)
+                                        $('#contactAddressCountry').html(data.Country)
+                                        toggle();
+                                       // toggle1();
+
+                                    }
+                                    else {
+                                        alert("Somthing went wrong");
+                                    }
 
 
 
-
-
-                                @* Removed for brevity *@
-
-                                <div class="form-group">
-                                    @Html.LabelFor(model => model.Contact.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-                                    <div class="col-md-10">
-                                        @Html.EditorFor(model => model.Contact.Name, new { htmlAttributes = new { @class = "form-control" } })
-                                        @Html.ValidationMessageFor(model => model.Contact.Name, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-
-                                @* Removed for brevity *@
-
-                                @section Scripts {
-                                    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
-
-                                    <script type="text/javascript">
-                                        $(document).ready(function () {
-                                            $('#Contacts_Name').autocomplete({
-                                                source: '@Url.Action("getContacts","Donations")',
-                                                select: function (event, ui)
-                                                {
-                                                    //set tagids to save
-                                                    $("#ContactId").val(ui.item.id);
-
-                                                    //Tags for display
-                                                    this.value = ui.item.value;
-                                                    return false;
-                                                }
-                                            });
-                                        });
-                                    </script>
+                                    return data;
+                                    //$("Contact_Name").hide(function () { $("div.success").fadeIn(); });
+                                },
+                                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                                    alert("Status: " + textStatus); alert("Error: " + errorThrown);
                                 }
 
-                            </p>
 
-                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                            <div class="form-group">
-                                <label asp-for="OrgId" class="control-label"></label>
-                                <select asp-for="OrgId" class="form-control" asp-items="ViewBag.OrgId"></select>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="EventId" class="control-label"></label>
-                                <select asp-for="EventId" class="form-control" asp-items="ViewBag.EventId"></select>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="CampaignId" class="control-label"></label>
-                                <select asp-for="CampaignId" class="form-control" asp-items="ViewBag.CampaignId"></select>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="ContactId" class="control-label"></label>
-                                <select asp-for="ContactId" class="form-control" asp-items="ViewBag.ContactId"></select>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="GuestDonation" class="control-label"></label>
-                                <input asp-for="GuestDonation" class="form-control" />
-                                <span asp-validation-for="GuestDonation" class="text-danger"></span>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="GuestEmail" class="control-label"></label>
-                                <input asp-for="GuestEmail" class="form-control" />
-                                <span asp-validation-for="GuestEmail" class="text-danger"></span>
-                            </div>
-                        </div>
+                            });
+                        };
+
+                    </script>
+
+                }
 
 
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <label asp-for="Amount" class="control-label"></label>
-                                <input asp-for="Amount" class="form-control" />
-                                <span asp-validation-for="Amount" class="text-danger"></span>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="RecurringDonation" class="control-label"></label>
-                                <input asp-for="RecurringDonation" class="form-control" />
-                                <span asp-validation-for="RecurringDonation" class="text-danger"></span>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="Date" class="control-label"></label>
-                                <input asp-for="Date" class="form-control" />
-                                <span asp-validation-for="Date" class="text-danger"></span>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="TransactionTypeId" class="control-label"></label>
-                                <select asp-for="TransactionTypeId" class="form-control" asp-items="ViewBag.TransactionTypeId"></select>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="DonationTypeId" class="control-label"></label>
-                                <select asp-for="DonationTypeId" class="form-control" asp-items="ViewBag.DonationTypeId"></select>
-                            </div>
-                            <div class="form-group">
-                                <input type="submit" value="Create" class="btn btn-default" />
-                            </div>
 
-                        </div>
-                    </div>
-                </form>
             </div>
 
 
@@ -146,3 +133,147 @@
     <a asp-action="Index">Back to List</a>
 
 </div>
+<script>
+    function toggle() {
+        var cont = document.getElementById('show');
+        cont.style.display = cont.style.display == 'none' ? 'block' : 'none' ? 'block' : ' none';
+    }
+</script>
+<div class="page-content" id="show" style="display:none;">
+
+    <div class="container-fluid">
+        <!-- Page-Title -->
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-title-box">
+
+                    <h4 class="page-title">Profile</h4>
+
+                </div><!--end page-title-box-->
+            </div><!--end col-->
+        </div>
+        <!-- end page title end breadcrumb -->
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body  met-pro-bg">
+                        <div class="met-profile">
+                            <div class="row">
+                                <div class="col-lg-4 align-self-center mb-3 mb-lg-0">
+                                    <div class="met-profile-main">
+                                        <div class="met-profile-main-pic">
+                                            <img src="../assets/images/users/user-4.jpg" alt="" class="rounded-circle">
+                                            <span class="fro-profile_main-pic-change">
+                                                <i class="fas fa-camera"></i>
+                                            </span>
+                                        </div>
+                                        <div class="met-profile_user-detail">
+                                            <h5 class="met-user-name" id="contactName">Name</h5>
+
+                                        </div>
+                                    </div>
+                                </div><!--end col-->
+                                <div class="col-lg-4 ml-auto">
+                                    <ul class="list-unstyled personal-detail">
+                                        <li class=""><i class="dripicons-phone mr-2 text-info font-8" id="Contactphonenumber"></i>
+                                        <li class="mt-2"><i class="dripicons-mail text-info font-8 mt-2 mr-2" id="contactemail"></i>
+                                        <li class="mt-2"><i class="dripicons-location text-info font-8 mt-2 mr-2" id="contactAddressLine1"></i>
+                                        <li class="mt-2"><i class=" text-info font-8 mt-2 mr-2" id="contactAddressLine2"></i>
+                                        <li class="mt-2"><i class=" text-info font-8 mt-2 mr-2" id="contactAddressStreet"></i>
+                                        <li class="mt-2"><i class=" text-info font-8 mt-2 mr-2" id="contactAddressCity"></i>
+                                        <li class="mt-2"><i class="text-info font-8 mt-2 mr-2" id="contactAddressState"></i>
+                                        <li class="mt-2"><i class=" text-info font-8 mt-2 mr-2" id="contactAddressZipCode"></i>
+                                        <li class="mt-2"><i class=" text-info font-8 mt-2 mr-2" id="contactAddressCountry"></i>
+                                    </ul>
+
+                                </div><!--end col-->
+                                <div class="col-lg-4">
+                                    <div class="row">
+                                        <div class="col-lg-6 mx-auto">
+                                            <div class="own-detail bg-danger">
+                                                <h1>87</h1>
+                                                <h5>Overall Donations </h5>
+                                            </div>
+                                            <div class="own-detail own-detail-project bg-secondary">
+                                                <h1>50</h1>
+                                                <h5>Overall Campaing's Funded</h5>
+                                            </div>
+                                            <div class="own-detail own-detail-happy bg-success">
+                                                <h1>37</h1>
+                                                <h5>Overall Event's Funded</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><!--end row-->
+                        </div><!--end f_profile-->
+                    </div>
+                    <div class="card-body">
+                        <ul class="nav nav-pills mb-0" id="pills-tab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link" id="general_detail_tab" data-toggle="pill " onclick="toggle1()">Donate for Campaing</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="education_detail_tab" data-toggle="pill" onclick="toggle2()">Donate for Event</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="portfolio_detail_tab" data-toggle="pill" href="#portfolio_detail">Genral Donation</a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function toggle1() {
+        var cont = document.getElementById('Donate_for_Campaing');
+        cont.style.display = cont.style.display == 'none' ? 'block' : 'none';
+    }
+</script>
+<div class="page-content" id="Donate_for_Campaing" style="display:none;">
+    <div class="col-lg-12">
+        <div class="row">
+            <div class="card">
+                <div class="card-body">
+                    <label class="col-sm-12 col-form-label text-right"> Select List from Campaing </label>
+                    <div class="col-sm-12">
+                        @Html.DropDownList("CampaignId", (SelectList)ViewBag.CampaignId, "Select", new { @class = "form-control" })
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function toggle2() {
+        var cont = document.getElementById('Donate_for_Event');
+        cont.style.display = cont.style.display == 'none' ? 'block' : 'none';
+    }
+</script>
+<div class="page-content" id="Donate_for_Event" style="display:none;">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+
+
+
+                    <label class="col-sm-12 col-form-label text-right">Select List from Events </label>
+                    <div class="col-sm-12">
+                        @Html.DropDownList("EventId", (SelectList)ViewBag.EventId, "Select", new { @class = "form-control" })
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+            
+       
+   
