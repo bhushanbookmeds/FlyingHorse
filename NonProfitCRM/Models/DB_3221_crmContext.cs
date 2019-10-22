@@ -44,9 +44,8 @@ namespace NonProfitCRM.Models
             {
 
                 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                 optionsBuilder.UseSqlServer("Data Source=DESKTOP-616KLHU;Initial Catalog=CRMDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
-             }
-
+                optionsBuilder.UseSqlServer(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=CRM;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+            }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -223,6 +222,7 @@ namespace NonProfitCRM.Models
 
                 entity.Property(e => e.AddressZipcode).HasMaxLength(6);
 
+                entity.Property(e => e.InstagramProfile).HasMaxLength(255);
             });
 
           
@@ -240,7 +240,7 @@ namespace NonProfitCRM.Models
 
                 entity.Property(e => e.AddressStreet).HasMaxLength(128);
 
-                entity.Property(e => e.AddressZipcode).HasMaxLength(50);
+                entity.Property(e => e.AddressZipcode).HasMaxLength(6);
 
                 entity.Property(e => e.StartDate).HasColumnType("datetime");
 
