@@ -25,6 +25,7 @@ namespace NonProfitCRM.Models
         [Required(ErrorMessage ="Please select contact type")]
         public int ContactTypeId { get; set; }
         public int? ParentContactId { get; set; }
+        public int PhoneCode { get; set; }
         [Required(ErrorMessage = "Field can't be empty.")]
         [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Invalid Phone number")]
         [DisplayName("PhoneNumber")]
@@ -65,6 +66,7 @@ namespace NonProfitCRM.Models
         [Required(ErrorMessage = "Field can't be empty.")]
         [DisplayName("Gender")]
         public string Gender { get; set; }
+        public string ImagePath { get; set; }
 
 
         public ContactType ContactType { get; set; }

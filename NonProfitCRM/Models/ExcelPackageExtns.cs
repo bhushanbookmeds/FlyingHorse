@@ -4,6 +4,7 @@
 //using System.Threading.Tasks;
 //using System.Data;
 //using OfficeOpenXml;
+//using System.IO;
 
 //namespace NonProfitCRM.Models
 //{
@@ -11,11 +12,11 @@
 //    {
 //        public static DataTable ToDataTable(this ExcelPackage package)
 //        {
-//            ExcelWorkSheet worksheet = package.Workbook.WorkSheets.First();
+//            ExcelWorksheet worksheet = package.Workbook.WorkSheets.First();
 //            DataTable dt = new DataTable();
 //            foreach (var firstRowCell in worksheet.Cells[1, 1, 1, worksheet.Dimension.End.Column])
 //            {
-//                dt.Columns.Add(firstRowCelll.Text);
+//                dt.Columns.Add(firstRowCell.Text);
 //            }
 //            for (var rownumber = 2; rownumber <= worksheet.Dimension.End.Row; rownumber++)
 //            {
@@ -29,5 +30,5 @@
 //            }
 //            return dt;
 //        }
-//}
+//    }
 //}

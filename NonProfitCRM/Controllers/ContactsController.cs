@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using NonProfitCRM.Data;
 using NonProfitCRM.Models;
 using System.Runtime.InteropServices;
+using NonProfitCRM.Services;
 //using Excel = Microsoft.Office.Interop.Excel;
 //using ImportExcelFileInASPNETMVC.Model
 
@@ -21,11 +22,16 @@ namespace NonProfitCRM.Controllers
     public class ContactsController : Controller
     {
         private readonly UnitOfWork _unitOfWork;
+        private readonly ICommonServices _commonServices;
+
         private readonly string orgId;
+
 
         public ContactsController()
         {
             _unitOfWork = new UnitOfWork();
+            _commonServices = new CommonServices();
+
             orgId = "cac8a4ec-edd5-4554-8c91-24574282b9c1";
         }
 
@@ -55,17 +61,33 @@ namespace NonProfitCRM.Controllers
         // GET: Contacts/Create
         public IActionResult Create()
         {
-            var contactTypes = _unitOfWork.ContactTypeRepository.GetAll().ToList();
-            ViewBag.ContactTypeId = new SelectList(contactTypes, "Id", "Name");
+           
+                var contactTypes = _unitOfWork.ContactTypeRepository.GetAll().ToList();
+                ViewBag.ContactTypeId = new SelectList(contactTypes, "Id", "Name");
+                var country = _commonServices.GetCountries();
+                ViewBag.AddressCountry = new SelectList(country, "Id", "Name");
+                    
             return View();
+
         }
+        public IActionResult State(int CountryId)
+        {
+            var states = _commonServices.GetStates(CountryId);
+            
+            return Json(states);
+        }
+
+
+
 
         // POST: Contacts/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,OrgId,Name,ContactTypeId,ParentContactId,PhoneNumber,Email,DonorScore,ProfilePicture,FacebookProfile,InstagramProfile,TwitterProfile,AddressLine1,AddressLine2,AddressStreet,AddressCity,AddressState,AddressCountry,AddressZipcode")] Contact contact)
+        public async Task<IActionResult> Create([Bind("Id,OrgId,Name,ContactTypeId,ParentContactId,PhoneNumber,Email," +
+            "DonorScore,ProfilePicture,FacebookProfile,InstagramProfile,TwitterProfile,Age,Gender,AddressLine1,AddressLine2,AddressStreet," +
+            "AddressCity,AddressState,AddressCountry,AddressZipcode")] Contact contact)
 
 
         {
@@ -104,7 +126,8 @@ namespace NonProfitCRM.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,OrgId,Name,ContactTypeId,ParentContactId,PhoneNumber,Email,DonorScore,ProfilePicture,FacebookProfile,InstagramProfile,TwitterProfile,AddressLine1,AddressLine2,AddressStreet,AddressCity,AddressState,AddressCountry,AddressZipcode")] Contact contact)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,OrgId,Name,ContactTypeId,ParentContactId,PhoneNumber,Email,DonorScore,ProfilePicture," +
+            "FacebookProfile,InstagramProfile,TwitterProfile,AddressLine1,AddressLine2,AddressStreet,AddressCity,AddressState,AddressCountry,AddressZipcode")] Contact contact)
         {
             if (id != contact.Id)
             {
@@ -175,33 +198,20 @@ namespace NonProfitCRM.Controllers
             }
             return true;
         }
-        //// GET: Contacts
-        //public async Task<IActionResult> Countries()
-        //{
-        //    var Country = await _unitOfWork.CountryRepository.GetManyAsync(C => C.CountryId == CountryId);
-        //    return View(Index);
-        //}
-        //// GET: Contacts/Countries/6
-        //    public IActionResult Country(int id)
-        //    {
-        //        var Country = _unitOfWork.ContactRepository.GetByID(Id)
-        //         List<Country> CountryList = new List<Country>();
-        //        CountryList = (from product in _unitOfWork.Country select product).ToList();
-        //        CountryList.Insert(0, new Country { Id = 0, Country = "Select" });
-        //        ViewBag.ListOfCountries = CountryList;
-        //        return View();
-
-
-        //        //    }
-        //        ////post
-        //        public ActionResult Import()
-        //    {
-        //        return View();
-        //    }
-        //}
-
-
+       
+       
+        public ActionResult ReadExcel()
+        {
+            return View();
+        }
     }
+      //  [HttpPost]
+        //public ActionResult ReadExcel(HttpPostedfileBase upload)
+        //{
+
+        //}
+
+    
 }
     
 
