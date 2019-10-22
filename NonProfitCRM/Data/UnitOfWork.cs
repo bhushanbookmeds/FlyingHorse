@@ -29,16 +29,12 @@ namespace NonProfitCRM.Data
         private GenericRepository<Event> eventRepository;
         private GenericRepository<Pledge> pledgeRepository;
         private GenericRepository<Project> projectRepository;
-
-       //private GenericRepository<Country> countryRepository;
-       // private GenericRepository<State> stateRepository;
+        private GenericRepository<Country> countryRepository;
+        private GenericRepository<State> stateRepository;
        private GenericRepository<Volunteers> volunteersRepository;
         private GenericRepository<ProjectType> projectTypeRepository;
         private GenericRepository<Expenditures> expendituresRepository;
-        //private GenericRepository<Country> CountriesRepository;
-
-
-        #endregion
+                         #endregion
 
 
         public UnitOfWork()
@@ -217,25 +213,25 @@ namespace NonProfitCRM.Data
         }
 
 
-        //public GenericRepository<Country> CountryRepository
-        //{
-        //    get
-        //    {
-        //        if (this.countryRepository == null)
-        //            this.countryRepository = new GenericRepository<Country>(_context);
-        //        return countryRepository;
-        //    }
-        //}
+        public GenericRepository<Country> CountryRepository
+        {
+            get
+            {
+                if (this.countryRepository == null)
+                    this.countryRepository = new GenericRepository<Country>(_context);
+                return countryRepository;
+            }
+        }
 
-        //public GenericRepository<State> StateRepository
-        //{
-        //    get
-        //    {
-        //        if (this.stateRepository == null)
-        //            this.stateRepository = new GenericRepository<State>(_context);
-        //        return stateRepository;
-        //    }
-        //}
+        public GenericRepository<State> StateRepository
+        {
+            get
+            {
+                if (this.stateRepository == null)
+                    this.stateRepository = new GenericRepository<State>(_context);
+                return stateRepository;
+            }
+        }
 
 
 

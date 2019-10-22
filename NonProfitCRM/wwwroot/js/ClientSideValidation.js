@@ -38,18 +38,18 @@ $(function () {
         }
     });
 
-    //$("#AddressZipcode").blur(function (e) {
-    //    var zipcode = $("#AddressZipcode").val();
-    //    var zipregex = /^\d{5}$/;
+    $("#AddressZipcode").blur(function (e) {
+        var zipcode = $("#AddressZipcode").val();
+        var zipregex = /^\d{5}$/;
 
-    //    if (zipregex.test(zipcode)) { return true; }
-    //    else {
-    //        $("#zipcode").empty();
-    //        $("#zipcode").html("Please provide a valid zipcode");
+        if (zipregex.test(zipcode)) { return true; }
+        else {
+            $("#zipcode").empty();
+            $("#zipcode").html("Please provide a valid zipcode");
             
-    //        e.preventDefault();
-    //    }
-    //});
+            e.preventDefault();
+        }
+    });
     //$('#AddressZipcode').click(function () {
     //    var zip = $('#AddressZipcode').val();
 
@@ -116,7 +116,7 @@ function CheckMandateValidate() {
     if ($.trim($('#AddressStreet').val()) === '') { message = message + "AddressStreet,"; count++; }
     if ($.trim($('#AddressCity').val()) === '') { message = message + "AddressCity,"; count++; }
     if ($.trim($('#AddressState').val()) === '') { message = message + "AddressState,"; count++; }
-    if ($.trim($('#AddressZipCode').val()) ==='') { message = message + "AddressZipcode,"; count++; }
+    if ($.trim($('#AddressZipCode').val()) ===0) { message = message + "AddressZipcode,"; count++; }
     if ($.trim($('#AddressCountry').val()) === 0) { message = message + "AddressCountry,"; count++; }
    // if ($.trim($('#facebook').val())=== 0) { message = message + "facebook,"; count++;}
     if (count === 0) {
@@ -124,3 +124,28 @@ function CheckMandateValidate() {
     }
     else { alert(message + " Invalid Data or Empty or Not Selected "); }
 }
+
+    
+$("#CountryId").change(function () {
+    debugger;
+
+    var statevar = $(this).val();
+
+    $.ajax({
+        url: "/Contacts/State",
+        type: 'GET',
+        data: { CountryId: $("#CountryId").val() },
+        success: function (data) {
+            debugger
+            $.each(data, function (key, value) {
+                $("#StateAddress").append($("<option></option>").val(value.name).html(value.name));
+            
+            });
+        
+            
+           //($("<option>Select</option>").val(value.CountryId).html(value.Name));
+        
+        }
+    });
+
+})

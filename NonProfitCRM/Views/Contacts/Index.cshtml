@@ -203,13 +203,17 @@
                                     <td>@Html.DisplayFor(modelItem => item.Age)</td>
                                     <td>@Html.DisplayFor(modelItem => item.Gender)</td>
                                     <td>
-                                        <span class="fa-facebook"></span>
-                                        <span class="fa-twitter"></span>
-                                        <span class="fa-instagram"></span>
+                                        <a href="//@item.FacebookProfile" target="_blank"><i class="fab fa-facebook" style="color:blue"></i></a>
+                                        <a href="//@item.InstagramProfile" target="_blank"><i class="fab fa-instagram" style="color:hotpink"></i></a>
+                                        <a href="//@item.TwitterProfile" target="_blank"><i class="fab fa-twitter" style="color:deepskyblue"></i></a>
+
+
                                     </td>
                                     <td>
                                         <a asp-controller="Contacts" asp-action="Edit" asp-route-Id=@item.Id class="mr-2"><i class="fas fa-edit text-info font-16"></i></a>
+
                                         <a asp-controller="Contacts" asp-action="Delete" asp-route-Id="@item.Id"><i class="fas fa-trash-alt text-danger font-16" ></i></a>
+
                                     </td>
                                 </tr><!--end tr-->
                             }
