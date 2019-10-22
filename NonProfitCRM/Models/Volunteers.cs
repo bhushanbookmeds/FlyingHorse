@@ -16,6 +16,8 @@ namespace NonProfitCRM.Models
         [DisplayName("Name")]
         public string Name { get; set; }
 
+        //public string CountryCode { get; set; }
+
         [Required(ErrorMessage = "Field can't be empty.")]
         [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Invalid Phone number")]
         [DisplayName("PhoneNumber")]
@@ -58,6 +60,12 @@ namespace NonProfitCRM.Models
         //[Required(ErrorMessage = "Field can't be empty.")]
         //[DisplayName("Instagram")]
         public string InstagramProfile { get; set; }
+
+        public string FacebookProfile { get; set; }
+
+        public string TwitterProfile { get; set; }
+
+
     }
 }
 
