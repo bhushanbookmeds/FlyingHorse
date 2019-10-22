@@ -52,6 +52,7 @@
                             {
                             <tr>
                                 <td>
+                                    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
                                     <img src="../assets/images/users/user-10.jpg" class="thumb-sm rounded-circle mr-2"><a asp-action="Details" asp-route-Id=@item.Id>
                                         @Html.DisplayFor(modelItem => item.Name)
                                     </a>
@@ -76,9 +77,9 @@
                                 @*<td>@Html.DisplayFor(modelItem => item.AddressZipcode)</td>*@
                              
                                 <td>
-                                     <a href="@item.FacebookProfile" target="_blank"><i class="fab fa-facebook"></i></a>
-                                     <a href="@item.TwitterProfile" target="_blank"><i class="fab fa-twitter-square"></i></a>
-                                    <a href="//@item.InstagramProfile" target="_blank"><i class="fab fa-instagram "></i></a>
+                                     <a href="//@item.FacebookProfile" target="_blank"><i class="w3-large fab fa-facebook"></i></a>
+                                     <a href="//@item.TwitterProfile" target="_blank"><i style="color:deepskyblue" class="w3-large fab fa-twitter-square"></i></a>
+                                     <a href="//@item.InstagramProfile" target="_blank"><i class="w3-large fab fa-instagram "></i></a>
                                 </td>
 
                                 <td>

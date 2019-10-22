@@ -95,8 +95,6 @@
                         </svg>
                     </a>
 
-
-
                     @if (!IsUserAdmin)
                     {
                         <a href="#MenuContacts" class="nav-link" data-toggle="tooltip-custom" data-placement="top" title="" data-original-title="Contacts">
@@ -166,10 +164,7 @@
                         <g>
                         <g>
                         <path d="M12 11c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm6 2c0-3.31-2.69-6-6-6s-6 2.69-6 6c0 2.22 1.21 4.15 3 5.19l1-1.74c-1.19-.7-2-1.97-2-3.45 0-2.21 1.79-4 4-4s4 1.79 4 4c0 1.48-.81 2.75-2 3.45l1 1.74c1.79-1.04 3-2.97 3-5.19z" />
-
-
-
-                                </g>
+                         </g>
                         <path class="svg-primary" d="M12 3C6.48 3 2 7.48 2 13c0 3.7 2.01 6.92 4.99 8.65l1-1.73C5.61 18.53 4 15.96 4 13c0-4.42 3.58-8 8-8s8 3.58 8 8c0 2.96-1.61 5.53-4 6.92l1 1.73c2.99-1.73 5-4.95 5-8.65 0-5.52-4.48-10-10-10z" />
 
                             </g>
@@ -189,10 +184,7 @@
 
                        <!---<g>
                         <path d="M15 7v4h1v2h-3V5h2l-3-4-3 4h2v8H8v-2.07c.7-.37 1.2-1.08 1.2-1.93 0-1.21-.99-2.2-2.2-2.2-1.21 0-2.2.99-2.2 2.2 0 .85.5 1.56 1.2 1.93V13c0 1.11.89 2 2 2h3v3.05c-.71.37-1.2 1.1-1.2 1.95a2.2 2.2 0 0 0 4.4 0c0-.85-.49-1.58-1.2-1.95V15h3c1.11 0 2-.89 2-2v-2h1V7h-4z" />
-
-
-
-                            </g>-->
+                         </g>-->
                         </svg>
                     </a>
                         <a href="#MenuPledges" class="nav-link" data-toggle="tooltip-custom" data-placement="top" title="" data-original-title="Pledges">
@@ -233,9 +225,10 @@
                             {
                                 <li class="nav-item"><a class="nav-link" href="../analytics/analytics-customers.html"><i class="dripicons-user-group"></i>Contacts</a></li>
                                 <li class="nav-item"><a class="nav-link" href="../analytics/analytics-reports.html"><i class="dripicons-trophy"></i>Donations</a></li>
+                                <li class="nav-item"><a class="nav-link" href="/Volunteers/Index"><i class="dripicons-trophy"></i>Volunteers</a></li>
                                 <li class="nav-item"><a class="nav-link" href="../analytics/analytics-reports.html"><i class="dripicons-broadcast"></i>Campaigns</a></li>
                                 <li class="nav-item"><a class="nav-link" href="../analytics/analytics-reports.html"><i class="dripicons-location"></i>Events</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/Project/Index"><i class="dripicons-expand"></i>Projects</a></li>
+                                <li class="nav-item"><a class="nav-link" href="/Project/Index"><i class="dripicons-expand"></i>Projects</a></li>
                             }
                             else
                             {
@@ -287,8 +280,6 @@
                             <li class="nav-item"><a class="nav-link" href="/Donations/Index"><i class="dripicons-view-apps"></i>View All</a></li>
                             <li class="nav-item"><a class="nav-link" href="/Donations/Create"><i class="dripicons-plus"></i>Add a donation</a></li>
                             <li class="nav-item"><a class="nav-link" href="/Donations/DonationType"><i class="dripicons-lightbulb"></i>Donation Type</a></li>
-
-
                         </ul>
                     </div><!-- end Donations -->
                     <div id="UploadDonations" class="main-icon-menu-pane">
@@ -301,20 +292,6 @@
                         </ul>
                     </div><!-- end 0f Upload Donations -->
 
-
-                   <!--<div id="MenuVoluntees" class="main-icon-menu-pane">
-                        <div class="title-box">
-                            <h6 class="menu-title">Volunteers</h6>
-                        </div>
-                        <ul class="nav">
-                            <li class="nav-item"><a class="nav-link" asp-controller="Volunteers" asp-action="Index"><i class="dripicons-view-apps"></i>View All</a></li>
-                            <li class="nav-item"><a class="nav-link" asp-controller="Volunteers" asp-action="Create"><i class="dripicons-plus"></i>Add a Volunteers</a></li>
-                            <li class="nav-item"><a class="nav-link" href="../crypto/crypto-wallet.html"><i class="dripicons-upload"></i>Import Volunteers</a></li>
-                        </ul>
-                    </div>-->
-                
-                      <!-- end Volunteers -->
-
                     <div id="MenuVolunteers" class="main-icon-menu-pane">
                         <div class="title-box">
                             <h6 class="menu-title">Volunteers</h6>
@@ -322,9 +299,6 @@
                         <ul class="nav">
                             <li class="nav-item"><a class="nav-link" href="/Volunteers/Index"><i class="dripicons-view-apps"></i>View All</a></li>
                             <li class="nav-item"><a class="nav-link" href="/Volunteers/Create"><i class="dripicons-plus"></i>Add a Volunteers</a></li>
-                            
-
-
                         </ul>
                     </div><!-- end Volunteers -->
 
@@ -401,9 +375,7 @@
     @*<script src="~/plugins/apexcharts.min.js"></script>
 
         <script src="~/pages/jquery.analytics_dashboard.init.js"></script>*@
-
-   <script src="../assets/pages/jquery.forms-advanced.js"></script>*@
-
-
+    <script src="~/js/ValidationServerside.js"></script>
+   <script src="../assets/pages/jquery.forms-advanced.js"></script>
 </body>
 </html>
