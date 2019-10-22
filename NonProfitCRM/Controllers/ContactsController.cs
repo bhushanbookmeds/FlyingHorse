@@ -1,12 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using NonProfitCRM.Data;
 using NonProfitCRM.Models;
+using System.Runtime.InteropServices;
+//using Excel = Microsoft.Office.Interop.Excel;
+//using ImportExcelFileInASPNETMVC.Model
+
+
 
 namespace NonProfitCRM.Controllers
 {
@@ -14,7 +22,6 @@ namespace NonProfitCRM.Controllers
     {
         private readonly UnitOfWork _unitOfWork;
         private readonly string orgId;
-
 
         public ContactsController()
         {
@@ -49,7 +56,7 @@ namespace NonProfitCRM.Controllers
         public IActionResult Create()
         {
             var contactTypes = _unitOfWork.ContactTypeRepository.GetAll().ToList();
-            ViewBag.ContactType = new SelectList(contactTypes, "Id", "Name");
+            ViewBag.ContactTypeId = new SelectList(contactTypes, "Id", "Name");
             return View();
         }
 
@@ -168,17 +175,33 @@ namespace NonProfitCRM.Controllers
             }
             return true;
         }
-        // GET: Contacts/Countries/6
-      /* public IActionResult Country(int id)
-        {
-            var Country=_unitOfWork.ContactRepository.GetByID(Id)
-            List<Country> CountryList = new List<Country>();
-            CountryList = (from product in _unitOfWork.Country select product).ToList();
-            CountryList.Insert(0, new Country { Id = 0, Country = "Select" });
-            ViewBag.ListOfCountries = CountryList;
-            return View();
+        //// GET: Contacts
+        //public async Task<IActionResult> Countries()
+        //{
+        //    var Country = await _unitOfWork.CountryRepository.GetManyAsync(C => C.CountryId == CountryId);
+        //    return View(Index);
+        //}
+        //// GET: Contacts/Countries/6
+        //    public IActionResult Country(int id)
+        //    {
+        //        var Country = _unitOfWork.ContactRepository.GetByID(Id)
+        //         List<Country> CountryList = new List<Country>();
+        //        CountryList = (from product in _unitOfWork.Country select product).ToList();
+        //        CountryList.Insert(0, new Country { Id = 0, Country = "Select" });
+        //        ViewBag.ListOfCountries = CountryList;
+        //        return View();
 
 
-        }*/
+        //        //    }
+        //        ////post
+        //        public ActionResult Import()
+        //    {
+        //        return View();
+        //    }
+        //}
+
+
     }
 }
+    
+

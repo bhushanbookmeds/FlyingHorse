@@ -139,6 +139,7 @@ namespace NonProfitCRM.Data
             return DbSet.Where(where).ToList();
         }
 
+
         /// <summary>
         /// generic method to get many record on the basis of a condition but query able.
         /// </summary>
