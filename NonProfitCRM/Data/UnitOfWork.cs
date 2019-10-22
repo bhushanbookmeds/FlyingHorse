@@ -29,7 +29,7 @@ namespace NonProfitCRM.Data
         private GenericRepository<Event> eventRepository;
         private GenericRepository<Pledge> pledgeRepository;
         private GenericRepository<Project> projectRepository;
-        //private GenericRepository<Country> CountriesRepository;
+        private GenericRepository<Picture> pictureRepository;
 
         #endregion
 
@@ -157,6 +157,16 @@ namespace NonProfitCRM.Data
                 if (this.eventRepository == null)
                     this.eventRepository = new GenericRepository<Event>(_context);
                 return eventRepository;
+            }
+        }
+
+        public GenericRepository<Picture> PictureRepository
+        {
+            get
+            {
+                if (this.pictureRepository == null)
+                    this.pictureRepository = new GenericRepository<Picture>(_context);
+                return pictureRepository;
             }
         }
 
