@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +11,7 @@ using NonProfitCRM.Models;
 
 namespace NonProfitCRM.Controllers
 {
+    [Authorize(Roles = "Admin,Organization")]
     public class OrganizationsController : Controller
     {
         private readonly UnitOfWork _unitOfWork;
@@ -20,9 +22,10 @@ namespace NonProfitCRM.Controllers
         }
 
         // GET: Organizations
+        [Authorize(Roles ="Admin")]
         public async Task<IActionResult> Index()
         {
-            var orgs = await _unitOfWork.OrganizationRepository.GetAllAsync();
+            var orgs = await _unitOfWork.OrganizationRepository.GetManyAsync(org=> !org.Name.Equals("Admin") && org.Id != "6562F517-EE73-4378-B9BD-8A8F64BB051C");
             return View(orgs);
         }
 
@@ -44,6 +47,7 @@ namespace NonProfitCRM.Controllers
         }
 
         // GET: Organizations/Create
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             return View();
@@ -52,6 +56,7 @@ namespace NonProfitCRM.Controllers
         // POST: Organizations/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles ="Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Name,StartDate,ExpiryDate,IsActive,AddressLine1,AddressLine2,AddressStreet,AddressCity,AddressState,AddressCountry,AddressZipcode")] Organization organization)
@@ -72,7 +77,7 @@ namespace NonProfitCRM.Controllers
         // GET: Organizations/Edit/5
         public async Task<IActionResult> Edit(string id)
         {
-            if (id == null)
+            if (id == null || id == "6562F517-EE73-4378-B9BD-8A8F64BB051C")
             {
                 return NotFound();
             }
@@ -121,6 +126,7 @@ namespace NonProfitCRM.Controllers
         }
 
         // GET: Organizations/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(string id)
         {
             if (id == null)
@@ -138,6 +144,7 @@ namespace NonProfitCRM.Controllers
         }
 
         // POST: Organizations/Delete/5
+        [Authorize(Roles = "Admin")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(string id)

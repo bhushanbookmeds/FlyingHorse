@@ -31,9 +31,10 @@ namespace NonProfitCRM.Data
         private GenericRepository<Project> projectRepository;
         private GenericRepository<Country> countryRepository;
         private GenericRepository<State> stateRepository;
-
-
-        #endregion
+       private GenericRepository<Volunteers> volunteersRepository;
+        private GenericRepository<ProjectType> projectTypeRepository;
+        private GenericRepository<Expenditures> expendituresRepository;
+                         #endregion
 
 
         public UnitOfWork()
@@ -99,6 +100,17 @@ namespace NonProfitCRM.Data
                 if (this.contactTypeRepository == null)
                     this.contactTypeRepository = new GenericRepository<ContactType>(_context);
                 return contactTypeRepository;
+            }
+        }
+
+
+        public GenericRepository<Volunteers> VolunteersRepository
+        {
+            get
+            {
+                if (this.volunteersRepository == null)
+                    this.volunteersRepository = new GenericRepository<Volunteers>(_context);
+                return volunteersRepository;
             }
         }
 
@@ -171,6 +183,15 @@ namespace NonProfitCRM.Data
                 return pledgeRepository;
             }
         }
+        public GenericRepository<ProjectType> ProjectTypeRepository
+        {
+            get
+            {
+                if (this.projectTypeRepository == null)
+                    this.projectTypeRepository = new GenericRepository<ProjectType>(_context);
+                return projectTypeRepository;
+            }
+        }
 
         public GenericRepository<Project> ProjectRepository
         {
@@ -181,6 +202,16 @@ namespace NonProfitCRM.Data
                 return projectRepository;
             }
         }
+        public GenericRepository<Expenditures> ExpendituresRepository
+        {
+            get
+            {
+                if (this.expendituresRepository == null)
+                    this.expendituresRepository = new GenericRepository<Expenditures>(_context);
+                return expendituresRepository;
+            }
+        }
+
 
         public GenericRepository<Country> CountryRepository
         {
