@@ -239,6 +239,8 @@ namespace NonProfitCRM.Data
 
 
 
+        public object Donation { get; internal set; }
+
         #region Public member methods...
         /// <summary>
         /// Save method.
