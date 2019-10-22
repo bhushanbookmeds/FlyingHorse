@@ -397,11 +397,6 @@ namespace NonProfitCRM.Models
                     .HasForeignKey(d => d.OrgId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Pledge_Organization");
-
-             /*   entity.HasOne(d => d.Volunteers)
-                   .WithMany(p => p.Pledge)
-                   .HasForeignKey(d => d.VolunteersId)
-                   .HasConstraintName("FK_Pledge_Volunteers");*/
             });
 
 
