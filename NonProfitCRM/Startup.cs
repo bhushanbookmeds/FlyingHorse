@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using NonProfitCRM.Data;
+using NonProfitCRM.Models;
 
 namespace NonProfitCRM
 {
@@ -31,6 +33,8 @@ namespace NonProfitCRM
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            services.AddScoped<DB_3221_crmContext, DB_3221_crmContext>();
+            services.AddScoped<UnitOfWork, UnitOfWork>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
