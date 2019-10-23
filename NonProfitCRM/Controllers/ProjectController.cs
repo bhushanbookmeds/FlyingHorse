@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using NonProfitCRM.Data;
 using NonProfitCRM.Models;
+using NonProfitCRM.Services;
 
 namespace NonProfitCRM.Controllers
 {
@@ -16,11 +17,14 @@ namespace NonProfitCRM.Controllers
 
 
         private readonly UnitOfWork _unitOfWork;
+        private readonly ICommonServices _commonServices;
         private readonly string orgId;
 
         public ProjectController()
         {
             _unitOfWork = new UnitOfWork();
+
+            _commonServices = new CommonServices();
             orgId = "cac8a4ec-edd5-4554-8c91-24574282b9c1";
         }
         // GET: Projects
@@ -54,9 +58,19 @@ namespace NonProfitCRM.Controllers
 
             var ProjectTypeId = _unitOfWork.ProjectTypeRepository.GetAll().ToList();
             ViewBag.ProjectTypeId = new SelectList(ProjectTypeId, "Id", "Name");
+            var country = _commonServices.GetCountries();
+            ViewBag.AddressCountry = new SelectList(country, "Id", "Name");
+
 
             return View(new Project());
         }
+        public IActionResult State(int CountryId)
+        {
+            var states = _commonServices.GetStates(CountryId);
+
+            return Json(states);
+        }
+
 
         // POST: Projects/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
@@ -121,6 +135,9 @@ namespace NonProfitCRM.Controllers
                 return NotFound();
             }
             var project = await _unitOfWork.ProjectRepository.GetByIDAsync(id);
+            var country = _commonServices.GetCountries();
+            ViewBag.AddressCountry = new SelectList(country, "Id", "Name");
+
             if (project == null)
             {
                 return NotFound();
@@ -205,6 +222,32 @@ namespace NonProfitCRM.Controllers
                 return false;
             }
             return true;
+        }
+        public IActionResult Search(string term)
+        {
+            int phoneNumber;
+            bool result = int.TryParse(term, out phoneNumber);
+            IQueryable<Contact> contacts;
+
+            if (result)
+                contacts = _unitOfWork.ContactRepository.GetDbSet().Where(x => x.PhoneNumber.Contains(term));
+            else
+                contacts = _unitOfWork.ContactRepository.GetDbSet().Where(x => x.Name.Contains(term));
+
+            var list = (from c in contacts
+                        select new
+                        {
+                            label = c.Name,
+                            id = c.Id.ToString()
+                        }).ToList();
+
+            return Json(list);
+        }
+        public async Task<IActionResult> GetContactDetails(int id)
+        {
+            var contact = await _unitOfWork.ContactRepository.GetDbSet().FirstOrDefaultAsync(m => m.Id == id);
+
+            return Json(contact);
         }
     }
 }
