@@ -1,0 +1,154 @@
+﻿@model NonProfitCRM.Models.Project
+
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_SiteLayout.cshtml";
+}
+
+<link href="~/plugins/dropify.min.css" rel="stylesheet" />
+<link href="~/plugins/magnific-popup.css" rel="stylesheet" />
+<!-- Page-Title -->
+<div class="row">
+    <div class="col-sm-12">
+        <div class="page-title-box">
+            <div class="float-right">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="javascript:void(0);">Project</a></li>
+                    <li class="breadcrumb-item active">Details</li>
+                </ol>
+            </div>
+            <h5 class="met-user-name">Project Name:@Model.Name</h5>
+            <p class="mb-0 met-user-name-post"></p>
+        </div><!--end page-title-box-->
+    </div><!--end col-->
+</div>
+<!-- end page title end breadcrumb -->
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+
+            <div class="card-body">
+                <ul class="nav nav-pills mb-0" id="pills-tab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="general_detail_tab" data-toggle="pill" href="#project_details">Project Overview</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="portfolio_detail_tab" data-toggle="pill" href="#portfolio_detail">Expenditures</a>
+                    </li>
+                </ul>
+            </div><!--end card-body-->
+        </div><!--end card-->
+    </div><!--end col-->
+</div><!--end row-->
+<div class="col-12">
+    <div class="tab-content detail-list" id="pills-tabContent">
+        <div class="tab-pane fade show active" id="project_details">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+
+
+                            <div class="row">
+                                <div class="col-lg-6">
+
+                                    <div class="form-group">
+                                        <label class="control-label col-md-8" style="text-transform: capitalize;">Name : @Html.DisplayFor(model => model.Name)</label>
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-8" style="text-transform: capitalize;">Project Type : @Html.DisplayFor(model => model.ProjectType.Name)</label>
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-8" style="text-transform: capitalize;">Description : @Html.DisplayFor(model => model.Description)</label>
+
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="control-label col-md-8">Start Date : @Html.DisplayFor(model => model.StartDate)</label>
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-8">Close Date : @Html.DisplayFor(model => model.EndDate)</label>
+
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group row">
+                                        <label class="control-label col-md-12" style="text-transform: capitalize;">
+                                            Address : @{ var address = Model.AddressLine1 + "," + Model.AddressLine2 + "," + Model.AddressStreet + "," + Model.AddressCity + "," + Model.AddressState + "," + Model.AddressCountry + "-" + Model.AddressZipcode; }
+                                            @address
+                                        </label>
+                                    </div>
+
+
+                                </div><!--end form-group-->
+                               
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div><!--end card-body-->
+        </div><!--end card-->
+   
+
+    <div class="tab-pane fade" id="portfolio_detail">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        @{ var expenditure = new Expenditures { ProjectId = Model.Id }; }
+                        @Html.Partial("Expenditures", expenditure)
+
+                        <h4 class="header-title mt-0">Expenditure Details</h4>
+
+                        <div class="table-responsive dash-social">
+                            <table id="datatable" class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Date</th>
+                                        <th>Submitter</th>
+                                        <th>Amount</th>
+                                        <th>Invoive</th>
+
+                                    </tr><!--end tr-->
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.Expenditures)
+                                    {
+                                        <tr>
+
+
+                                            <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.Date)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.Submitter)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.Amount)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.Invoice)</td>
+
+                                            <td>
+                                                <a asp-controller="Project" asp-action="Delete" asp-route-Id="@item.Id"><i class="fas fa-trash-alt text-danger font-16" onclick="return confirm('Are you sure to delete the record')"></i></a>
+                                            </td>
+                                        </tr><!--end tr-->
+                                    }
+                                </tbody>
+                            </table>
+                            <div>
+                            <label>Total:</label><span id="total_expenditure">@ViewBag.TotalAmount</span>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div> <!--end col-->
+            </div><!--end row-->
+        </div><!-- End portfolio  -->
+    </div><!--end card-body-->
+</div><!--end row-->
+</div><!--end general detail-->

@@ -1,0 +1,318 @@
+﻿@model NonProfitCRM.Models.Event
+
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_SiteLayout.cshtml";
+}
+
+
+<!-- Page-Title -->
+<div class="row">
+    <div class="col-sm-12">
+        <div class="page-title-box">
+            <div class="float-right">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="javascript:void(0);">Events</a></li>
+                    <li class="breadcrumb-item active">Add New</li>
+                </ol>
+            </div>
+            <h4 class="page-title">Add Event</h4>
+        </div><!--end page-title-box-->
+    </div><!--end col-->
+</div>
+<!-- end page title end breadcrumb -->
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <form method="post" enctype="multipart/form-data" asp-controller="Events" asp-action="Create">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group row">
+                                <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="Name">Event Name</label>
+                                <div class="col-sm-8">
+                                    <input class="form-control" type="text" pattern="[A-Za-z]+" style="text-transform: capitalize;"
+                                           id="example-text-input" asp-for="Name" required>
+
+                                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            @*<div class="form-group row">
+                                    <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="OrgId">Organization</label>
+                                    <div class="col-sm-8">
+                                        @Html.DropDownList("organization", (SelectList)ViewBag.Organization, "Select", new { @class = "form-control" })
+                                    </div>
+                                </div>*@
+
+                            @*<div class="form-group row">
+                                    <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="CategoryId">Category</label>
+                                    <div class="col-sm-8">
+                                        @Html.DropDownList("CategoryId", (SelectList)ViewBag.category, "Select", new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })
+
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="CampaignId">Campaign</label>
+                                    <div class="col-sm-8">
+                                        @Html.DropDownList("CampaignId", (SelectList)ViewBag.campaign, "Select", new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.CampaignId, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>*@
+
+                            <div class="form-group row">
+                                <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="StartDate">Start Date</label>
+                                <div class="col-sm-5">
+                                    <input class="form-control" type="text" id="txtdate1" asp-for="StartDate" required>
+                                    @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col-sm-3">
+                                    <input class="form-control" name="StartTime" type="text" id="example1" asp-for="StartTime" placeholder="Time" required>
+                                </div>
+
+
+
+                            </div>
+
+
+
+                            <div class="form-group row">
+                                <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="EndDate">End Date</label>
+                                <div class="col-sm-5">
+                                    <input id="txtdate2" class="form-control" type="text" asp-for="EndDate" required>
+                                    @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
+                                </div>
+
+                                <div class="col-sm-3">
+                                    <input class="form-control" name="EndTime" type="text" id="example2" asp-for="EndTime" placeholder="Time" required>
+                                </div>
+                            </div>
+
+
+
+                            @*<div class="form-group">
+                                    @Html.LabelFor(model => model.ImagePath, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        <input type="file" name="ImageFile" multiple />
+                                    </div>
+                                </div>*@
+
+                            <div class="form-group row">
+                                <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="Description">Description</label>
+                                <div class="col-sm-8">
+                                    <textarea class="form-control" rows="4" cols="23" name="Description" style="text-transform: capitalize;" required>
+
+                                    </textarea>
+                                </div>
+                            </div>
+
+                            @*<div class="form-group row">
+                                    <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="Name">Upload Banner</label>
+                                    <div class="col-sm-8">
+                                        <input type="file" class="form-control" name="ImageFile" multiple />
+                                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>*@
+
+                            <div class="form-group row">
+                                <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="ImagePath">Upload Banner</label>
+                                <div class="col-sm-8">
+                                    <input type="file" class="form-control" name="ImageFile" accept="image/*" onchange="preview_image(event)" required>
+                                    <img id="output_image" />
+                                </div>
+                            </div>
+
+                            
+                        </div>
+
+
+                        <div class="col-lg-6">
+
+
+                            <div class="form-group row">
+                                <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="AddressLine1">Address Line 1</label>
+                                <div class="col-sm-8">
+                                    <input class="form-control" type="text" style="text-transform: capitalize;" asp-for="AddressLine1" onkeypress="return IsNumber2(event);" required>
+                                    <span id="error2" style="color: Red; display: none">Please Give Proper Address</span>
+                                    @Html.ValidationMessageFor(model => model.AddressLine1, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="AddressLine2">Address Line 2</label>
+                                <div class="col-sm-8">
+                                    <input class="form-control" type="text" style="text-transform: capitalize;" asp-for="AddressLine2" onkeypress="return IsNumber3(event);" required>
+                                    <span id="error3" style="color: Red; display: none">Please Give Proper Address</span>
+                                    @Html.ValidationMessageFor(model => model.AddressLine2, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-form-label text-right" asp-for="AddressCountry">Country</label>
+                                <div class="col-sm-8">
+                                    <select class="custom-select" asp-for="AddressCountry">
+                                        <option Selected="" required>Select</option>
+                                        <option value="India">India</option>
+                                        <option value="USA">USA</option>
+                                    </select>
+                                </div>
+                                @*@Html.ValidationMessageFor(model => model.AddressCountry, "", new { @class = "text-danger" })*@
+                            </div>
+
+
+                            <div class="form-group row">
+                                <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="AddressState">State</label>
+                                <div class="col-sm-8">
+                                    <input class="form-control" type="text" style="text-transform: capitalize;" asp-for="AddressState" required>
+                                    @Html.ValidationMessageFor(model => model.AddressState, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="AddressCity">City</label>
+                                <div class="col-sm-8">
+                                    <input class="form-control" type="text" style="text-transform: capitalize;" asp-for="AddressCity" required>
+                                    @Html.ValidationMessageFor(model => model.AddressCity, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="AddressStreet">Street</label>
+                                <div class="col-sm-8">
+                                    <input class="form-control" type="text" style="text-transform: capitalize;" asp-for="AddressStreet" required>
+                                    @Html.ValidationMessageFor(model => model.AddressStreet, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+
+
+                            <div class="form-group row">
+                                <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="AddressZipcode">Zip code</label>
+                                <div class="col-sm-8">
+                                    <input class="form-control" type="text" style="text-transform: capitalize;" asp-for="AddressZipcode" onkeypress="return IsNumber1(event);" required>
+                                    <span id="error1" style="color: Red; display: none">Please Give Zip Code</span>
+                                    @Html.ValidationMessageFor(model => model.AddressZipcode, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+
+
+                            <br><br>
+                            <div class="form-group row">
+                                <div class="col-sm-12 text-right">
+                                    <input type="submit" value="Add" class="col-sm-3 btn btn-primary" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div><!--end card-body-->
+        </div><!--end card-->
+    </div><!--end col-->
+</div>
+
+
+@*DatePicker*@
+
+<script>
+    $(document).ready(function () {
+        $("#txtdate1").datepicker({
+            minDate: 0
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+        $("#txtdate2").datepicker({
+            minDate: 0
+        });
+    });
+</script>
+
+@*TimePicker*@
+
+<script>
+    $(document).ready(function () {
+        $('#example1').timepicker();
+    });
+</script>
+
+<script>
+
+    $(document).ready(function () {
+        $('#example2').timepicker();
+    });
+</script>
+
+@*Image Script*@
+
+<script>
+    function preview_image(event) {
+        var reader = new FileReader();
+        reader.onload = function () {
+            var output = document.getElementById('output_image');
+            output.src = reader.result;
+        }
+        reader.readAsDataURL(event.target.files[0]);
+    }
+</script>
+
+
+@*Zip Code Script*@
+
+<script>
+    var specialKeys = new Array();
+    specialKeys.push(8); //Backspace
+    function IsNumber1(e) {
+        var keyCode = e.which ? e.which : e.keyCode
+        var ret = ((keyCode >= 35 && keyCode <= 57) || specialKeys.indexOf(keyCode) != -1);
+        document.getElementById("error1").style.display = ret ? "none" : "inline";
+
+        return ret;
+
+    }
+</script>
+
+@*Address Script*@
+
+<script>
+    var specialKeys = new Array();
+    specialKeys.push(8); //Backspace
+    function IsNumber2(e) {
+        var keyCode = e.which ? e.which : e.keyCode
+        var ret = ((keyCode >= 35 && keyCode <= 57) || specialKeys.indexOf(keyCode) != -1);
+        document.getElementById("error2").style.display = ret ? "none" : "inline";
+
+        return ret;
+
+    }
+</script>
+
+@*Address Script*@
+
+<script>
+    var specialKeys = new Array();
+    specialKeys.push(8); //Backspace
+    function IsNumber3(e) {
+        var keyCode = e.which ? e.which : e.keyCode
+        var ret = ((keyCode >= 35 && keyCode <= 57) || specialKeys.indexOf(keyCode) != -1);
+        document.getElementById("error3").style.display = ret ? "none" : "inline";
+
+        return ret;
+
+    }
+</script>
+
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

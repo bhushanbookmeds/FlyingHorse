@@ -1,0 +1,77 @@
+﻿@model NonProfitCRM.Models.Expenditures
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="col-md-6 col-lg-3">
+    <div>
+        <form id="myform">
+            <div>
+                <button type="button" class="btn btn-dark waves-effect waves-light pull-right" data-toggle="modal" data-animation="bounce" data-target=".bs-example-modal-lg">Add Expenses</button>
+            </div>
+            <!--  Modal content for the above example -->
+            <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title mt-0" id="myLargeModalLabel">Add Expenses</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group row">
+                                <input class="form-control" type="hidden" id="ProjectId" value="@Model.ProjectId" name="projectId" >
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="Name">Name</label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control" type="text" id="Name" asp-for="Name" required>
+                                        <span asp-validation-for="Name" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="Date">Date</label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control" type="date" id="Date" asp-for="Date" required>
+                                        <span asp-validation-for="Date" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="Submitter">Submitter</label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control" type="text" id="Submitter" asp-for="Submitter" required>
+                                        <span asp-validation-for="Submitter" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="example-number-input" class="col-sm-4 col-form-label text-right" asp-for="Amount">Amount</label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control" type="number" id="Amount" asp-for="Amount" required>
+                                        <span asp-validation-for="Amount" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="Invoice">Invoice</label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control" type="file" id="Invoice" name="InvoiceFile">
+
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <input id="btnSubmit" type="button" value="Submit" />
+                                    <button class="btn btn-primary" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+        </form>
+    </div><!--end card-body-->
+
+</div><!--end card-->
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

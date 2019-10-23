@@ -28,8 +28,13 @@ namespace NonProfitCRM.Data
         private GenericRepository<Donation> donationRepository;
         private GenericRepository<Event> eventRepository;
         private GenericRepository<Pledge> pledgeRepository;
-
-        #endregion
+        private GenericRepository<Project> projectRepository;
+        private GenericRepository<Country> countryRepository;
+        private GenericRepository<State> stateRepository;
+       private GenericRepository<Volunteers> volunteersRepository;
+        private GenericRepository<ProjectType> projectTypeRepository;
+        private GenericRepository<Expenditures> expendituresRepository;
+                         #endregion
 
 
         public UnitOfWork()
@@ -95,6 +100,17 @@ namespace NonProfitCRM.Data
                 if (this.contactTypeRepository == null)
                     this.contactTypeRepository = new GenericRepository<ContactType>(_context);
                 return contactTypeRepository;
+            }
+        }
+
+
+        public GenericRepository<Volunteers> VolunteersRepository
+        {
+            get
+            {
+                if (this.volunteersRepository == null)
+                    this.volunteersRepository = new GenericRepository<Volunteers>(_context);
+                return volunteersRepository;
             }
         }
 
@@ -167,7 +183,59 @@ namespace NonProfitCRM.Data
                 return pledgeRepository;
             }
         }
+        public GenericRepository<ProjectType> ProjectTypeRepository
+        {
+            get
+            {
+                if (this.projectTypeRepository == null)
+                    this.projectTypeRepository = new GenericRepository<ProjectType>(_context);
+                return projectTypeRepository;
+            }
+        }
 
+        public GenericRepository<Project> ProjectRepository
+        {
+            get
+            {
+                if (this.projectRepository == null)
+                    this.projectRepository = new GenericRepository<Project>(_context);
+                return projectRepository;
+            }
+        }
+        public GenericRepository<Expenditures> ExpendituresRepository
+        {
+            get
+            {
+                if (this.expendituresRepository == null)
+                    this.expendituresRepository = new GenericRepository<Expenditures>(_context);
+                return expendituresRepository;
+            }
+        }
+
+
+        public GenericRepository<Country> CountryRepository
+        {
+            get
+            {
+                if (this.countryRepository == null)
+                    this.countryRepository = new GenericRepository<Country>(_context);
+                return countryRepository;
+            }
+        }
+
+        public GenericRepository<State> StateRepository
+        {
+            get
+            {
+                if (this.stateRepository == null)
+                    this.stateRepository = new GenericRepository<State>(_context);
+                return stateRepository;
+            }
+        }
+
+
+
+        public object Donation { get; internal set; }
 
         #region Public member methods...
         /// <summary>

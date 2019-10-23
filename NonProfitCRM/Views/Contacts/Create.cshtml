@@ -5,145 +5,231 @@
     Layout = "~/Views/Shared/_SiteLayout.cshtml";
 }
 
-        <!-- Page-Title -->
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="page-title-box">
-                    <div class="float-right">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="javascript:void(0);">Contacts</a></li>
-                            <li class="breadcrumb-item active">Add New</li>
-                        </ol>
-                    </div>
-                    <h4 class="page-title">Add Contact</h4>
-                </div><!--end page-title-box-->
-            </div><!--end col-->
-        </div>
-        <!-- end page title end breadcrumb -->
+
+<!-- Page-Title -->
+<div class="row">
+    <div class="col-sm-12">
+        <div class="page-title-box">
+            <div class="float-right">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="javascript:void(0);">Contacts</a></li>
+                    <li class="breadcrumb-item active">Add New</li>
+                </ol>
+            </div>
+            <h4 class="page-title">Add Contact</h4>
+        </div><!--end page-title-box-->
+    </div><!--end col-->
+</div>
+<!-- end page title end breadcrumb -->
 
 
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="card">
-                    <div class="card-body">
-                        <form asp-action="Create">
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="form-group row">
-                                        <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="Name">Name</label>
-                                        <div class="col-sm-8">
-                                            <input class="form-control" type="text" id="example-text-input" asp-for="Name" required>
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-sm-4 col-form-label text-right" asp-for="ContactTypeId">Type</label>
-                                        @*<div class="col-sm-8">
-                                            @Html.DropDownList("ContactTypeId", new SelectList((System.Collections.IEnumerable)ViewData["ContactTypeId"]), "Select", new { @class = "form-control" });
-            @Html.DropDownList("ContactTypeId", new SelectList(ViewBag.ContactType, "Id", "Name"), "Name", new { @class = "form-control" })
-                                            @Html.DropDownListFor(x => x.ContactTypeId, new SelectList(ViewBag.ContactType, "Id", "Name"))
-                                        </div>*@
-                                        <div class="col-sm-8">
-                                            <select class="custom-select" asp-for="ContactTypeId">
-                                                <option selected="">Select</option>
-                                                <option value="1">Individual</option>
-                                                <option value="2">Organization</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label for="example-phone-input" class="col-sm-4 col-form-label text-right" asp-for="PhoneNumber">Phone Number</label>
-                                        <div class="col-sm-8">
-                                            <input class="form-control" type="text" id="startDate" asp-for="PhoneNumber" required>
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label for="example-email-input" class="col-sm-4 col-form-label text-right" asp-for="Email">Email</label>
-                                        <div class="col-sm-8">
-                                            <input class="form-control" type="email" id="example-date-input" asp-for="Email" required>
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-sm-4 col-form-label text-right" asp-for="FacebookProfile">Facebook Profile</label>
-                                        <div class="col-sm-8">
-                                            <input class="form-control" type="text" id="example-text-input" asp-for="FacebookProfile">
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="InstagramProfile">Instagram Profile</label>
-                                        <div class="col-sm-8">
-                                            <input class="form-control" type="text" asp-for="InstagramProfile">
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="TwitterProfile">Twitter Profile</label>
-                                        <div class="col-sm-8">
-                                            <input class="form-control" type="text" asp-for="TwitterProfile">
-                                        </div>
-                                    </div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <form method="post" asp-action="Create" id="myform">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group row">
+                                <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="Name">Name<span class="mandate" style="color:red">*</span></label>
+                                <div class="col-sm-8">
+
+                                    <input class="form-control" type="text" id="Name" asp-for="Name" required="required" placeholder="Type your name here">
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="Name" data-valmsg-replace="true" id="txtName"></span>
+
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-form-label text-right" asp-for="ContactTypeId">Type <span class="mandate" style="color:red">*</span> </label>
+                                <div class="col-sm-8">
+                                    @Html.DropDownList("ContactTypeId", (SelectList)ViewBag.ContactTypeId, "Select", new { @class = "form-control", required = true })
+                                    <span asp-validation-for="ContactTypeId" id="contacttype" class="text-danger"></span>
+
                                 </div>
 
 
-                                <div class="col-lg-6">
-                                    <div class="form-group row">
-                                        <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="AddressLine1">Address Line 1</label>
-                                        <div class="col-sm-8">
-                                            <input class="form-control" type="text" asp-for="AddressLine1">
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="AddressLine2">Address Line 2</label>
-                                        <div class="col-sm-8">
-                                            <input class="form-control" type="text" asp-for="AddressLine2">
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="AddressStreet">Street</label>
-                                        <div class="col-sm-8">
-                                            <input class="form-control" type="text" asp-for="AddressStreet">
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="AddressCity">City</label>
-                                        <div class="col-sm-8">
-                                            <input class="form-control" type="text" asp-for="AddressCity">
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="AddressState">State</label>
-                                        <div class="col-sm-8">
-                                            <input class="form-control" type="text" asp-for="AddressState">
-                                        </div>
-                                    </div>
+                                @*<div class="col-sm-8">
+                                        <select class="custom-select" asp-for="ContactTypeId">
+                                            <option>Select</option>
+                                            <option value="1">Individual</option>
+                                            <option value="2">Organization</option>
+                                        </select>
+                                        <span asp-validation-for="ContactTypeId" class="text-danger"></span>
+                                    </div>*@
+                            </div>
 
-                                    <div class="form-group row">
-                                        <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="AddressZipcode">Zip code</label>
-                                        <div class="col-sm-8">
-                                            <input class="form-control" type="text" asp-for="AddressZipcode" required>
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-sm-4 col-form-label text-right" asp-for="AddressCountry">Country</label>
-                                        <div class="col-sm-8">
-                                            <select class="custom-select" asp-for="AddressCountry" required>
-                                                <option selected="">Select</option>
-                                                <option value="India">India</option>
-                                                <option value="USA">USA</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <div class="col-sm-12 text-right">
-                                            <input type="submit" value="Add" class="col-sm-3 btn btn-primary" />
-                                        </div>
+
+                            <div class="form-group row">
+                                <label for="example-phone-input" class="col-sm-4 col-form-label text-right" asp-for="PhoneNumber">Phone Number <span class="mandate" style="color:red">*</span> </label>
+                                <div class="col-sm-8">
+                                    <input class="form-control" type="tel" id="PhoneNumber" asp-for="PhoneNumber" required placeholder="Enter your mobile number">
+
+                                    <span asp-validation-for="PhoneNumber" id="MobileNumber" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="example-email-input" class="col-sm-4 col-form-label text-right" asp-for="Email">Email <span class="mandate" style="color:red">*</span> </label>
+                                <div class="col-sm-8">
+                                    <input class="form-control" type="email" id="Email" asp-for="Email" required placeholder="Enter a valid email-id">
+                                    @*<script src="email-validation.js"></script>*@
+                                    <span asp-validation-for="Email" id="mail" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-form-label text-right" asp-for="FacebookProfile">Facebook Profile</label>
+
+                                <div class="col-sm-8">
+                                    <div class="input-group">
+                                        <span class="input-group-prepend">
+                                            <picture type="picture" class="btn btn-primary"><i class="fab fa-facebook-f"></i></picture>
+                                        </span>
+                                        <input class="form-control" type="text" id="facebook" asp-for="FacebookProfile">
                                     </div>
                                 </div>
                             </div>
-                        </form>
-                    </div><!--end card-body-->
-                </div><!--end card-->
-            </div><!--end col-->
-        </div>
+                            <div class="form-group row">
+                                <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="InstagramProfile">Instagram Profile</label>
+                                <div class="col-sm-8">
+                                    <div class="input-group">
+                                        <span class="input-group-prepend">
+                                            <picture type="picture" class="btn btn-pink"><i class="fab fa-instagram"></i></picture>
+                                        </span>
+                                        <input class="form-control" type="text" id="insta" asp-for="InstagramProfile">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="TwitterProfile">Twitter Profile</label>
+                                <div class="col-sm-8">
+                                    <div class="input-group">
+                                        <span class="input-group-prepend">
+                                            <picture type="picture" class="btn btn-skype"><i class="fab fa-twitter"></i></picture>
+                                        </span>
+                                        <input class="form-control" type="text" id="twitter" asp-for="TwitterProfile">
+                                    </div>
+                                </div>
+                            </div>
 
+                            <div class="form-group row">
+                                <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="Age">Age <span class="mandate" style="color:red">*</span> </label>
+                                <div class="col-sm-8">
+                                    <input class="form-control" type="tel" id="Age" asp-for="Age" required placeholder="Enter your age ">
+                                    <span asp-validation-for="Age" id="txtAge" class="text-danger"></span>
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group row">
+
+                                <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="Gender">Gender<span class="mandate" style="color:red">*</span></label>
+
+                                <div class="col-sm-6" id="Gender">
+
+                                    <input name="Gender" type="radio" value="Male" />  Male
+                                    <input name="Gender" type="radio" value="Female" /> Female
+                                    <input name="Gender" type="radio" value="Others" /> Others
+                                    <span asp-validation-for="Gender" id="radioGender" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="AddressLine1">Address Line 1 <span class="mandate" style="color:red">*</span> </label>
+                                <div class="col-sm-8">
+                                    <input class="form-control" type="text" asp-for="AddressLine1" placeholder="Enter your address here" />
+                                    <span asp-validation-for="AddressLine1" id="FirstAddress" class="text-danger"></span>
+
+                                </div>
+                            </div>
+
+
+
+                            <div class="form-group row">
+                                <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="AddressLine2">Address Line 2</label>
+                                <div class="col-sm-8">
+                                    <input class="form-control" type="text" asp-for="AddressLine2" placeholder="Enter your second address (optional)">
+                                    <span asp-validation-for="AddressLine2" class="text-danger"></span>
+                                </div>
+                            </div>
+
+
+
+
+
+                            <div class="form-group row">
+                                <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="AddressStreet"> Street <span class="mandate" style="color:red">*</span> </label>
+                                <div class="col-sm-8">
+                                    <input class="form-control" type="text" asp-for="AddressStreet" placeholder="Enter your streetaddress here">
+                                    <span asp-validation-for="AddressStreet" id="streetaddress" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="AddressCity">City <span class="mandate" style="color:red">*</span> </label>
+                                <div class="col-sm-8">
+                                    <input class="form-control" type="text" asp-for="AddressCity" required placeholder="Enter your cityname">
+                                    <span asp-validation-for="AddressCity" class="text-danger"></span>
+                                </div>
+                            </div>
+                           
+                            <div class="form-group row">
+                                <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="AddressState">State <span class="mandate" style="color:red">*</span> </label>
+                                <div class="col-sm-8">
+                                    <select class="custom-select" id="StateAddress" asp-for="AddressState">
+                                        <option>Select</option>
+
+                                    </select>
+                                    <span asp-validation-for="AddressState" class="text-danger"></span>
+                                </div>
+                                </div>
+
+
+                                <div class="form-group row">
+                                    <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="AddressZipcode">Zip code <span class="mandate" style="color:red">*</span> </label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control" type="text" asp-for="AddressZipcode" id="AddressZipcode" required placeholder="Enter a valid zipcode">
+                                        <span asp-validation-for="AddressZipcode" id="zipcode" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-4 col-form-label text-right" asp-for="AddressCountry">Country <span class="mandate" style="color:red">*</span> </label>
+                                    <div class="col-sm-8">
+                                        @Html.DropDownList("AddressCountry", (SelectList)ViewBag.AddressCountry, "Select", new { @class = "form-control", required = true,id="CountryId"})
+
+
+                                        <span asp-validation-for="AddressCountry" id="Country" class="text-danger"> </span>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="ImagePath">Photo <span class="mandate" style="color:red">*</span> </label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control" type="file" asp-for="ImagePath" id="ImagePath" accept="image/.jpg|.png">
+
+                                        <span asp-validation-for="ImagePath" id="img" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+                                @*<div class="form-group row">
+                <label for="example-phone-input" class="col-sm-4 col-form-label text-right" asp-for="PhoneNumber">Phone Number <span class="mandate" style="color:red">*</span> </label>
+                <div class="col-sm-8">
+                    <input class="form-control" type="tel" id="PhoneNumber" asp-for="PhoneNumber" required>
+
+                    <span asp-validation-for="PhoneNumber" id="MobileNumber" class="text-danger"></span>
+                </div>
+            </div>*@
+                                <div class="form-group row">
+                                    <div class="col-sm-12 text-right">
+
+                                        <input type="button" id="submitbtn" onclick="CheckMandateValidate()" value="Add" class="col-sm-3 btn btn-primary" />
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+            </form>
+        </div><!--end card-body-->
+    </div><!--end card-->
+</div><!--end col-->
+</div>
 
 
 @section Scripts {

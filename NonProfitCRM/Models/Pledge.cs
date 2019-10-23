@@ -40,6 +40,8 @@ namespace NonProfitCRM.Models
         [Display(Name = "Donation")]
         public int? DonationId { get; set; }
 
+        public int? VolunteersId { get; set; }
+
         public Campaign Campaign { get; set; }
 
         [Display(Name = "Name")]
@@ -49,7 +51,9 @@ namespace NonProfitCRM.Models
 
         public Event Event { get; set; }
         public Organization Org { get; set; }
-        [Display(Name = "Description")]
-        public string Description { get; set; }
+
+
+        public Volunteers Volunteers { get; set; }
+
     }
 }
