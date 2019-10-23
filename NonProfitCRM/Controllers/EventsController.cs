@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -9,6 +10,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using NonProfitCRM.Data;
 using NonProfitCRM.Models;
+using NonProfitCRM.Services;
 
 namespace NonProfitCRM.Controllers
 {
@@ -16,10 +18,12 @@ namespace NonProfitCRM.Controllers
     {
         private readonly UnitOfWork _unitOfWork;
         private readonly string orgId;
+        private readonly IImageService _imageService;
 
-        public EventsController()
+        public EventsController(IImageService imageService)
         {
             _unitOfWork = new UnitOfWork();
+            _imageService = imageService;
             orgId = "cac8a4ec-edd5-4554-8c91-24574282b9c1";
         }
 
@@ -39,14 +43,39 @@ namespace NonProfitCRM.Controllers
             {
                 return NotFound();
             }
+
             var events = await _unitOfWork.EventRepository.GetByIDAsync(id);
             if (events == null)
             {
+                
+
+                _unitOfWork.EventRepository.Insert(events);
+                await _unitOfWork.SaveAsync();
                 return NotFound();
             }
 
             return View(events);
         }
+
+
+        // GET: Events/Details-Pictures/5
+        [HttpPost]
+        public async Task<IActionResult>Pictures(IList<IFormFile> files,int id)
+        {
+
+            foreach (IFormFile source in files)
+            {
+               
+                
+                Picture picture = new Picture();
+
+                picture.PictureUrl = await _imageService.ImageUpload(source, "Pictures");
+            }
+
+            return this.View();
+
+        }
+        
 
         // GET: Events/Create
         public IActionResult Create()
@@ -64,8 +93,8 @@ namespace NonProfitCRM.Controllers
         // POST: Events/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,OrgId,Name,CategoryId,CampaignId,StartDate,StartTime," +
-            "EndDate,EndTime,ImagePath,ImageFile,Description,AddressLine1,AddressLine2,AddressStreet,AddressCity,AddressState,AddressCountry,AddressZipcode")] Event events)
+        public async Task<IActionResult> Create([Bind("Id,OrgId,Name,CategoryId,CampaignId,StartDate," +
+            "EndDate,ImagePath,ImageFile,Description,LongDescription,AddressLine1,AddressLine2,AddressStreet,AddressCity,AddressState,AddressCountry,AddressZipcode")] Event events)
         {
             if (ModelState.IsValid)
             {
@@ -82,23 +111,7 @@ namespace NonProfitCRM.Controllers
                 else
                 {
 
-                    //Upload Image
-                    string FileName = Path.GetFileNameWithoutExtension(events.ImageFile.FileName);
-                    string extension = Path.GetExtension(events.ImageFile.FileName);
-                    FileName = FileName + DateTime.Now.ToString("yymmssfff") + extension;
-                    var mediaFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\Banners");
-                    var path = Path.Combine(mediaFolderPath, FileName);
-                    bool exists = Directory.Exists(mediaFolderPath);
-                    if (!exists)
-                        Directory.CreateDirectory(mediaFolderPath);
-
-                    using (var bits = new FileStream(path, FileMode.Create))
-                    {
-                        await events.ImageFile.CopyToAsync(bits);
-                    }
-
-                    string baseUrl = $"{this.Request.Scheme}://{this.Request.Host}{this.Request.PathBase}";
-                    events.ImagePath = Path.Combine(baseUrl, "Banners", FileName);
+                    events.ImagePath = await _imageService.ImageUpload(events.ImageFile,"Banners");
 
                     _unitOfWork.EventRepository.Insert(events);
                     await _unitOfWork.SaveAsync();
@@ -140,8 +153,8 @@ namespace NonProfitCRM.Controllers
         // POST: Events/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,OrgId,Name,CategoryId,CampaignId,StartDate,StartTime," +
-            "EndDate,EndTime,ImagePath,ImageFile,Description,AddressLine1,AddressLine2,AddressStreet,AddressCity,AddressState,AddressCountry,AddressZipcode")] Event events)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,OrgId,Name,CategoryId,CampaignId,StartDate," +
+            "EndDate,ImagePath,ImageFile,Description,LongDescription,AddressLine1,AddressLine2,AddressStreet,AddressCity,AddressState,AddressCountry,AddressZipcode")] Event events)
         {
             if (id != events.Id)
             {
@@ -153,6 +166,9 @@ namespace NonProfitCRM.Controllers
                 try
                 {
                     events.OrgId = orgId;
+
+                    events.ImagePath = await _imageService.ImageUpload(events.ImageFile);
+
                     _unitOfWork.EventRepository.Update(events);
                     await _unitOfWork.SaveAsync();
 
@@ -229,5 +245,12 @@ namespace NonProfitCRM.Controllers
                 return true;
             }
         }
+
+        public IActionResult Calendar()
+        {
+            return View();
+        }
+
+
     }
 }

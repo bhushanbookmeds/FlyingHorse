@@ -22,6 +22,7 @@ namespace NonProfitCRM.Models
         public virtual DbSet<Donation> Donation { get; set; }
         public virtual DbSet<DonationType> DonationType { get; set; }
         public virtual DbSet<Event> Event { get; set; }
+        public virtual DbSet<Event> Picture { get; set; }
         public virtual DbSet<Organization> Organization { get; set; }
         public virtual DbSet<Pledge> Pledge { get; set; }
         public virtual DbSet<TransactionType> TransactionType { get; set; }
@@ -45,6 +46,7 @@ namespace NonProfitCRM.Models
 
                 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
                 optionsBuilder.UseSqlServer(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=CRM;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+
 
             }
         }
@@ -243,15 +245,13 @@ namespace NonProfitCRM.Models
 
                 entity.Property(e => e.AddressZipcode).HasMaxLength(6);
 
-                entity.Property(e => e.StartDate).HasColumnType("datetime");
+                entity.Property(e => e.StartDate).HasColumnType("50");
 
-                entity.Property(e => e.EndDate).HasColumnType("datetime");
-
-                entity.Property(e => e.StartTime).HasMaxLength(50);
-
-                entity.Property(e => e.EndTime).HasMaxLength(50);
+                entity.Property(e => e.EndDate).HasColumnType("50");
 
                 entity.Property(e => e.Description).HasMaxLength(500);
+
+                entity.Property(e => e.LongDescription).HasMaxLength(500);
 
                 entity.Property(e => e.ImagePath).HasMaxLength(500);
 
@@ -273,6 +273,17 @@ namespace NonProfitCRM.Models
                     .WithMany(p => p.Event)
                     .HasForeignKey(d => d.OrgId)
                     .HasConstraintName("FK_Event_Organization");
+            });
+
+            modelBuilder.Entity<Picture>(entity =>
+            {
+               
+
+                entity.Property(e => e.EntityType).HasMaxLength(128);
+
+                entity.Property(e => e.PictureUrl).HasMaxLength(250);
+
+                
             });
 
             modelBuilder.Entity<Project>(entity =>

@@ -87,7 +87,12 @@
         $('#min-date').bootstrapMaterialDatePicker({ 
             format : 'DD/MM/YYYY HH:mm', minDate : new Date() 
         });
-        
+
+      $('#event-enddate').bootstrapMaterialDatePicker({
+          format: 'DD/MM/YYYY HH:mm', minDate: new Date()
+      });
+
+
         $('#date-end').bootstrapMaterialDatePicker
         ({
             weekStart: 0, format: 'DD/MM/YYYY HH:mm'
