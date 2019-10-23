@@ -1,0 +1,95 @@
+﻿@model NonProfitCRM.Models.Project
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_SiteLayout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete dtis?</h3>
+<div>
+    <h4>Contact</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.StartDate)
+        </dt>
+        <dt>
+            @Html.DisplayFor(model => model.EndDate)
+        </dt>
+        <dt>
+            @Html.DisplayNameFor(model => model.AllocatedFund)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AllocatedFund)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalExpenses)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TotalExpenses)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.AddressLine1)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AddressLine1)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.AddressLine2)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AddressLine2)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.AddressStreet)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AddressStreet)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.AddressCity)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AddressCity)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.AddressState)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AddressState)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.AddressCountry)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AddressCountry)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.AddressZipcode)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AddressZipcode)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ProjectType)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ProjectType)
+        </dd>
+    </dl>
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>
+
+

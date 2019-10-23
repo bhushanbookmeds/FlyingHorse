@@ -1,0 +1,66 @@
+﻿@model IEnumerable<NonProfitCRM.Models.Project>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_SiteLayout.cshtml";
+}
+
+@*<a asp-action="Details" asp-route-id="@item.Id">Details</a> |*@
+<div class="row">
+    <div class="col-sm-12">
+        <div class="page-title-box">
+            <div class="float-right">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="javascript:void(0);">Project</a></li>
+                    <li class="breadcrumb-item active">View All</li>
+                </ol>
+            </div>
+            <h4 class="page-title">Project</h4>
+        </div><!--end page-title-box-->
+    </div><!--end col-->
+</div>
+<!-- end page title end breadcrumb -->
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <a asp-action="Create" class="btn btn-primary px-4 btn-rounded float-right mt-0 mb-3">+ Add New</a>
+                <h4 class="header-title mt-0">Project Details</h4>
+                <div class="table-responsive dash-social">
+                    <table id="datatable" class="table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Start Date</th>
+                                <th>Close Date</th>
+                                <th>Allocated Fund</th>
+                                <th>City</th>
+                                <th>Country</th>
+                            </tr><!--end tr-->
+                        </thead>
+
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td><img src="../assets/images/users/user-10.jpg" alt="" class="thumb-sm rounded-circle mr-2"><a asp-action="Details" asp-route-Id=@item.Id>@Html.DisplayFor(modelItem => item.Name)</a></td>
+
+                                    <td>@Html.DisplayFor(modelItem => item.StartDate)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.EndDate)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.AllocatedFund)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.AddressCity)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.AddressCountry)</td>
+
+
+                                    <td>
+                                        <a asp-controller="Project" asp-action="Edit" asp-route-Id=@item.Id class="mr-2"><i class="fas fa-edit text-info font-16" onclick="return confirm('Are you sure to edit the record')"></i></a>
+                                        <a asp-controller="Project" asp-action="Delete" asp-route-Id="@item.Id"><i class="fas fa-trash-alt text-danger font-16" onclick="return confirm('Are you sure to delete the record')"></i></a>
+                                    </td>
+                                </tr><!--end tr-->
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div><!--end card-body-->
+        </div><!--end card-->
+    </div> <!--end col-->
+</div><!--end row-->

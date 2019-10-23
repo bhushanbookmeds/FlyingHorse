@@ -5,8 +5,13 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+
+using NonProfitCRM.Data;
+using NonProfitCRM.Models;
+
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using NonProfitCRM.Services;
+
 
 namespace NonProfitCRM
 {
@@ -29,6 +34,9 @@ namespace NonProfitCRM
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+
+            services.AddScoped<DB_3221_crmContext, DB_3221_crmContext>();
+            services.AddScoped<UnitOfWork, UnitOfWork>();
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie();
 
             AutoMapperIntializer.Intializer();
