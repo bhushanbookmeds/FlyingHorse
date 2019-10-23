@@ -4,6 +4,7 @@
 @{
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_SiteLayout.cshtml";
+    ViewData["ContactTypes"] = ViewBag.ContactTypeId;
 }
 
 
@@ -28,20 +29,25 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-body">
-                <form asp-action="Create" id="Form1">
+                <partial name="_CreatePopup"
+                         model='new Contact()'>
+                   
+                    <form asp-action="Create" id="Form1">
 
 
-                    <a asp-controller="Contacts" asp-action="Create" class="btn btn-primary px-2 btn-rounded float-right mt-0 mb-1">New user</a>
-                    <div class="form-group">
-                        <div class="control-label col-md-12"> Search For Existing User</div>
-                        <div class="col-md-6">
-                            @Html.EditorFor(model => model.Contact.Name, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.Contact.Name, "", new { @class = "text-danger" })
+
+                        <a asp-controller="Contacts" asp-action="Create" class="btn btn-primary px-2 btn-rounded float-right mt-0 mb-1">New user</a>
+
+                        <div class="form-group">
+                            <div class="control-label col-md-12"> Search For Existing User</div>
+                            <div class="col-md-6">
+                                @Html.EditorFor(model => model.Contact.Name, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Contact.Name, "", new { @class = "text-danger" })
+                            </div>
                         </div>
-                    </div>
-                    @section Scripts
+                        @section Scripts
               {
-                        <script type="text/javascript">
+                            <script type="text/javascript">
                   $(document).ready(function ()
                    {
                     $('#Contact_Name').autocomplete({
@@ -107,230 +113,231 @@
                             });
                         };
 
-                        </script>
+                            </script>
 
-                    }
-
-
+                        }
 
 
-                    <div>
-                        <a asp-action="Index">Back to List</a>
-
-                    </div>
 
 
-                    <div class="page-content" id="show" style="display:none;">
+                        <div>
+                            <a asp-action="Index">Back to List</a>
 
-                        <div class="container-fluid">
-                            <!-- Page-Title -->
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <div class="page-title-box">
-
-                                        <h4 class="page-title">Profile</h4>
-
-                                    </div><!--end page-title-box-->
-                                </div><!--end col-->
-                            </div>
-                            <!-- end page title end breadcrumb -->
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="card">
-                                        <div class="form-group row">
-                                            <div class="form-group" id="HiddenFeild" style="display:none">
-                                                <div class="">
-                                                    <input class="form-control" asp-for="ContactId">
-                                                </div>
-                                            </div>
-
-                                            <div class="card-body  met-pro-bg">
-                                                <div class="met-profile">
-                                                    <div class="row">
-                                                        <div class="col-lg-4 align-self-center mb-3 mb-lg-0">
-                                                            <div class="met-profile-main">
-                                                                <div class="met-profile-main-pic">
-                                                                    <img src="../assets/images/users/user-4.jpg" alt="" class="rounded-circle">
-                                                                    <span class="fro-profile_main-pic-change">
-                                                                        <i class="fas fa-camera"></i>
-                                                                    </span>
-                                                                </div>
-                                                                <div class="met-profile_user-detail">
-                                                                    <h5 class="met-user-name" id="contactName">Name</h5>
-
-                                                                </div>
-                                                            </div>
-                                                        </div><!--end col-->
-                                                        <div class="col-lg-4 ml-auto">
-                                                            <ul class="list-unstyled personal-detail">
-                                                                <li class=""><i class="dripicons-phone mr-2 text-info font-8" id="Contactphonenumber"></i>
-                                                                <li class="mt-2"><i class="dripicons-mail text-info font-8 mt-2 mr-2" id="contactemail"></i>
-                                                                <li class="mt-2"><i class="dripicons-location text-info font-8 mt-2 mr-2" id="contactAddressLine1"></i>
-                                                                <li class="mt-2"><i class=" text-info font-8 mt-2 mr-2" id="contactAddressLine2"></i>
-                                                                <li class="mt-2"><i class=" text-info font-8 mt-2 mr-2" id="contactAddressStreet"></i>
-                                                                <li class="mt-2"><i class=" text-info font-8 mt-2 mr-2" id="contactAddressCity"></i>
-                                                                <li class="mt-2"><i class="text-info font-8 mt-2 mr-2" id="contactAddressState"></i>
-                                                                <li class="mt-2"><i class=" text-info font-8 mt-2 mr-2" id="contactAddressZipCode"></i>
-                                                                <li class="mt-2"><i class=" text-info font-8 mt-2 mr-2" id="contactAddressCountry"></i>
-                                                            </ul>
-
-                                                        </div><!--end col-->
-                                                        <div class="col-lg-4">
-                                                            <div class="row">
-                                                                <div class="col-lg-6 mx-auto">
-                                                                    <div class="own-detail bg-danger">
-                                                                        <h1>87</h1>
-                                                                        <h5>Overall Donations </h5>
-                                                                    </div>
-                                                                    <div class="own-detail own-detail-project bg-secondary">
-                                                                        <h1>50</h1>
-                                                                        <h5>Overall Campaing's Funded</h5>
-                                                                    </div>
-                                                                    <div class="own-detail own-detail-happy bg-success">
-                                                                        <h1>37</h1>
-                                                                        <h5>Overall Event's Funded</h5>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div><!--end row-->
-                                                </div><!--end f_profile-->
-                                            </div>
-                                            <div class="card-body">
-                                                <ul class="nav nav-pills mb-0" id="pills-tab" role="tablist">
-                                                    <li class="nav-item">
-                                                        <a class="nav-link" id="general_detail_tab" data-toggle="pill " onclick="toggle1()">Donate for Campaing</a>
-                                                    </li>
-                                                    <li class="nav-item">
-                                                        <a class="nav-link" id="education_detail_tab" data-toggle="pill" onclick="toggle2()">Donate for Event</a>
-                                                    </li>
-                                                    <li class="nav-item">
-                                                        <a class="nav-link" id="portfolio_detail_tab" data-toggle="pill" href="#portfolio_detail">Genral Donation</a>
-                                                    </li>
-
-                                                </ul>
-                                            </div>
-                                            <div class="form-group" id="Donate_for_Campaing" style="display:none;">
-                                                <div class="row">
-                                                    <div class="col-lg-12">
-                                                        <div class="card">
-                                                            <div class="card-body">
-                                                                <label class="col-sm-12 col-form-label text-left"> Select List from Campaing </label>
-                                                                <div class="col-sm-12">
-
-                                                                    @Html.DropDownList("CampaignId", (SelectList)ViewBag.CampaignId, "Select", new { @class = "form-control", onclick = "toggle3()" })
+                        </div>
 
 
-                                                                </div>
-                                                            </div>
+                        <div class="page-content" id="show" style="display:none;">
 
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group" id="Donate_for_Event" style="display:none;">
-                                                <div class="row">
-                                                    <div class="col-lg-12">
-                                                        <div class="card">
-                                                            <div class="card-body">
-                                                                <label class="col-sm-12 col-form-label text-left">Select List from Events </label>
-                                                                <div class="col-sm-12">
-                                                                    @Html.DropDownList("EventId", (SelectList)ViewBag.EventId, "Select", new { @class = "form-control", onclick = "toggle3()" }),
-                                                                </div>
-                                                            </div>
+                            <div class="container-fluid">
+                                <!-- Page-Title -->
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="page-title-box">
 
-                                                        </div>
+                                            <h4 class="page-title">Profile</h4>
+
+                                        </div><!--end page-title-box-->
+                                    </div><!--end col-->
+                                </div>
+                                <!-- end page title end breadcrumb -->
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="card">
+                                            <div class="form-group row">
+                                                <div class="form-group" id="HiddenFeild" style="display:none">
+                                                    <div class="">
+                                                        <input class="form-control" asp-for="ContactId">
                                                     </div>
                                                 </div>
 
-                                            </div>
-                                            <div class="form-group" id="Add_Donation" style="display:none">
-                                                <div class="row">
-                                                    <div class="col-lg-12">
-                                                        <div class="card">
-                                                            <div class="card-body">
+                                                <div class="card-body  met-pro-bg">
+                                                    <div class="met-profile">
+                                                        <div class="row">
+                                                            <div class="col-lg-4 align-self-center mb-3 mb-lg-0">
+                                                                <div class="met-profile-main">
+                                                                    <div class="met-profile-main-pic">
+                                                                        <img src="../assets/images/users/user-4.jpg" alt="" class="rounded-circle">
+                                                                        <span class="fro-profile_main-pic-change">
+                                                                            <i class="fas fa-camera"></i>
+                                                                        </span>
+                                                                    </div>
+                                                                    <div class="met-profile_user-detail">
+                                                                        <h5 class="met-user-name" id="contactName">Name</h5>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div><!--end col-->
+                                                            <div class="col-lg-4 ml-auto">
+                                                                <ul class="list-unstyled personal-detail">
+                                                                    <li class=""><i class="dripicons-phone mr-2 text-info font-8" id="Contactphonenumber"></i>
+                                                                    <li class="mt-2"><i class="dripicons-mail text-info font-8 mt-2 mr-2" id="contactemail"></i>
+                                                                    <li class="mt-2"><i class="dripicons-location text-info font-8 mt-2 mr-2" id="contactAddressLine1"></i>
+                                                                    <li class="mt-2"><i class=" text-info font-8 mt-2 mr-2" id="contactAddressLine2"></i>
+                                                                    <li class="mt-2"><i class=" text-info font-8 mt-2 mr-2" id="contactAddressStreet"></i>
+                                                                    <li class="mt-2"><i class=" text-info font-8 mt-2 mr-2" id="contactAddressCity"></i>
+                                                                    <li class="mt-2"><i class="text-info font-8 mt-2 mr-2" id="contactAddressState"></i>
+                                                                    <li class="mt-2"><i class=" text-info font-8 mt-2 mr-2" id="contactAddressZipCode"></i>
+                                                                    <li class="mt-2"><i class=" text-info font-8 mt-2 mr-2" id="contactAddressCountry"></i>
+                                                                </ul>
+
+                                                            </div><!--end col-->
+                                                            <div class="col-lg-4">
                                                                 <div class="row">
-                                                                    <div class="col-lg-6">
-                                                                        <div class="form-group row">
-                                                                            <label for="example-text-input" class="col-sm-6 " asp-for="Amount">Total Amount<span class="mandate" style="color:red">*</span></label>
-                                                                            <div class="col-sm-6">
-                                                                                <input class="form-control" type="number" id="NewName" asp-for="Amount" required="required">
-                                                                                <span asp-validation-for="Amount" id="ItsName" class="text-danger"></span>
-                                                                            </div>
+                                                                    <div class="col-lg-6 mx-auto">
+                                                                        <div class="own-detail bg-danger">
+                                                                            <h1>87</h1>
+                                                                            <h5>Overall Donations </h5>
                                                                         </div>
-                                                                        <div class="form-group row">
-                                                                            <label for="example-text-input" class="col-sm-3 col-form-label text-right" asp-for="Date">Date<span class="mandate" style="color:red">*</span></label>
-                                                                            <div class="col-sm-9">
-                                                                                <input class="form-control" placeholder="2017-06-04" id="mdate" type="date" asp-for="Date" required>
-                                                                                <span asp-validation-for="Date" id="ItsName" class="text-danger"></span>
-                                                                            </div>
+                                                                        <div class="own-detail own-detail-project bg-secondary">
+                                                                            <h1>50</h1>
+                                                                            <h5>Overall Campaing's Funded</h5>
                                                                         </div>
-
-                                                                        @*<div class="form-group row form-material">
-                                                                            <label class="col-sm-4 " asp-for="Date" required="required">Date<span class="mandate" style="color:red">*</span></label>
-                                                                            <div class="col-sm-8">
-                                                                                <input type="text" class="form-control" placeholder="2017-06-04" id="mdate">
-
-                                                                            </div>
-                                                                        </div>*@
-
-                                                                        <div class="form-group row">
-                                                                            <label for="example-text-input" class="col-sm-4 " asp-for="DonationType">Donation Type<span class="mandate" style="color:red">*</span></label>
-                                                                            <div class="col-sm-8">
-                                                                                @Html.DropDownList("DonationTypeId", (SelectList)ViewBag.DonationTypeId, "Select", new { @class = "form-control" })
-                                                                                <span asp-validation-for="DonationType" id="ItsName" class="text-danger"></span>
-                                                                            </div>
+                                                                        <div class="own-detail own-detail-happy bg-success">
+                                                                            <h1>37</h1>
+                                                                            <h5>Overall Event's Funded</h5>
                                                                         </div>
-                                                                        <div class="form-group row">
-                                                                            <label for="example-text-input" class="col-sm-4 " asp-for="TransactionTypeId">Transaction Type<span class="mandate" style="color:red">*</span></label>
-                                                                            <div class="col-sm-8">
-                                                                                @Html.DropDownList("TransactionTypeId", (SelectList)ViewBag.TransactionTypeId, "Select", new { @class = "form-control" })
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div><!--end row-->
+                                                    </div><!--end f_profile-->
+                                                </div>
+                                                <div class="card-body">
+                                                    <ul class="nav nav-pills mb-0" id="pills-tab" role="tablist">
+                                                        <li class="nav-item">
+                                                            <a class="nav-link" id="general_detail_tab" data-toggle="pill " onclick="toggle1()">Donate for Campaing</a>
+                                                        </li>
+                                                        <li class="nav-item">
+                                                            <a class="nav-link" id="education_detail_tab" data-toggle="pill" onclick="toggle2()">Donate for Event</a>
+                                                        </li>
+                                                        <li class="nav-item">
+                                                            <a class="nav-link" id="portfolio_detail_tab" data-toggle="pill" href="#portfolio_detail">Genral Donation</a>
+                                                        </li>
 
-                                                                                <span asp-validation-for="TransactionTypeId" id="ItsName" class="text-danger"></span>
-                                                                            </div>
+                                                    </ul>
+                                                </div>
+                                                <div class="form-group" id="Donate_for_Campaing" style="display:none;">
+                                                    <div class="row">
+                                                        <div class="col-lg-12">
+                                                            <div class="card">
+                                                                <div class="card-body">
+                                                                    <label class="col-sm-12 col-form-label text-left"> Select List from Campaing </label>
+                                                                    <div class="col-sm-12">
+
+                                                                        @Html.DropDownList("CampaignId", (SelectList)ViewBag.CampaignId, "Select", new { @class = "form-control", onclick = "toggle3()" })
+
+
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group" id="Donate_for_Event" style="display:none;">
+                                                    <div class="row">
+                                                        <div class="col-lg-12">
+                                                            <div class="card">
+                                                                <div class="card-body">
+                                                                    <label class="col-sm-12 col-form-label text-left">Select List from Events </label>
+                                                                    <div class="col-sm-12">
+                                                                        @Html.DropDownList("EventId", (SelectList)ViewBag.EventId, "Select", new { @class = "form-control", onclick = "toggle3()" }),
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="form-group" id="Add_Donation" style="display:none">
+                                                    <div class="row">
+                                                        <div class="col-lg-12">
+                                                            <div class="card">
+                                                                <div class="card-body">
+
+                                                                    <div class="form-group row">
+                                                                        <label for="example-text-input" class="col-sm-4 " asp-for="Amount">Total Amount<span class="mandate" style="color:red">*</span></label>
+                                                                        <div class="col-sm-8">
+                                                                            <input class="form-control" type="number" id="amount" asp-for="Amount" required="required">
+                                                                            <span asp-validation-for="Amount" id="ItsName" class="text-danger"></span>
                                                                         </div>
+                                                                    </div>
+                                                                    <div class="form-group row">
+                                                                        <label for="example-text-input" class="col-sm-4 " asp-for="Date">Date<span class="mandate" style="color:red">*</span></label>
+                                                                        <div class="col-sm-8">
+                                                                            <input class="form-control" placeholder="2017-06-04" id="mdate" type="date" asp-for="Date" required>
+                                                                            <span asp-validation-for="Date" id="ItsName" class="text-danger"></span>
+                                                                        </div>
+                                                                    </div>
 
+                                                                    @*<div class="form-group row form-material">
+                                                                <label class="col-sm-4 " asp-for="Date" required="required">Date<span class="mandate" style="color:red">*</span></label>
+                                                                <div class="col-sm-8">
+                                                                    <input type="text" class="form-control" placeholder="2017-06-04" id="mdate">
+
+                                                                </div>
+                                                            </div>*@
+
+                                                                    <div class="form-group row">
+                                                                        <label for="example-text-input" class="col-sm-4 " asp-for="DonationType">Donation Type<span class="mandate" style="color:red">*</span></label>
+                                                                        <div class="col-sm-8">
+                                                                            @Html.DropDownList("DonationTypeId", (SelectList)ViewBag.DonationTypeId, "Select", new { @class = "form-control" })
+                                                                            <span asp-validation-for="DonationType" id="ItsName" class="text-danger"></span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group row">
+                                                                        <label for="example-text-input" class="col-sm-4 " asp-for="TransactionTypeId">Transaction Type<span class="mandate" style="color:red">*</span></label>
+                                                                        <div class="col-sm-8">
+                                                                            @Html.DropDownList("TransactionTypeId", (SelectList)ViewBag.TransactionTypeId, "Select", new { @class = "form-control" })
+
+                                                                            <span asp-validation-for="TransactionTypeId" id="ItsName" class="text-danger"></span>
+                                                                        </div>
                                                                     </div>
                                                                     <div class="form-group row">
                                                                         <div class="col-sm-9 text-right">
                                                                             <input type="submit" value="Add" class="col-sm-4 btn btn-primary" />
                                                                         </div>
                                                                     </div>
+
                                                                 </div>
+
                                                             </div>
+
                                                         </div>
                                                     </div>
-
                                                 </div>
 
                                             </div>
+
                                         </div>
-
                                     </div>
-
-
 
                                 </div>
 
 
 
                             </div>
+
+
+
                         </div>
-                </form>
+
+                    </form>
 
             </div>
 
-
-
-
         </div>
-
 
 
     </div>
 
 
+
 </div>
+
+
+
 
 <script>
     function toggle() {

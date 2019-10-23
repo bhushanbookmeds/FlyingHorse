@@ -23,12 +23,12 @@ namespace NonProfitCRM.Controllers
         }
 
         // GET: Donations
-        public async Task<IActionResult> Index(int? id,Details_Donation details_Donation)
+        public async Task<IActionResult> Index(int? id, Details_Donation details_Donation)
         {
             var donations = await _unitOfWork.DonationRepository.GetManyAsync(c => c.OrgId == orgId);
 
             IList<Details_Donation> list_details_donations = new List<Details_Donation>();
-            foreach(var donation in donations)
+            foreach (var donation in donations)
             {
                 var campignName = string.Empty;
                 var eventName = string.Empty;
@@ -43,31 +43,31 @@ namespace NonProfitCRM.Controllers
                     var contacts = await _unitOfWork.ContactRepository.GetByIDAsync(donation.ContactId);
                     contactName = contacts.Name;
                 }
-                
-               if (donation.EventId != null)
+
+                if (donation.EventId != null)
                 {
                     var events = await _unitOfWork.EventRepository.GetByIDAsync(donation.EventId);
                     eventName = events.Name;
                 }
-               
-                
-                if (donation.CampaignId !=null)
+
+
+                if (donation.CampaignId != null)
                 {
                     var campaings = await _unitOfWork.CampaignRepository.GetByIDAsync(donation.CampaignId);
                     campignName = campaings.Name;
                 }
-               
-                if (donation.DonationTypeId !=null)
+
+                if (donation.DonationTypeId != null)
                 {
                     var donationTypes = await _unitOfWork.DonationTypeRepository.GetByIDAsync(donation.DonationTypeId);
                     DonationTypeId = donationTypes.Name;
                 }
-                 if(donation.TransactionTypeId != null)
+                if (donation.TransactionTypeId != null)
                 {
                     var TransactionTypes = await _unitOfWork.TransactionTypeRepository.GetByIDAsync(donation.TransactionTypeId);
                     TransactionTypeId = TransactionTypes.Name;
                 }
-               
+
 
                 Details_Donation details_donations = new Details_Donation();
 
@@ -79,14 +79,16 @@ namespace NonProfitCRM.Controllers
                 details_donations.GuestDonation = donation.GuestDonation;
                 details_donations.TransactionTypeId = TransactionTypeId;
                 details_donations.Amount = donation.Amount;
+                details_donations.Id = donation.Id;
+
                 list_details_donations.Add(details_donations);
             }
 
-            
+
 
             return View(list_details_donations);
-        }         
-        
+        }
+
 
         // GET: Donations/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -97,7 +99,7 @@ namespace NonProfitCRM.Controllers
                     return NotFound();
                 }
                 var donation = await _unitOfWork.DonationRepository.GetByIDAsync(id);
-              
+
                 if (donation == null)
                 {
                     return NotFound();
@@ -118,17 +120,19 @@ namespace NonProfitCRM.Controllers
 
             var EventId = _unitOfWork.EventRepository.GetAll().ToList();
             ViewBag.EventId = new SelectList(EventId, "Id", "Name");
-            
+
             var ContactId = _unitOfWork.ContactRepository.GetAll().ToList();
             ViewBag.ContactId = new SelectList(ContactId, "Id", "Name");
             var DonationTypeId = _unitOfWork.DonationTypeRepository.GetAll().ToList();
             ViewBag.DonationTypeId = new SelectList(DonationTypeId, "Id", "Name");
             var TransactionTypeId = _unitOfWork.TransactionTypeRepository.GetAll().ToList();
             ViewBag.TransactionTypeId = new SelectList(TransactionTypeId, "Id", "Name");
-           
+            var ContactTypeId = _unitOfWork.ContactTypeRepository.GetAll().ToList();
+            ViewBag.ContactTypeId = new SelectList(ContactTypeId, "Id", "Name");
+
 
             return View();
-            
+
         }
 
         // POST: Donations/Create
@@ -136,7 +140,7 @@ namespace NonProfitCRM.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,OrgId,EventId,CampaignId,ContactId,GuestDonation,GuestEmail,Amount,RecurringDonation,Date,TransactionTypeId,DonationTypeId")] Donation donation)
+        public async Task<IActionResult> Create([Bind("Id,OrgId,EventId,CampaignId,ContactId,GuestDonation,GuestEmail,Amount,RecurringDonation,Date,TransactionTypeId,DonationTypeId,ContactTypeId")] Donation donation)
         {
             if (ModelState.IsValid)
             {
@@ -153,7 +157,7 @@ namespace NonProfitCRM.Controllers
             ViewData["ContactId"] = new SelectList(_unitOfWork.ContactRepository.GetAll(), "Id", "Name", donation.ContactId);
             ViewData["DonationTypeId"] = new SelectList(_unitOfWork.DonationTypeRepository.GetAll(), "Id", "Name", donation.DonationTypeId);
             ViewData["TransactionTypeId"] = new SelectList(_unitOfWork.TransactionTypeRepository.GetAll(), "Id", "Name", donation.TransactionTypeId);
-
+            ViewData["ContactTypeId"] = new SelectList(_unitOfWork.ContactTypeRepository.GetAll(), "Id", "Name");
 
 
             return View(donation);
@@ -214,7 +218,7 @@ namespace NonProfitCRM.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-        
+
             ViewData["CampaignId"] = new SelectList(_unitOfWork.CampaignRepository.CampaignId, "Id", "OrgId", donation.CampaignId);
             ViewData["ContactId"] = new SelectList(_unitOfWork.ContactRepository.Contact, "Id", "Name", donation.ContactId);
             ViewData["DonationTypeId"] = new SelectList(_unitOfWork.DonationTypeRepository.DonationType, "Id", "Name", donation.DonationTypeId);
@@ -226,23 +230,24 @@ namespace NonProfitCRM.Controllers
 
         // GET: Donations/Delete/5
         public async Task<IActionResult> Delete(int? id)
-        
+        {
+            if (id == null)
             {
-                if (id == null)
-                {
-                    return NotFound();
-                }
-
-                var donation = await _unitOfWork.DonationRepository.GetByIDAsync(id);
-                if (donation == null)
-                {
-                    return NotFound();
-                }
-
-                return View(donation);
+                return NotFound();
             }
 
-            
+            var events = await _unitOfWork.DonationRepository.GetByIDAsync(id);
+            if (events == null)
+            {
+                return NotFound();
+            }
+
+            _unitOfWork.DonationRepository.Delete(events);
+            await _unitOfWork.SaveAsync();
+
+            return RedirectToAction(nameof(Index));
+        }
+
         // POST: Donations/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -271,7 +276,7 @@ namespace NonProfitCRM.Controllers
             IQueryable<Contact> contacts;
 
             if (result)
-                contacts = _unitOfWork.ContactRepository.GetDbSet(). Where(x => x.PhoneNumber.Contains(term));
+                contacts = _unitOfWork.ContactRepository.GetDbSet().Where(x => x.PhoneNumber.Contains(term));
             else
                 contacts = _unitOfWork.ContactRepository.GetDbSet().Where(x => x.Name.Contains(term));
 
