@@ -16,13 +16,13 @@ namespace NonProfitCRM.Models
 
         public int Id { get; set; }
         public string OrgId { get; set; }
-        [Required(ErrorMessage="Field can't be empty.")]
+        [Required(ErrorMessage = "Field can't be empty.")]
         [RegularExpression(@"^[\D]*$", ErrorMessage = " Please use alphabets only.")]
         [DisplayName("Name")]
 
         public string Name { get; set; }
-        
-        [Required(ErrorMessage ="Please select contact type")]
+
+        [Required(ErrorMessage = "Please select contact type")]
         public int ContactTypeId { get; set; }
         public int? ParentContactId { get; set; }
         public int PhoneCode { get; set; }
@@ -60,7 +60,7 @@ namespace NonProfitCRM.Models
         [DisplayName("Zipcode Address")]
         public string AddressZipcode { get; set; }
         [Required(ErrorMessage = "Field can't be empty.")]
-        [Range(13,100,ErrorMessage ="Please enter age between 13 to 100.")]
+        [Range(13, 100, ErrorMessage = "Please enter age between 13 to 100.")]
         [DisplayName("Age")]
         public int? Age { get; set; }
         [Required(ErrorMessage = "Field can't be empty.")]
@@ -70,6 +70,7 @@ namespace NonProfitCRM.Models
 
 
         public ContactType ContactType { get; set; }
+        public ICollection<Project> Project { get; set; }
         public ICollection<Donation> Donation { get; set; }
         public ICollection<Pledge> Pledge { get; set; }
     }
