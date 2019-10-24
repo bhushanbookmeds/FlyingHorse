@@ -33,12 +33,13 @@ namespace NonProfitCRM
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
-            services.AddScoped<DB_3221_crmContext, DB_3221_crmContext>();
-            services.AddScoped<UnitOfWork, UnitOfWork>();
+           
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie();
 
             AutoMapperIntializer.Intializer();
-
+            
+            services.AddScoped<DB_3221_crmContext, DB_3221_crmContext>();
+            services.AddScoped<UnitOfWork, UnitOfWork>();
             services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.TryAddTransient<IUserService, UserService>();
             services.TryAddTransient<Services.IAuthenticationService, Services.AuthenticationService>();
