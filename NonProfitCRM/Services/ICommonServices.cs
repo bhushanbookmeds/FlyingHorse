@@ -9,6 +9,7 @@ namespace NonProfitCRM.Services
     public interface ICommonServices
     {
         IEnumerable<Country> GetCountries();
+        IEnumerable<PhoneCodeModel> GetPhoneCode();
         IEnumerable<State> GetStates(int CountryId);
         
     }
