@@ -2,11 +2,6 @@
 
 $(function () {
 
-    $("#dtpDob").datepicker({
-        dateFormat: 'dd/mm/yy', changeMonth: true, changeYear: true, buttonImage: '../images/cal.png',
-        buttonImageOnly: true, showOn: 'both',
-    });
-  
     $("#NewName").keydown(function (e) {
         debugger
         if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 || (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) ||
@@ -58,20 +53,21 @@ function CheckMandateValidate() {
 
     var count = 0, message = '';
     if ($.trim($('#NewName').val()) === '') { message = "Name,"; count++; }
-    if ($.trim($('#ProjectType').val()) === 0) { message = message + "ProjectType,"; count++; }
-    if ($.trim($('#PhoneNumber').val()) === '') { message = message + "PhoneNumber,"; count++; }
-    if ($.trim($('#dtpDob').val()) == '') { message = message + "Date,"; count++; }
-    if ($.trim($('#AddressLine1').val()) === '') { message = message + "AddressLine1,"; count++; }
-    if ($.trim($('#AddressStreet').val()) === '') { message = message + "AddressStreet,"; count++; }
-    if ($.trim($('#AddressCity').val()) === '') { message = message + "AddressCity,"; count++; }
-    if ($.trim($('#AddressState').val()) === '') { message = message + "AddressState,"; count++; }
-    if ($.trim($('#AddressZipCode').val()) === '') { message = message + "AddressZipcode,"; count++; }
-    if ($.trim($('#AddressCountry').val()) === '') { message = message + "AddressCountry,"; count++; }
+    //if ($.trim($('#AddressLine1').val()) === 0) { message = message + "AddressLine1,"; count++; }
+    //if ($.trim($('#AddressStreet').val()) === 0) { message = message + "AddressStreet,"; count++; }
+    //if ($.trim($('#AddressCity').val()) === 0) { message = message + "AddressCity,"; count++; }
+    //if ($.trim($('#AddressState').val()) === 0) { message = message + "AddressState,"; count++; }
+    //if ($.trim($('#AddressZipCode').val()) === 0) { message = message + "AddressZipcode,"; count++; }
+    //if ($.trim($('#AddressCountry').val()) === 0) { message = message + "AddressCountry,"; count++; }
     if (count === 0) {
-        $("#myNewForm").submit();
+        $("#myNewform").submit();
     }
-    else {$.alert(message + " Invalid Data or Empty or Not Selected "); }
+    else {
+        alert(message + " Invalid Data or Empty or Not Selected ");
+    
+    }
 }
+
 
 
 

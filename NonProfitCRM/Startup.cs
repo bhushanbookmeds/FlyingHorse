@@ -5,8 +5,13 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+
+using NonProfitCRM.Data;
+using NonProfitCRM.Models;
+
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using NonProfitCRM.Services;
+
 
 namespace NonProfitCRM
 {
@@ -28,7 +33,8 @@ namespace NonProfitCRM
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
-
+            services.AddScoped<DB_3221_crmContext, DB_3221_crmContext>();
+            services.AddScoped<UnitOfWork, UnitOfWork>();
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie();
 
             AutoMapperIntializer.Intializer();
@@ -38,9 +44,8 @@ namespace NonProfitCRM
             services.TryAddTransient<Services.IAuthenticationService, Services.AuthenticationService>();
             services.TryAddTransient<IEncryptionService, EncryptionService>();
             services.TryAddTransient<IImageService, ImageService>();
-
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-
+          
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -67,6 +72,7 @@ namespace NonProfitCRM
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
             IHttpContextAccessor httpContextAccessor = app.ApplicationServices.GetRequiredService<IHttpContextAccessor>();
             ContextHelper.Configure(httpContextAccessor);
         }

@@ -57,7 +57,7 @@ namespace NonProfitCRM.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,OrgId,Name,PhoneNumber,Age,Email,AddressLine1,AddressLine2,AddressStreet,AddressCity,AddressState,AddressCountry,AddressZipcode")] Volunteers volunteers)
+        public async Task<IActionResult> Create([Bind("Id,OrgId,Name,PhoneNumber,Age,Email,InstagramProfile,FacebookProfile,TwitterProfile,AddressLine1,AddressLine2,AddressStreet,AddressCity,AddressState,AddressCountry,AddressZipcode")] Volunteers volunteers)
 
 
         {
@@ -98,7 +98,7 @@ namespace NonProfitCRM.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,OrgId,Name,PhoneNumber,Age,Email,AddressLine1,AddressLine2,AddressStreet,AddressCity,AddressState,AddressCountry,AddressZipcode")] Volunteers volunteers)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,OrgId,Name,PhoneNumber,Age,Email,InstagramProfile,FacebookProfile,TwitterProfile,AddressLine1,AddressLine2,AddressStreet,AddressCity,AddressState,AddressCountry,AddressZipcode")] Volunteers volunteers)
         {
             if (id != volunteers.Id)
             {
