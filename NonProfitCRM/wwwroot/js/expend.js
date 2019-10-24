@@ -41,21 +41,21 @@ $(function () {
             data: expenditure,
             //contentType: "application/jason; charset=utf-8",
             //dataType: "json",
-            
+
             success: function (data) {
-                
+
                 if (data.returnStatus === "success") {
-                   
+
                     var expend = data.returnData;
                     var newdata = "<tr><td>" + expend.name + " </td> <td>" + expend.date + "</td><td>" + expend.submitter + "</td><td>" + expend.amount + "</td><td>" + expend.invoice + "</td></tr>";
                     $('#datatable').append(newdata);
                     debugger
-                    var totalAmount = $("#total_expenditure").html() + expend.amount;
+                    var totalAmount = parseInt($("#total_expenditure").html()) + expend.amount;
 
                     $("#total_expenditure").html(totalAmount);
                 }
                 else {
-                    alert("Something went wrong");
+                    alert("Expense already exsist");
                 }
 
 

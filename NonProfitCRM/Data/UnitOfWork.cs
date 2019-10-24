@@ -29,14 +29,13 @@ namespace NonProfitCRM.Data
         private GenericRepository<Event> eventRepository;
         private GenericRepository<Pledge> pledgeRepository;
         private GenericRepository<Project> projectRepository;
+        private GenericRepository<Picture> pictureRepository;
         private GenericRepository<Country> countryRepository;
         private GenericRepository<State> stateRepository;
-       private GenericRepository<Volunteers> volunteersRepository;
+        private GenericRepository<Volunteers> volunteersRepository;
         private GenericRepository<ProjectType> projectTypeRepository;
         private GenericRepository<Expenditures> expendituresRepository;
                          #endregion
-
-
         public UnitOfWork()
         {
             _context = new DB_3221_crmContext();
@@ -171,6 +170,16 @@ namespace NonProfitCRM.Data
                 if (this.eventRepository == null)
                     this.eventRepository = new GenericRepository<Event>(_context);
                 return eventRepository;
+            }
+        }
+
+        public GenericRepository<Picture> PictureRepository
+        {
+            get
+            {
+                if (this.pictureRepository == null)
+                    this.pictureRepository = new GenericRepository<Picture>(_context);
+                return pictureRepository;
             }
         }
 

@@ -71,6 +71,7 @@
                     <li class="nav-item">
                         <a class="nav-link active" id="general_detail_tab" data-toggle="pill" href="#general_detail">Details</a>
                     </li>
+
                     <li class="nav-item">
                         <a class="nav-link" id="portfolio_detail_tab" data-toggle="pill" href="#portfolio_detail">Photos</a>
                     </li>
@@ -96,26 +97,26 @@
                                     <div class="col-md-6">
 
                                         <div class="form-group">
-                                            <label class="control-label col-md-4" style="text-transform: capitalize;"><b>Name :</b> @Html.DisplayFor(model => model.Name)</label>
+                                            <label class="control-label col-md-6" style="text-transform: capitalize;"><b>Name :</b> @Html.DisplayFor(model => model.Name)</label>
 
                                         </div>
 
                                         <div class="form-group">
-                                            <label class="control-label col-md-4"><b>Date :</b> @Html.DisplayFor(model => model.StartDate)</label>
+                                            <label class="control-label col-md-6"><b>Date :</b> @Html.DisplayFor(model => model.StartDate)</label>
 
                                         </div>
 
                                         <div class="form-group">
-                                            <label class="control-label col-md-4" style="text-transform: capitalize;"><b>Country :</b>@Html.DisplayFor(model => model.AddressCountry)</label>
+                                            <label class="control-label col-md-6" style="text-transform: capitalize;"><b>Country :</b>@Html.DisplayFor(model => model.AddressCountry)</label>
                                         </div>
 
                                         <div class="form-group">
-                                            <label class="control-label col-md-4" style="text-transform: capitalize;"><b>State :</b>@Html.DisplayFor(model => model.AddressState)</label>
+                                            <label class="control-label col-md-6" style="text-transform: capitalize;"><b>State :</b>@Html.DisplayFor(model => model.AddressState)</label>
 
                                         </div>
 
                                         <div class="form-group">
-                                            <label class="control-label col-md-4" style="text-transform: capitalize;"><b>City : </b>@Html.DisplayFor(model => model.AddressCity)</label>
+                                            <label class="control-label col-md-6" style="text-transform: capitalize;"><b>City : </b>@Html.DisplayFor(model => model.AddressCity)</label>
 
                                         </div>
 
@@ -128,21 +129,21 @@
 
 
                                         <div class="form-group">
-                                            <label class="control-label col-md-4" style="text-transform: capitalize;"><b>Street :</b> @Html.DisplayFor(model => model.AddressStreet)</label>
+                                            <label class="control-label col-md-6" style="text-transform: capitalize;"><b>Street :</b> @Html.DisplayFor(model => model.AddressStreet)</label>
 
                                         </div>
 
                                         <div class="form-group">
-                                            <label class="control-label col-md-4" style="text-transform: capitalize;"><b>AddressLine1 :</b> @Html.DisplayFor(model => model.AddressLine1)</label>
+                                            <label class="control-label col-md-6" style="text-transform: capitalize;"><b>AddressLine1 :</b> @Html.DisplayFor(model => model.AddressLine1)</label>
 
                                         </div>
                                         <div class="form-group">
-                                            <label class="control-label col-md-4" style="text-transform: capitalize;"><b>AddressLine2 :</b> @Html.DisplayFor(model => model.AddressLine2)</label>
+                                            <label class="control-label col-md-6" style="text-transform: capitalize;"><b>AddressLine2 :</b> @Html.DisplayFor(model => model.AddressLine2)</label>
 
                                         </div>
 
                                         <div class="form-group">
-                                            <label class="control-label col-md-4" style="text-transform: capitalize;"><b>ZipCode :</b>@Html.DisplayFor(model => model.AddressZipcode)</label>
+                                            <label class="control-label col-md-6" style="text-transform: capitalize;"><b>ZipCode :</b>@Html.DisplayFor(model => model.AddressZipcode)</label>
 
                                         </div>
 
@@ -181,172 +182,141 @@
             </div><!--end general detail-->
 
             <div class="tab-pane fade" id="portfolio_detail">
-                <div class="row">
-                    <div class="col-lg-8">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="row">
-                                    <ul class="col container-filter categories-filter mb-0" id="filter">
-                                        <li><a class="categories active" data-filter="*">All</a></li>
-                                        <li><a class="categories" data-filter=".branding">Branding</a></li>
-                                        <li><a class="categories" data-filter=".design">Design</a></li>
-                                        <li><a class="categories" data-filter=".photo">Photo</a></li>
-                                        <li><a class="categories" data-filter=".coffee">coffee</a></li>
-                                    </ul>
-                                </div><!-- End portfolio  -->
-                            </div><!--end card-body-->
-                        </div><!--end card-->
-
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="row container-grid nf-col-3  projects-wrapper">
-                                    <div class="col-lg-4 col-md-6 p-0 nf-item branding design coffee spacing">
-                                        <div class="item-box">
-                                            <a class="cbox-gallary1 mfp-image" href="~/imagesimg-1.jpg" title="Consequat massa quis">
-                                                <img class="item-container " src="~/images/img-1.jpg" alt="7" />
-                                                <div class="item-mask">
-                                                    <div class="item-caption">
-                                                        <h5 class="text-white">Consequat massa quis</h5>
-                                                        <p class="text-white">Branding, Design, Coffee</p>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </div><!--end item-box-->
-                                    </div><!--end col-->
-
-                                    <div class="col-lg-4 col-md-6 p-0 nf-item photo spacing">
-                                        <div class="item-box">
-                                            <a class="cbox-gallary1 mfp-image" href="~/images/img-2.jpg" title="Vivamus elementum semper">
-                                                <img class="item-container mfp-fade" src="~/images/img-2.jpg" alt="2" />
-                                                <div class="item-mask">
-                                                    <div class="item-caption">
-                                                        <h5 class="text-light">Vivamus elementum semper</h5>
-                                                        <p class="text-light">Photo</p>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </div><!--end item-box-->
-                                    </div><!--end col-->
-
-                                    <div class="col-lg-4 col-md-6 p-0 nf-item branding coffee spacing">
-                                        <div class="item-box">
-                                            <a class="cbox-gallary1 mfp-image" href="~/images/img-3.jpg" title="Quisque rutrum">
-                                                <img class="item-container" src="~/images/img-3.jpg" alt="4" />
-                                                <div class="item-mask">
-                                                    <div class="item-caption">
-                                                        <h5 class="text-light">Quisque rutrum</h5>
-                                                        <p class="text-light">Branding, Design, Coffee</p>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </div><!--end item-box-->
-                                    </div><!--end col-->
-
-                                    <div class="col-lg-4 col-md-6 p-0 nf-item branding design spacing">
-                                        <div class="item-box">
-                                            <a class="cbox-gallary1 mfp-image" href="~/images/img-4.jpg" title="Tellus eget condimentum">
-                                                <img class="item-container" src="~/images/img-4.jpg" alt="5" />
-                                                <div class="item-mask">
-                                                    <div class="item-caption">
-                                                        <h5 class="text-light">Tellus eget condimentum</h5>
-                                                        <p class="text-light">Design</p>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </div><!--end item-box-->
-                                    </div><!--end col-->
-
-                                    <div class="col-lg-4 col-md-6 p-0 nf-item branding design spacing">
-                                        <div class="item-box">
-                                            <a class="cbox-gallary1 mfp-image" href="~/images/img-5.jpg" title="Nullam quis ant">
-                                                <img class="item-container" src="~/images/img-5.jpg" alt="6" />
-                                                <div class="item-mask">
-                                                    <div class="item-caption">
-                                                        <h5 class="text-light">Nullam quis ant</h5>
-                                                        <p class="text-light">Branding, Design</p>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </div><!--end item-box-->
-                                    </div><!--end col-->
-
-                                    <div class="col-lg-4 col-md-6 p-0 nf-item photo spacing">
-                                        <div class="item-box">
-                                            <a class="cbox-gallary1 mfp-image" href="~/images/img-6.jpg" title="Sed fringilla mauris">
-                                                <img class="item-container" src="~/images/img-6.jpg" alt="1" />
-                                                <div class="item-mask">
-                                                    <div class="item-caption">
-                                                        <h5 class="text-light">Sed fringilla mauris</h5>
-                                                        <p class="text-light">Photo</p>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </div><!--end item-box-->
-                                    </div><!--end col-->
-                                </div><!--end row-->
-                            </div><!--end card-body-->
-                        </div><!--end card-->
-                    </div><!--end col-->
-                    <div class="col-lg-4">
-                        <div class="card ">
-                            <div class="card-body">
-                                <div class="text-center">
-                                    <h4><i class="fas fa-quote-left text-primary"></i></h4>
+                <div class="container-fluid">
+                    <!-- Page-Title -->
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="page-title-box">
+                                <div class="float-right">
+                                    <ol class="breadcrumb">
+                                        <li class="breadcrumb-item active">Events</li>
+                                        <li class="breadcrumb-item active">Gallery</li>
+                                    </ol>
                                 </div>
-                                <div id="carouselExampleFade2" class="carousel slide" data-ride="carousel">
-                                    <div class="carousel-inner">
-                                        <div class="carousel-item">
-                                            <div class="text-center">
-                                                <p class="text-muted px-4">
-                                                    It is a long established fact that a reader will be distracted by
-                                                    the readable content of a page when looking at its layout.
-                                                    The point of using Lorem Ipsum is that it has a more-or-less
-                                                    normal distribution of letters, as opposed to using.
-                                                </p>
-                                                <div class="">
-                                                    <img src="~/images/user-10.jpg" alt="" class="rounded-circle thumb-lg mb-2">
-                                                    <p class="mb-0 text-primary"><b>- Mary K. Myers</b></p>
-                                                    <small class="text-muted">CEO Facebook</small>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="carousel-item active">
-                                            <div class="text-center">
-                                                <p class="text-muted px-4">
-                                                    Where does it come from?
-                                                    Contrary to popular belief, Lorem Ipsum is not simply random text.
-                                                    It has roots in a piece of classical Latin literature from 45 BC,
-                                                    making it over 2000 years  popular belief,old.
-                                                </p>
-                                                <div class="">
-                                                    <img src="~/images/user-4.jpg" alt="" class="rounded-circle  thumb-lg mb-2">
-                                                    <p class="mb-0 text-primary"><b>- Michael C. Rios</b></p>
-                                                    <small class="text-muted">CEO Facebook</small>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="carousel-item">
-                                            <div class="text-center">
-                                                <p class="text-muted px-4">
-                                                    There are many variations of passages of Lorem Ipsum available,
-                                                    but the majority have suffered alteration in some form, by injected humour,
-                                                    or randomised words which don't look even slightly believable.
-                                                    If you are going to use a passage of Lorem Ipsum.
-                                                </p>
-                                                <div class="">
-                                                    <img src="~/images/user-5.jpg" alt="" class="rounded-circle  thumb-lg mb-2">
-                                                    <p class="mb-0 text-primary"><b>- Lisa D. Pullen</b></p>
-                                                    <small class="text-muted">CEO Facebook</small>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
+                                <h4 class="page-title">Gallery</h4>
+                            </div><!--end page-title-box-->
+                        </div><!--end col-->
                     </div>
-                </div><!--end row-->
+                    <!-- end page title end breadcrumb -->
+
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+
+                                <div class="card-body">
+                                    <input type="hidden" asp-for="Id" value="@Model.Id">
+                                        <div class="row">
+
+                                            <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="ImagePath">Upload Photos</label>
+                                            <div class="col-sm-5">
+                                                <form method="post" enctype="multipart/form-data" asp-controller="Events" asp-action="Details">
+                                                    <input multiple type="file" class="form-control" name="ImageFile" accept="image/*" onchange="preview_image(event)" required>
+                                                    <img id="output_image" />
+                                                    <div class="col-sm-20 text-right">
+                                                        <input type="submit" value="Add" class="col-sm-3 btn btn-primary" />
+                                                    </div>
+                                                </form>
+                                            </div>
+                                    
+                                        </div><!-- End portfolio  -->
+                                </div><!--end card-body-->
+                            </div><!--end card-->
+
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row container-grid nf-col-3  projects-wrapper">
+                                        <div class="col-lg-4 col-md-6 p-0 nf-item branding design coffee spacing">
+                                            <div class="item-box">
+                                                <a class="cbox-gallary1 mfp-image" href="~/imagesimg-1.jpg" title="Consequat massa quis">
+                                                    <img class="item-container " src="~/images/img-1.jpg" alt="7" />
+                                                    <div class="item-mask">
+                                                        <div class="item-caption">
+                                                            <h5 class="text-white">Consequat massa quis</h5>
+                                                            <p class="text-white">Branding, Design, Coffee</p>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </div><!--end item-box-->
+                                        </div><!--end col-->
+
+                                        <div class="col-lg-4 col-md-6 p-0 nf-item photo spacing">
+                                            <div class="item-box">
+                                                <a class="cbox-gallary1 mfp-image" href="~/imagesimg-1.jpg" title="Vivamus elementum semper">
+                                                    <img class="item-container mfp-fade" src="~/images/img-1.jpg" alt="2" />
+                                                    <div class="item-mask">
+                                                        <div class="item-caption">
+                                                            <h5 class="text-light">Vivamus elementum semper</h5>
+                                                            <p class="text-light">Photo</p>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </div><!--end item-box-->
+                                        </div><!--end col-->
+
+                                        <div class="col-lg-4 col-md-6 p-0 nf-item branding coffee spacing">
+                                            <div class="item-box">
+                                                <a class="cbox-gallary1 mfp-image" href="~/imagesimg-1.jpg" title="Quisque rutrum">
+                                                    <img class="item-container" src="~/images/img-1.jpg" alt="4" />
+                                                    <div class="item-mask">
+                                                        <div class="item-caption">
+                                                            <h5 class="text-light">Quisque rutrum</h5>
+                                                            <p class="text-light">Branding, Design, Coffee</p>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </div><!--end item-box-->
+                                        </div><!--end col-->
+
+                                        <div class="col-lg-4 col-md-6 p-0 nf-item branding design spacing">
+                                            <div class="item-box">
+                                                <a class="cbox-gallary1 mfp-image" href="~/imagesimg-1.jpg" title="Tellus eget condimentum">
+                                                    <img class="item-container" src="~/images/img-1.jpg" alt="5" />
+                                                    <div class="item-mask">
+                                                        <div class="item-caption">
+                                                            <h5 class="text-light">Tellus eget condimentum</h5>
+                                                            <p class="text-light">Design</p>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </div><!--end item-box-->
+                                        </div><!--end col-->
+
+                                        <div class="col-lg-4 col-md-6 p-0 nf-item branding design spacing">
+                                            <div class="item-box">
+                                                <a class="cbox-gallary1 mfp-image" href="~/imagesimg-1.jpg" title="Nullam quis ant">
+                                                    <img class="item-container" src="~/images/img-1.jpg" alt="6" />
+                                                    <div class="item-mask">
+                                                        <div class="item-caption">
+                                                            <h5 class="text-light">Nullam quis ant</h5>
+                                                            <p class="text-light">Branding, Design</p>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </div><!--end item-box-->
+                                        </div><!--end col-->
+
+                                        <div class="col-lg-4 col-md-6 p-0 nf-item photo spacing">
+                                            <div class="item-box">
+                                                <a class="cbox-gallary1 mfp-image" href="~/imagesimg-1.jpg" title="Sed fringilla mauris">
+                                                    <img class="item-container" src="~/images/img-1.jpg" alt="1" />
+                                                    <div class="item-mask">
+                                                        <div class="item-caption">
+                                                            <h5 class="text-light">Sed fringilla mauris</h5>
+                                                            <p class="text-light">Photo</p>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </div><!--end item-box-->
+                                        </div><!--end col-->
+                                    </div><!--end row-->
+                                </div><!--end card-body-->
+                            </div><!--end card-->
+                        </div><!--end col-->
+                    </div><!--end row-->
+
+
+
+                </div><!-- container -->
             </div><!--end portfolio detail-->
 
             <div class="tab-pane fade" id="settings_detail">
@@ -424,3 +394,36 @@
     <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>
+
+<script>
+    function uploadcsvfile() {
+        var myfile = document.getElementById("myfile");
+        var formData = new FormData();
+
+        if (myfile.files.length > 0) {
+            for (var i = 0; i < myfile.files.length; i++) {
+                formData.append('file-' + i, myfile.files[i]);
+            }
+        }
+
+        var data = {
+            Files = formData,
+            Id = $("#EventId").val()
+        };
+
+        $.ajax({
+            url: "/Events/Pictures/",
+            type: "POST",
+            dataType: "json",
+            data: data,
+            contentType: false,
+            processData: false,
+            success: function (data) {
+
+            },
+            error: function (data) {
+
+            }
+        })
+    }
+</script>

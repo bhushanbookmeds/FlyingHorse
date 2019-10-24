@@ -22,6 +22,7 @@ namespace NonProfitCRM.Models
         public virtual DbSet<Donation> Donation { get; set; }
         public virtual DbSet<DonationType> DonationType { get; set; }
         public virtual DbSet<Event> Event { get; set; }
+        public virtual DbSet<Event> Picture { get; set; }
         public virtual DbSet<Organization> Organization { get; set; }
         public virtual DbSet<Pledge> Pledge { get; set; }
         public virtual DbSet<TransactionType> TransactionType { get; set; }
@@ -35,8 +36,8 @@ namespace NonProfitCRM.Models
         public virtual DbSet<Country> Country { get; set; }
         public virtual DbSet<State> State { get; set; }
 
-        public virtual DbSet<Volunteers>Volunteers { get; set; }
-     
+        public virtual DbSet<Volunteers> Volunteers { get; set; }
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -45,6 +46,9 @@ namespace NonProfitCRM.Models
 
                 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
                 optionsBuilder.UseSqlServer(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=CRM;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+
+
+
             }
         }
 
@@ -145,7 +149,7 @@ namespace NonProfitCRM.Models
                 entity.Property(e => e.Date).HasColumnType("datetime");
 
                 entity.Property(e => e.GuestEmail).HasMaxLength(100);
-               
+
 
                 entity.Property(e => e.OrgId)
                     .IsRequired()
@@ -195,7 +199,7 @@ namespace NonProfitCRM.Models
 
 
             modelBuilder.Entity<Volunteers>(entity =>
-            {         
+            {
                 entity.Property(e => e.OrgId)
                     .IsRequired()
                     .HasMaxLength(128);
@@ -203,7 +207,7 @@ namespace NonProfitCRM.Models
                 entity.Property(e => e.Name).IsRequired().HasMaxLength(255);
 
                 entity.Property(e => e.PhoneNumber);
-                   
+
                 entity.Property(e => e.Age);
 
                 entity.Property(e => e.Email).HasMaxLength(255);
@@ -225,7 +229,7 @@ namespace NonProfitCRM.Models
                 entity.Property(e => e.InstagramProfile).HasMaxLength(255);
             });
 
-          
+
             modelBuilder.Entity<Event>(entity =>
             {
                 entity.Property(e => e.AddressCity).HasMaxLength(50);
@@ -242,15 +246,13 @@ namespace NonProfitCRM.Models
 
                 entity.Property(e => e.AddressZipcode).HasMaxLength(6);
 
-                entity.Property(e => e.StartDate).HasColumnType("datetime");
+                entity.Property(e => e.StartDate).HasColumnType("50");
 
-                entity.Property(e => e.EndDate).HasColumnType("datetime");
-
-                entity.Property(e => e.StartTime).HasMaxLength(50);
-
-                entity.Property(e => e.EndTime).HasMaxLength(50);
+                entity.Property(e => e.EndDate).HasColumnType("50");
 
                 entity.Property(e => e.Description).HasMaxLength(500);
+
+                entity.Property(e => e.LongDescription).HasMaxLength(500);
 
                 entity.Property(e => e.ImagePath).HasMaxLength(500);
 
@@ -274,29 +276,30 @@ namespace NonProfitCRM.Models
                     .HasConstraintName("FK_Event_Organization");
             });
 
+            modelBuilder.Entity<Picture>(entity =>
+            {
+               
+
+                entity.Property(e => e.EntityType).HasMaxLength(128);
+
+                entity.Property(e => e.PictureUrl).HasMaxLength(250);
+
+                
+            });
+
             modelBuilder.Entity<Project>(entity =>
             {
-                entity.Property(e => e.AddressCity).HasMaxLength(50);
-
-                entity.Property(e => e.AddressCountry).HasMaxLength(50);
-
-                entity.Property(e => e.AddressLine1).HasMaxLength(128);
-
-                entity.Property(e => e.AddressLine2).HasMaxLength(128);
-
-                entity.Property(e => e.AddressState).HasMaxLength(50);
-
-                entity.Property(e => e.AddressStreet).HasMaxLength(128);
-
-                entity.Property(e => e.AddressZipcode).HasMaxLength(50);
-
+              
                 entity.Property(e => e.StartDate).HasColumnType("datetime");
                 entity.Property(e => e.EndDate).HasColumnType("datetime");
+                entity.Property(e => e.Status).IsRequired();
 
                 entity.Property(e => e.OrgId).HasMaxLength(128);
+                entity.Property(e => e.ContactId).HasMaxLength(128);
                 entity.Property(e => e.Lead).IsRequired();
 
                 entity.Property(e => e.Name).IsRequired();
+                entity.Property(e => e.ProjectLeadId).IsRequired();
                 entity.HasOne(d => d.Org)
                     .WithMany(p => p.Project)
                     .HasForeignKey(d => d.OrgId)
@@ -306,6 +309,11 @@ namespace NonProfitCRM.Models
                     .WithMany(p => p.Project)
                     .HasForeignKey(d => d.ProjectTypeId)
                     .HasConstraintName("FK_Project_ProjectType");
+
+                entity.HasOne(d => d.Contact)
+                    .WithMany(p => p.Project)
+                    .HasForeignKey(d => d.ContactId)
+                    .HasConstraintName("FK_Project_Contact");
             });
             modelBuilder.Entity<ProjectType>(entity =>
             {
@@ -323,7 +331,7 @@ namespace NonProfitCRM.Models
                 entity.Property(e => e.Date).HasColumnType("datetime");
                 entity.Property(e => e.Submitter).IsRequired();
                 entity.Property(e => e.Amount).HasColumnType("decimal(18, 2)");
-                
+
                 entity.Property(e => e.Invoice);
             });
             modelBuilder.Entity<Organization>(entity =>
@@ -359,110 +367,109 @@ namespace NonProfitCRM.Models
                 entity.Property(e => e.StartDate).HasColumnType("datetime");
             });
 
-                modelBuilder.Entity<Pledge>(entity =>
-                {
-                    entity.Property(e => e.Date).HasColumnType("datetime");
+            modelBuilder.Entity<Pledge>(entity =>
+            {
+                entity.Property(e => e.Date).HasColumnType("datetime");
 
-                    entity.Property(e => e.OrgId)
-                        .IsRequired()
-                        .HasMaxLength(128);
+                entity.Property(e => e.OrgId)
+                    .IsRequired()
+                    .HasMaxLength(128);
 
-                    entity.Property(e => e.PhoneNumber)
-                        .HasMaxLength(50)
-                        .IsUnicode(false);
+                entity.Property(e => e.PhoneNumber)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
 
-                    entity.HasOne(d => d.Campaign)
-                        .WithMany(p => p.Pledge)
-                        .HasForeignKey(d => d.CampaignId)
-                        .HasConstraintName("FK_Pledge_Campaign");
+                entity.HasOne(d => d.Campaign)
+                    .WithMany(p => p.Pledge)
+                    .HasForeignKey(d => d.CampaignId)
+                    .HasConstraintName("FK_Pledge_Campaign");
 
-                    entity.HasOne(d => d.Contact)
-                        .WithMany(p => p.Pledge)
-                        .HasForeignKey(d => d.ContactId)
-                        .HasConstraintName("FK_Pledge_Contact");
+                entity.HasOne(d => d.Contact)
+                    .WithMany(p => p.Pledge)
+                    .HasForeignKey(d => d.ContactId)
+                    .HasConstraintName("FK_Pledge_Contact");
 
-                    entity.HasOne(d => d.Donation)
-                        .WithMany(p => p.Pledge)
-                        .HasForeignKey(d => d.DonationId)
-                        .HasConstraintName("FK_Pledge_Donation");
+                entity.HasOne(d => d.Donation)
+                    .WithMany(p => p.Pledge)
+                    .HasForeignKey(d => d.DonationId)
+                    .HasConstraintName("FK_Pledge_Donation");
 
-                    entity.HasOne(d => d.Event)
-                        .WithMany(p => p.Pledge)
-                        .HasForeignKey(d => d.EventId)
-                        .HasConstraintName("FK_Pledge_Event");
+                entity.HasOne(d => d.Event)
+                    .WithMany(p => p.Pledge)
+                    .HasForeignKey(d => d.EventId)
+                    .HasConstraintName("FK_Pledge_Event");
 
 
                 entity.HasOne(d => d.Org)
-                    .WithMany(p => p.Pledge)
-                    .HasForeignKey(d => d.OrgId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Pledge_Organization");
+                        .WithMany(p => p.Pledge)
+                        .HasForeignKey(d => d.OrgId)
+                        .OnDelete(DeleteBehavior.ClientSetNull)
+                        .HasConstraintName("FK_Pledge_Organization");
             });
 
 
-                modelBuilder.Entity<TransactionType>(entity =>
-                {
-                    entity.Property(e => e.Name)
-                        .IsRequired()
-                        .HasMaxLength(50);
+            modelBuilder.Entity<TransactionType>(entity =>
+            {
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(50);
 
-                    entity.Property(e => e.OrgId).HasMaxLength(128);
-                });
+                entity.Property(e => e.OrgId).HasMaxLength(128);
+            });
 
-                modelBuilder.Entity<UserRole>(entity =>
-                {
-                    entity.Property(e => e.Name).HasMaxLength(50);
-                });
+            modelBuilder.Entity<UserRole>(entity =>
+            {
+                entity.Property(e => e.Name).HasMaxLength(50);
+            });
 
-                modelBuilder.Entity<UserRoleMapping>(entity =>
-                {
-                    entity.HasOne(d => d.Role)
-                        .WithMany(p => p.UserRoleMapping)
-                        .HasForeignKey(d => d.RoleId)
-                        .HasConstraintName("FK_UserRoleMapping_Role");
+            modelBuilder.Entity<UserRoleMapping>(entity =>
+            {
+                entity.HasOne(d => d.Role)
+                    .WithMany(p => p.UserRoleMapping)
+                    .HasForeignKey(d => d.RoleId)
+                    .HasConstraintName("FK_UserRoleMapping_Role");
 
-                    entity.HasOne(d => d.User)
-                        .WithMany(p => p.UserRoleMapping)
-                        .HasForeignKey(d => d.UserId)
-                        .HasConstraintName("FK_UserRoleMapping_User");
-                });
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.UserRoleMapping)
+                    .HasForeignKey(d => d.UserId)
+                    .HasConstraintName("FK_UserRoleMapping_User");
+            });
 
-                modelBuilder.Entity<Users>(entity =>
-                {
-                    entity.Property(e => e.AddressCity).HasMaxLength(50);
+            modelBuilder.Entity<Users>(entity =>
+            {
+                entity.Property(e => e.AddressCity).HasMaxLength(50);
 
-                    entity.Property(e => e.AddressCountry).HasMaxLength(50);
+                entity.Property(e => e.AddressCountry).HasMaxLength(50);
 
-                    entity.Property(e => e.AddressLine1).HasMaxLength(128);
+                entity.Property(e => e.AddressLine1).HasMaxLength(128);
 
-                    entity.Property(e => e.AddressLine2).HasMaxLength(128);
+                entity.Property(e => e.AddressLine2).HasMaxLength(128);
 
-                    entity.Property(e => e.AddressState).HasMaxLength(50);
+                entity.Property(e => e.AddressState).HasMaxLength(50);
 
-                    entity.Property(e => e.AddressStreet).HasMaxLength(128);
+                entity.Property(e => e.AddressStreet).HasMaxLength(128);
 
-                    entity.Property(e => e.AddressZipcode).HasMaxLength(50);
+                entity.Property(e => e.AddressZipcode).HasMaxLength(50);
 
-                    entity.Property(e => e.Email).HasMaxLength(100);
+                entity.Property(e => e.Email).HasMaxLength(100);
 
-                    entity.Property(e => e.Name).HasMaxLength(100);
+                entity.Property(e => e.Name).HasMaxLength(100);
 
-                    entity.Property(e => e.OrgId).HasMaxLength(128);
+                entity.Property(e => e.OrgId).HasMaxLength(128);
 
-                    entity.Property(e => e.Password).HasMaxLength(50);
+                entity.Property(e => e.Password).HasMaxLength(50);
 
-                    entity.Property(e => e.PhoneNumber)
-                        .HasMaxLength(30)
-                        .IsUnicode(false);
+                entity.Property(e => e.PhoneNumber)
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
 
-            }
-    }
+
 
                 entity.HasOne(d => d.Org)
-                    .WithMany(p => p.Users)
-                    .HasForeignKey(d => d.OrgId)
-                    .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("FK_Users_Organization");
+                                .WithMany(p => p.Users)
+                                .HasForeignKey(d => d.OrgId)
+                                .OnDelete(DeleteBehavior.Cascade)
+                                .HasConstraintName("FK_Users_Organization");
             });
             modelBuilder.Entity<Country>(entity =>
             {
@@ -485,11 +492,12 @@ namespace NonProfitCRM.Models
                 entity.Property(e => e.Abbreviation).HasMaxLength(100);
 
                 entity.HasOne(s => s.Country)
-                    .WithMany(c => c.State)
-                    .HasForeignKey(s => s.CountryId)
-                    .HasConstraintName("FK_State_Country_CountryId");
+                                    .WithMany(c => c.State)
+                                    .HasForeignKey(s => s.CountryId)
+                                    .HasConstraintName("FK_State_Country_CountryId");
             });
 
         }
 
     }
+}

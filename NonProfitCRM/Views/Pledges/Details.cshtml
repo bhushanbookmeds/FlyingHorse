@@ -1,0 +1,31 @@
+﻿@model NonProfitCRM.Models.Pledge
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_SiteLayout.cshtml";
+}
+<div class="row">
+    <div class="col-sm-12">
+        <div class="page-title-box">
+            <div class="float-right">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="javascript:void(0);">Pledge</a></li>
+                    <li class="breadcrumb-item active">Create</li>
+                </ol>
+            </div>
+            <h4 class="page-title">Add </h4>
+        </div><!--end page-title-box-->
+    </div><!--end col-->
+</div>
+
+<div>
+    <h4>Pledge</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
