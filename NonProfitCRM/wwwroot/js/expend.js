@@ -50,12 +50,12 @@ $(function () {
                     var newdata = "<tr><td>" + expend.name + " </td> <td>" + expend.date + "</td><td>" + expend.submitter + "</td><td>" + expend.amount + "</td><td>" + expend.invoice + "</td></tr>";
                     $('#datatable').append(newdata);
                     debugger
-                    var totalAmount = parseInt($("#total_expenditure").html()) + expend.amount;
+                    var totalAmount = $("#total_expenditure").html() + expend.amount;
 
-         $("#total_expenditure").html(totalAmount);
+                    $("#total_expenditure").html(totalAmount);
                 }
                 else {
-                    alert("Expense already exsist");
+                    alert("Something went wrong");
                 }
 
 

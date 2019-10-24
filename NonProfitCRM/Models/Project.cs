@@ -39,7 +39,8 @@ namespace NonProfitCRM.Models
         [Required(ErrorMessage = "Field can't be empty.")]
         [DisplayName("AddressLine1")]
         public string AddressLine1 { get; set; }
-        
+        [Required(ErrorMessage = " Field can't be empty.")]
+        [DisplayName("AddressLine2")]
         public string AddressLine2 { get; set; }
         [Required(ErrorMessage = "Field can't be empty.")]
         [DisplayName("AddressStreet")]
@@ -67,9 +68,7 @@ namespace NonProfitCRM.Models
         [Required(ErrorMessage = "Field can't be empty.")]
         [DisplayName("ProjectType")]
         public int ProjectTypeId { get; set; }
-        public int? ContactId { get; set; }
         public Organization Org { get; set; }
-        public Contact Contact { get; set; }
 
         public ICollection<Expenditures> Expenditures { get; set; }
         public ProjectType ProjectType { get; set; }

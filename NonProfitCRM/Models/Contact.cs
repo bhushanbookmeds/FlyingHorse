@@ -70,7 +70,6 @@ namespace NonProfitCRM.Models
 
 
         public ContactType ContactType { get; set; }
-        public ICollection<Project> Project { get; set; }
         public ICollection<Donation> Donation { get; set; }
         public ICollection<Pledge> Pledge { get; set; }
     }
