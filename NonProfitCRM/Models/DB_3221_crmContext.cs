@@ -112,6 +112,11 @@ namespace NonProfitCRM.Models
 
                 entity.Property(e => e.Name).IsRequired();
 
+                entity.Ignore(e => e.PhoneCode);
+
+                entity.Property(e => e.ImagePath).HasMaxLength(500);
+                entity.Ignore(e => e.ImageFile);
+
                 entity.Property(e => e.OrgId)
                     .IsRequired()
                     .HasMaxLength(128);

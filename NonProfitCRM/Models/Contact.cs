@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -8,11 +9,14 @@ namespace NonProfitCRM.Models
 {
     public partial class Contact
     {
+       
         public Contact()
         {
             Donation = new HashSet<Donation>();
             Pledge = new HashSet<Pledge>();
         }
+
+        public IFormFile ImageFile { get; set; }
 
         public int Id { get; set; }
         public string OrgId { get; set; }
@@ -27,8 +31,8 @@ namespace NonProfitCRM.Models
         public int? ParentContactId { get; set; }
         public int PhoneCode { get; set; }
         [Required(ErrorMessage = "Field can't be empty.")]
-        [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Invalid Phone number")]
-        [DisplayName("PhoneNumber")]
+      //  [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Invalid Phone number")]
+       // [DisplayName("PhoneNumber")]
         public string PhoneNumber { get; set; }
         [Required(ErrorMessage = "Field can't be empty.")]
         [RegularExpression("^[a-z0-9_\\+-]+(\\.[a-z0-9_\\+-]+)*@[a-z0-9-]+(\\.[a-z0-9]+)*\\.([a-z]{2,4})$", ErrorMessage = "Invalid email format.")]

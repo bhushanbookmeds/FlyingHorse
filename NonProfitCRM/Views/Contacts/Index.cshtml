@@ -26,8 +26,12 @@
                 @Html.DisplayNameFor(model => model.ParentContactId)
             </th>
             <th>
+             @Html.DisplayNameFor(model=>model.PhoneCode)
+             </th>
+            <th>
                 @Html.DisplayNameFor(model => model.PhoneNumber)
             </th>
+
             <th>
                 @Html.DisplayNameFor(model => model.Email)
             </th>
@@ -180,11 +184,11 @@
                                 <th>Email</th>
                                 <th>Phone No</th>
                                 <th>Donor Score</th>
-                                <th>City</th>
-                                <th>Country</th>
-                                
                                 <th>Age</th>
                                 <th>Gender</th>
+                                <th>Country</th>
+                                <th>State</th>
+                                <th>City</th>
                                 <th>Social</th>
                                 <th>Action</th>
                             </tr><!--end tr-->
@@ -193,29 +197,35 @@
                         <tbody>
                             @foreach (var item in Model)
                             {
-                                <tr>
-                                    <td><img src="../assets/images/users/user-10.jpg" alt="" class="thumb-sm rounded-circle mr-2"><a asp-action="Details" asp-route-Id=@item.Id>@Html.DisplayFor(modelItem => item.Name)</a></td>
-                                    <td>@Html.DisplayFor(modelItem => item.Email)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.PhoneNumber)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.DonorScore)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.AddressCity)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.AddressCountry)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.Age)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.Gender)</td>
-                                    <td>
+                            <tr>
+                                <td>
+                                    <img src="@Html.DisplayFor(modelItem => item.ImagePath)" alt="" class="thumb-sm rounded-circle mr-2">
+                                    <a asp-action="Details" asp-route-Id=@item.Id style="text-transform: capitalize;">@Html.DisplayFor(modelItem => item.Name)</a>
+                                </td>
+                                <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                                <td>@Html.DisplayFor(modelItem => item.PhoneNumber)</td>
+                                <td>@Html.DisplayFor(modelItem => item.DonorScore)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Age)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Gender)</td>
+                                <td>@Html.DisplayFor(modelItem => item.AddressCountry)</td>
+                                <td>@Html.DisplayFor(modelItem => item.AddressState)</td>
+                                <td>@Html.DisplayFor(modelItem => item.AddressCity)</td>
+
+                                <td>
+                                    
                                         <a href="//@item.FacebookProfile" target="_blank"><i class="fab fa-facebook" style="color:blue"></i></a>
                                         <a href="//@item.InstagramProfile" target="_blank"><i class="fab fa-instagram" style="color:hotpink"></i></a>
-                                        <a href="//@item.TwitterProfile" target="_blank"><i class="fab fa-twitter" style="color:deepskyblue"></i></a>
+                                        <a href="//@item.TwitterProfile" target="_blank"><i class="fab fa-twitter" style="color:deepskyblue",'margin-top:16px'></i></a>
+                                       
+                                </td>
 
+                                <td>
+                                    <a asp-controller="Contacts" asp-action="Edit" asp-route-Id=@item.Id class="mr-2"><i class="fas fa-edit text-info font-16"></i></a>
 
-                                    </td>
-                                    <td>
-                                        <a asp-controller="Contacts" asp-action="Edit" asp-route-Id=@item.Id class="mr-2"><i class="fas fa-edit text-info font-16"></i></a>
+                                    <a asp-controller="Contacts" asp-action="Delete" asp-route-Id="@item.Id"><i class="fas fa-trash-alt text-danger font-16"></i></a>
 
-                                        <a asp-controller="Contacts" asp-action="Delete" asp-route-Id="@item.Id"><i class="fas fa-trash-alt text-danger font-16" ></i></a>
-
-                                    </td>
-                                </tr><!--end tr-->
+                                </td>
+                            </tr><!--end tr-->
                             }
                         </tbody>
                     </table>

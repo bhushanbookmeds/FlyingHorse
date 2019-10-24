@@ -37,6 +37,7 @@ namespace NonProfitCRM
             services.TryAddTransient<IUserService, UserService>();
             services.TryAddTransient<Services.IAuthenticationService, Services.AuthenticationService>();
             services.TryAddTransient<IEncryptionService, EncryptionService>();
+            services.TryAddTransient<IImageService, ImageService>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
@@ -66,6 +67,8 @@ namespace NonProfitCRM
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+            IHttpContextAccessor httpContextAccessor = app.ApplicationServices.GetRequiredService<IHttpContextAccessor>();
+            ContextHelper.Configure(httpContextAccessor);
         }
     }
 }
