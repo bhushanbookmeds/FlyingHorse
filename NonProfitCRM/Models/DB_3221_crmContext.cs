@@ -45,7 +45,11 @@ namespace NonProfitCRM.Models
             {
 
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+
+               
+
                 optionsBuilder.UseSqlServer(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=CRM;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+
 
 
 
@@ -233,7 +237,10 @@ namespace NonProfitCRM.Models
 
                 entity.Property(e => e.InstagramProfile).HasMaxLength(255);
 
+
+
                 });
+
 
             modelBuilder.Entity<Event>(entity =>
             {
@@ -440,6 +447,10 @@ namespace NonProfitCRM.Models
                     .HasConstraintName("FK_UserRoleMapping_User");
             });
 
+
+
+
+
             modelBuilder.Entity<Users>(entity =>
             {
                 entity.Property(e => e.AddressCity).HasMaxLength(50);
@@ -462,6 +473,7 @@ namespace NonProfitCRM.Models
 
                 entity.Property(e => e.OrgId).HasMaxLength(128);
 
+
                 entity.Property(e => e.Password).HasMaxLength(50);
 
                 entity.Property(e => e.PhoneNumber)
@@ -471,10 +483,13 @@ namespace NonProfitCRM.Models
 
 
                 entity.HasOne(d => d.Org)
+
+                       
                                 .WithMany(p => p.Users)
                                 .HasForeignKey(d => d.OrgId)
                                 .OnDelete(DeleteBehavior.Cascade)
                                 .HasConstraintName("FK_Users_Organization");
+
 
             });
             modelBuilder.Entity<Country>(entity =>
@@ -505,7 +520,6 @@ namespace NonProfitCRM.Models
 
         }
     }
-
 
 }
 
