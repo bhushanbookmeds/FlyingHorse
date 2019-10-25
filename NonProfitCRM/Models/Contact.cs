@@ -68,6 +68,7 @@ namespace NonProfitCRM.Models
         public string Gender { get; set; }
         public string ImagePath { get; set; }
 
+        public string Country { get; set; }
 
         public ContactType ContactType { get; set; }
         public ICollection<Donation> Donation { get; set; }
