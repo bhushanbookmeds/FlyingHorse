@@ -44,7 +44,7 @@ namespace NonProfitCRM.Models
             if (!optionsBuilder.IsConfigured)
             {
 
-                #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
                 optionsBuilder.UseSqlServer(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=CRM;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
 
 
@@ -116,7 +116,7 @@ namespace NonProfitCRM.Models
 
                 entity.Property(e => e.DonorScore).HasColumnType("decimal(7, 4)");
 
-                entity.Property(e => e.Email).HasMaxLength(100);
+                entity.Property(e => e.Email).HasMaxLength(100);              
 
                 entity.Property(e => e.Name).IsRequired();
 
@@ -232,8 +232,8 @@ namespace NonProfitCRM.Models
                 entity.Property(e => e.AddressZipcode).HasMaxLength(6);
 
                 entity.Property(e => e.InstagramProfile).HasMaxLength(255);
-            });
 
+                });
 
             modelBuilder.Entity<Event>(entity =>
             {
@@ -475,6 +475,7 @@ namespace NonProfitCRM.Models
                                 .HasForeignKey(d => d.OrgId)
                                 .OnDelete(DeleteBehavior.Cascade)
                                 .HasConstraintName("FK_Users_Organization");
+
             });
             modelBuilder.Entity<Country>(entity =>
             {
@@ -503,6 +504,8 @@ namespace NonProfitCRM.Models
             });
 
         }
-
     }
+
+
 }
+

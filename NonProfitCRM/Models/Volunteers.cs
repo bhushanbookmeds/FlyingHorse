@@ -17,6 +17,7 @@ namespace NonProfitCRM.Models
         public string Name { get; set; }
 
         //public string CountryCode { get; set; }
+        public string PhoneCode { get; set; }
 
         [Required(ErrorMessage = "Field can't be empty.")]
         [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Invalid Phone number")]
@@ -32,6 +33,8 @@ namespace NonProfitCRM.Models
         [Range(18,100,ErrorMessage ="Please Enter Age Between 18 to 100")]
         [DisplayName("Age")]
         public int Age { get; set; }
+
+        public string Gender { get; set; }
 
         [Required(ErrorMessage = "Field can't be empty.")]
         [DisplayName("AddressLine1")]
@@ -56,6 +59,8 @@ namespace NonProfitCRM.Models
         [Required(ErrorMessage = "Field can't be empty.")]
         [DisplayName("Zipcode Address")]
         public string AddressZipcode { get; set; }
+
+        public string ImagePath { get; set; }
 
         //[Required(ErrorMessage = "Field can't be empty.")]
         //[DisplayName("Instagram")]

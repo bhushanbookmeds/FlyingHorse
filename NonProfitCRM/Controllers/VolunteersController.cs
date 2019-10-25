@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using NonProfitCRM.Data;
 using NonProfitCRM.Models;
+using NonProfitCRM.Services;
 
 namespace NonProfitCRM.Controllers
 {
@@ -15,12 +16,15 @@ namespace NonProfitCRM.Controllers
 
 
         private readonly UnitOfWork _unitOfWork;
+        private readonly ICommonServices _commonServices;
+
         private readonly string orgId;
 
 
         public VolunteersController()
         {
             _unitOfWork = new UnitOfWork();
+            _commonServices = new CommonServices();
             orgId = "cac8a4ec-edd5-4554-8c91-24574282b9c1";
         }
 
@@ -50,6 +54,12 @@ namespace NonProfitCRM.Controllers
         // GET: Volunteers/Create
         public IActionResult Create()
         {
+
+            
+            var country = _commonServices.GetCountries();
+            ViewBag.AddressCountry = new SelectList(country, "Id", "Name");
+
+           
             return View();
         }
         // POST: Contacts/Create
@@ -57,7 +67,7 @@ namespace NonProfitCRM.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,OrgId,Name,PhoneNumber,Age,Email,InstagramProfile,FacebookProfile,TwitterProfile,AddressLine1,AddressLine2,AddressStreet,AddressCity,AddressState,AddressCountry,AddressZipcode")] Volunteers volunteers)
+        public async Task<IActionResult> Create([Bind("Id,OrgId,Name,VolunteersTypeId,PhoneNumber,Age,Email,InstagramProfile,FacebookProfile,TwitterProfile,AddressLine1,AddressLine2,AddressStreet,AddressCity,AddressState,AddressCountry,AddressZipcode")] Volunteers volunteers)
 
 
         {
