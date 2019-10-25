@@ -22,19 +22,32 @@ namespace NonProfitCRM.Controllers
         {
             ViewData["TotalDonations"] = _unitOfWork.DonationRepository.DbSet.Sum(donation => donation.Amount);
             ViewData["Credit"] = 100;
-            ViewData["Cash"] = 200;
+            ViewData["Cash"] = 100;
+
+            ViewData["NewContacts"] = _unitOfWork.ContactRepository.DbSet.Count();
+            ViewData["TotalDonors"] = _unitOfWork.DonationRepository.DbSet.Where(donation=> donation.Date.GetValueOrDefault().Month == DateTime.Now.Month && donation.Date.GetValueOrDefault().Year == DateTime.Now.Year).Count();
+            ViewData["TotalDonations"] = _unitOfWork.DonationRepository.DbSet.Sum(src => src.Amount);
+            ViewData["TotalExpenditures"] = 800;
             return View();
         }
 
-        public async Task<Dictionary<DateTime, decimal>> GetDonation(string type)
+        public async Task<Dictionary<string, decimal>> GetDonation(string type)
         {
             if (type == "YEAR")
             {
-                return null;
+                var donations = await _unitOfWork.DonationRepository.GetManyAsync(src => src.Date.GetValueOrDefault() >= DateTime.Now.AddDays(-365));
+
+                var donationData = await GetDonationMonthWiseData(donations.OrderBy(src => src.Date).ToList());
+
+                return donationData;
             }
             else if (type == "MONTH")
             {
-                return null;
+                var donations = await _unitOfWork.DonationRepository.GetManyAsync(src => src.Date.GetValueOrDefault() >= DateTime.Now.AddDays(-30));
+
+                var donationData = await GetDonation(donations.OrderBy(src => src.Date).ToList());
+
+                return donationData;
             }
             else
             {
@@ -42,24 +55,51 @@ namespace NonProfitCRM.Controllers
 
                 var donations = await _unitOfWork.DonationRepository.GetManyAsync(src => src.Date.GetValueOrDefault() >= DateTime.Now.AddDays(-7));
 
-                var donationData = await GetDonation(donations.ToList());
+                var donationData = await GetDonation(donations.OrderBy(src=>src.Date).ToList());
 
                 return donationData;
             }
         }
 
-        private async Task<Dictionary<DateTime, decimal>> GetDonation(List<Donation> donations)
+        private async Task<Dictionary<string, decimal>> GetDonation(List<Donation> donations)
         {
-            var result =
-                (from d in donations
-                 group d by d.Date.GetValueOrDefault().Date into g
-                 select new
-                 {
-                     Date = g.Key.Date,
-                     Amount = g.Sum(x => x.Amount)
-                 }).ToDictionary(src => src.Date, x => x.Amount.GetValueOrDefault());
+            try
+            {
+                var result =
+                    (from d in donations
+                     group d by d.Date.GetValueOrDefault().Date into g
+                     select new
+                     {
+                         Date = g.Key.Date.ToString("MMM dd"),
+                         Amount = g.Sum(x => x.Amount)
+                     }).ToDictionary(src => src.Date, x => x.Amount.GetValueOrDefault());
 
-            return result;
+                return result;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+
+        private async Task<Dictionary<string, decimal>> GetDonationMonthWiseData(List<Donation> donations)
+        {
+            try
+            {
+                var result = (from d in donations
+                              group d by new { month = d.Date.GetValueOrDefault().ToString("MMM"), year = d.Date.GetValueOrDefault().Year } into donation
+                              select new
+                              {
+                                  Date = string.Format("{0} {1}", donation.Key.month, donation.Key.year),
+                                  Amount = donation.Sum(x => x.Amount.GetValueOrDefault())
+                              }).ToDictionary(src => src.Date, x => x.Amount); ;
+                return result;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
 
 

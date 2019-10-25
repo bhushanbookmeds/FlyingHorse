@@ -269,7 +269,6 @@ var options = {
         }
     }
   }
-  
 }
 
 var chart = new ApexCharts(

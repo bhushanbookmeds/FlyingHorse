@@ -13,6 +13,12 @@
     <Folder Include="wwwroot\Pictures\" />
     <None Remove="Views\Countries\**" />
   </ItemGroup>
+
+ 
+  <ItemGroup>
+    <None Include="wwwroot\plugins\chartist\js\chartist-plugin-tooltip.min.js" />
+    <None Include="wwwroot\plugins\chartist\js\chartist.min.js" />
+  </ItemGroup>
   <ItemGroup>
 
     <None Include="wwwroot\js\app.js" />

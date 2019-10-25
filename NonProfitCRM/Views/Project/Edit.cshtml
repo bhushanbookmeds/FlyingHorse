@@ -23,6 +23,72 @@
                             </div>
                         </div>
                         <div class="form-group row">
+                            <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="Contact.Name">Project Lead<span class="mandate" style="color:red">*</span></label>
+                            <div class="col-sm-8">
+                                @Html.EditorFor(model => model.Contact.Name, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Contact.Name, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        @section Scripts
+              {
+                            <script type="text/javascript">
+                  $(document).ready(function ()
+                   {
+                    $('#Contact_Name').autocomplete({
+                       delay: 500,
+                       minLength: 1,
+                        source: '@Url.Action("Search","Project")',
+                        select: function (event, ui)
+                          {
+                              $("#Contact_Name").val(ui.item.label);
+                             this.value = ui.item.label;
+                            $('#Contact_Name').show();
+
+                            $("#ContactId").val(ui.item.id)
+
+
+                               debugger
+                               selectFunction(ui.item.id);
+                          return false;
+
+                        }
+                    });
+                }); function selectFunction(id) {
+                            $.ajax({
+                                type: "GET",
+                                url: '@Url.Action("GetContactDetails","Project")/' + id,
+                                data: {},
+                                contentType: "application/json; charset=utf-8",
+                                dataType: "json",
+                                success: function (data) {
+
+
+                                    if (data) {
+
+                                        $('#contactName').html(data.name);
+
+                                    }
+                                    else {
+                                        alert("Somthing went wrong");
+                                    }
+
+
+
+                                    return data;
+                                    //$("Contact_Name").hide(function () { $("div.success").fadeIn(); });
+                                },
+                                //error: function (XMLHttpRequest, textStatus, errorThrown) {
+                                //    alert("Status: " + textStatus); alert("Error: " + errorThrown);
+                                //}
+
+
+                            });
+                        };
+
+                            </script>
+
+                        }
+                        <div class="form-group row">
                             <label class="col-sm-4 col-form-label text-right" asp-for="ProjectTypeId">Project Type</label>
                             <div class="col-sm-8">
 
@@ -33,107 +99,56 @@
 
 
                         <div class="form-group row">
-                            <label for="example-number-input" class="col-sm-4 col-form-label text-right" asp-for="AllocatedFund">Allocated Fund</label>
+                            <label for="example-number-input" class="col-sm-4 col-form-label text-right" asp-for="AllocatedFund">Allocated Fund<span class="mandate" style="color:red">*</span></label>
                             <div class="col-sm-8">
-                                <input class="form-control" type="number" id="startDate" asp-for="AllocatedFund" required>
+                                <input class="form-control" type="number" asp-for="AllocatedFund" required placeholder="Enter the Fund provided for Project">
                                 <span asp-validation-for="AllocatedFund" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="Description">Description</label>
                             <div class="col-sm-8">
-                                <textarea class="form-control" asp-for="Description" rows="4" cols="45"></textarea>
+                                <textarea class="form-control" asp-for="Description" rows="4" cols="45" placeholder="Description of Project"></textarea>
                                 <span asp-validation-for="Description" class="text-danger"></span>
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="StartDate">Start Date</label>
+                            <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="StartDate">Start Date<span class="mandate" style="color:red">*</span></label>
                             <div class="col-sm-8">
-                                <input class="form-control" type="date" id="example-text-input" asp-for="StartDate" required>
+                                <input class="form-control" type="date" id="example-text-input" asp-for="StartDate" required placeholder="Enter the Start date of Project">
                                 <span asp-validation-for="StartDate" class="text-danger"></span>
                             </div>
                         </div>
 
+
+
                         <div class="form-group row">
-                            <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="EndDate">Close Date</label>
+                            <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="EndDate">Close Date<span class="mandate" style="color:red">*</span></label>
                             <div class="col-sm-8">
-                                <input class="form-control" type="date" id="example-text-input" asp-for="EndDate" required>
+                                <input class="form-control" type="date" asp-for="EndDate" placeholder="Enter the Closing date of Project">
+
                                 <span asp-validation-for="EndDate" class="text-danger"></span>
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-lg-6">
-                        <div class="form-group row">
-                            <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="AddressLine1">Address Line 1</label>
-                            <div class="col-sm-8">
-                                <input class="form-control" type="text" asp-for="AddressLine1">
-                                <span asp-validation-for="AddressLine1" class="text-danger"></span>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="AddressLine2">Address Line 2</label>
-                            <div class="col-sm-8">
-                                <input class="form-control" type="text" asp-for="AddressLine2">
-                                <span asp-validation-for="AddressLine2" class="text-danger"></span>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="AddressStreet">Street</label>
-                            <div class="col-sm-8">
-                                <input class="form-control" type="text" asp-for="AddressStreet">
-                                <span asp-validation-for="AddressStreet" class="text-danger"></span>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="AddressCity">City</label>
-                            <div class="col-sm-8">
-                                <input class="form-control" type="text" asp-for="AddressCity">
-                                <span asp-validation-for="AddressCity" class="text-danger"></span>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="AddressState">State</label>
-                            <div class="col-sm-8">
-                                <input class="form-control" type="text" asp-for="AddressState">
-                                <span asp-validation-for="AddressState" class="text-danger"></span>
-                            </div>
-                        </div>
 
-                        <div class="form-group row">
-                            <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="AddressZipcode">Zip code</label>
-                            <div class="col-sm-8">
-                                <input class="form-control" type="number" asp-for="AddressZipcode" required>
-                                <span asp-validation-for="AddressZipcode" class="text-danger"></span>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-4 col-form-label text-right" asp-for="AddressCountry">Country</label>
-                            <div class="col-sm-8">
-                                <select class="custom-select" asp-for="AddressCountry" required>
-                                    <option selected="">Select</option>
-                                    <option value="India">India</option>
-                                    <option value="USA">USA</option>
-                                </select>
-                                <span asp-validation-for="AddressCountry" class="text-danger"></span>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-sm-12 text-right">
+                    <div class="form-group row">
+                        <div class="col-sm-12 text-right">
 
-                                <input type="submit" value="Save" class="col-sm-3 btn btn-primary" />
-                            </div>
+                            <input type="submit" value="Save" class="col-sm-3 btn btn-primary" />
                         </div>
                     </div>
                 </div>
+
             </form>
         </div>
     </div>
 </div><!--end card-body-->
- @*@Html.Partial("Expenditures", Model.Expenditures)*@
+@*@Html.Partial("Expenditures", Model.Expenditures)*@
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+@*@section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }*@
 

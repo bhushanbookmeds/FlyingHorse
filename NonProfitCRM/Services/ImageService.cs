@@ -9,11 +9,10 @@ namespace NonProfitCRM.Services
 {
     public class ImageService : IImageService
     {
-        public async Task<string>ImageUpload(IFormFile file, string folderName = null)
+        public async Task<string> ImageUpload(IFormFile file, string folderName = null)
         {
             if (string.IsNullOrWhiteSpace(folderName))
                 folderName = "Banners";
-
             //Upload Image
             string FileName = Path.GetFileNameWithoutExtension(file.FileName);
             string extension = Path.GetExtension(file.FileName);
@@ -24,13 +23,12 @@ namespace NonProfitCRM.Services
             bool exists = Directory.Exists(mediaFolderPath);
             if (!exists)
                 Directory.CreateDirectory(mediaFolderPath);
-
             using (var bits = new FileStream(path, FileMode.Create))
             {
                 await file.CopyToAsync(bits);
             }
-            
             return Path.Combine(ContextHelper.GetHostingUrl(), folderName, FileName);
         }
     }
 }
+
