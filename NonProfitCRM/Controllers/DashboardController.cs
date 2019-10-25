@@ -11,7 +11,7 @@ namespace NonProfitCRM.Controllers
     public class DashboardController : Controller
     {
         private readonly UnitOfWork _unitOfWork;
-        private readonly string orgId;
+        
 
         public DashboardController(UnitOfWork unitOfWork)
         {

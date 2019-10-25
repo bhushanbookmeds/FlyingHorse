@@ -1,11 +1,8 @@
 ﻿@model NonProfitCRM.Models.Event
-
-
 @{
     ViewData["Title"] = "Edit";
     Layout = "~/Views/Shared/_SiteLayout.cshtml";
 }
-
 
 <!-- Page-Title -->
 <div class="row">
@@ -17,7 +14,7 @@
                     <li class="breadcrumb-item active">Edit Events</li>
                 </ol>
             </div>
-            <h4 class="page-title">Edit Events</h4>
+            <h4 class="page-title">Edit Event</h4>
         </div><!--end page-title-box-->
     </div><!--end col-->
 </div>
@@ -32,7 +29,7 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="form-group row">
-                                <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="Name">Event Name</label>
+                                <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="Name">Event Name<span class="mandate" style="color:red">*</span></label>
                                 <div class="col-sm-8">
                                     <input class="form-control" type="text" pattern="[A-Za-z]+" style="text-transform: capitalize;"
                                            id="example-text-input" asp-for="Name" placeholder="Event Name" required>
@@ -66,15 +63,15 @@
                                 </div>*@
 
                             <div class="form-group row">
-                                <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="StartDate">Start Date</label>
+                                <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="StartDate">Start Date<span class="mandate" style="color:red">*</span></label>
                                 <div class="col-sm-8">
-                                    <input type="text" name="StartDate" asp-for="StartDate"class="form-control" placeholder="Select Date -Time" id="min-date">
+                                    <input type="text" name="StartDate" asp-for="StartDate" class="form-control" placeholder="Select Date -Time" id="min-date">
                                     @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
                                 </div>
                             </div>
 
                             <div class="form-group row">
-                                <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="EndDate">End Date</label>
+                                <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="EndDate">End Date<span class="mandate" style="color:red">*</span></label>
                                 <div class="col-sm-8">
                                     <input type="text" name="EndDate" asp-for="EndDate" class="form-control" placeholder="Select Date -Time" id="event-enddate">
                                     @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
@@ -105,7 +102,7 @@
                             <div class="form-group row">
                                 <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="Description">Short Description</label>
                                 <div class="col-sm-8">
-                                    <textarea rows="2" class="form-control" cols="23" name="Description" asp-for="Description" style="text-transform: capitalize;"
+                                    <textarea rows="2" class="form-control" cols="23" asp-for="Description" name="Description" style="text-transform: capitalize;"
                                               placeholder="Enter Short Description" required></textarea>
 
                                 </div>
@@ -114,7 +111,7 @@
                             <div class="form-group row">
                                 <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="LongDescription">Long Description</label>
                                 <div class="col-sm-8">
-                                    <textarea rows="4" class="form-control" cols="23" name="LongDescription" asp-for="LongDescription" style="text-transform: capitalize;"
+                                    <textarea rows="4" class="form-control" cols="23" asp-for="LongDescription" name="LongDescription" style="text-transform: capitalize;"
                                               placeholder="Enter Long Description" required></textarea>
 
                                 </div>
@@ -129,24 +126,25 @@
                                 </div>*@
 
                             <div class="form-group row">
-                                    <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="ImagePath">Upload Banner</label>
-                                    <div class="col-sm-8">
-                                        <input multiple type="file" class="form-control" name="ImageFile" asp-for="ImagePath" accept="image/*" onchange="preview_image(event)" required>
-                                        <img id="output_image" />
-                                    </div>
+                                <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="ImagePath">Upload Banner</label>
+                                <div class="col-sm-8">
+                                    <input multiple type="file" class="form-control" name="ImageFile" accept="image/*" onchange="preview_image(event)" required>
+
+                                    <img id="output_image" />
                                 </div>
+                            </div>
 
                             @*<div class="form-group row">
-                                <div class="col-sm-8">
-                                    <input type="file" name="file-1[]" id="file-1" style="display:none" class="inputfile inputfile-1" data-multiple-caption="{count} files selected" multiple />
+                                    <div class="col-sm-8">
+                                        <input type="file" name="file-1[]" id="file-1" style="display:none" class="inputfile inputfile-1" data-multiple-caption="{count} files selected" multiple />
 
-                                    <label for="file-1" class="col-sm-4 col-form-label text-right">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="17" viewBox="0 0 20 17">
-                                            <path d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z" />
-                                        </svg> <span>Choose a file&hellip;</span>
-                                    </label>
-                                </div>
-                            </div>*@
+                                        <label for="file-1" class="col-sm-4 col-form-label text-right">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="17" viewBox="0 0 20 17">
+                                                <path d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z" />
+                                            </svg> <span>Choose a file&hellip;</span>
+                                        </label>
+                                    </div>
+                                </div>*@
 
                         </div>
 
@@ -173,20 +171,17 @@
                             </div>
 
                             <div class="form-group row">
-                                <label class="col-sm-4 col-form-label text-right" asp-for="AddressCountry">Country</label>
+                                <label class="col-sm-4 col-form-label text-right" asp-for="AddressCountry">Country <span class="mandate" style="color:red">*</span> </label>
                                 <div class="col-sm-8">
-                                    <select class="custom-select" asp-for="AddressCountry" placeholder="Country">
-                                        <option Selected="" required>Select</option>
-                                        <option value="India">India</option>
-                                        <option value="USA">USA</option>
-                                    </select>
+                                    @Html.DropDownList("AddressCountry", (SelectList)ViewBag.AddressCountry, "Select", new { @class = "form-control", required = true, id = "Name" })
+
+                                    <span asp-validation-for="AddressCountry" id="Country" class="text-danger"> </span>
                                 </div>
-                                @*@Html.ValidationMessageFor(model => model.AddressCountry, "", new { @class = "text-danger" })*@
                             </div>
 
 
                             <div class="form-group row">
-                                <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="AddressState">State</label>
+                                <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="AddressState">State<span class="mandate" style="color:red">*</span></label>
                                 <div class="col-sm-8">
                                     <input class="form-control" type="text" style="text-transform: capitalize;" asp-for="AddressState" placeholder="State" required>
                                     @Html.ValidationMessageFor(model => model.AddressState, "", new { @class = "text-danger" })
@@ -194,7 +189,7 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="AddressCity">City</label>
+                                <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="AddressCity">City<span class="mandate" style="color:red">*</span></label>
                                 <div class="col-sm-8">
                                     <input class="form-control" type="text" style="text-transform: capitalize;" asp-for="AddressCity" placeholder="City" required>
                                     @Html.ValidationMessageFor(model => model.AddressCity, "", new { @class = "text-danger" })

@@ -7,22 +7,17 @@ using System.Net.Http;
 
 namespace NonProfitCRM.Models
 {
-    
+
     public partial class Event
     {
-        public IFormFile ImageFile { get; set; }
-
         public Event()
         {
             Donation = new HashSet<Donation>();
             Pledge = new HashSet<Pledge>();
-
-             
-    }
+        }
 
         public int Id { get; set; }
         public string OrgId { get; set; }
-        
 
         //public string BannerPath { get; set; }
 
@@ -34,9 +29,7 @@ namespace NonProfitCRM.Models
         [Required(AllowEmptyStrings = false, ErrorMessage = "Name Should be Unique")]
         public string Name { get; set; }
 
-
         public int? CategoryId { get; set; }
-
 
         public int? CampaignId { get; set; }
 
@@ -44,11 +37,9 @@ namespace NonProfitCRM.Models
         [Required(AllowEmptyStrings = false, ErrorMessage = "Start Date is required")]
         public string StartDate { get; set; }
 
-
         [Display(Name = "EndDate")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "End Date is required")]
         public string EndDate { get; set; }
-
 
         //[Display(Name = "Description")]
         //[Required(AllowEmptyStrings = false, ErrorMessage = "Description Field is required")]
@@ -86,7 +77,10 @@ namespace NonProfitCRM.Models
         [Required(AllowEmptyStrings = false, ErrorMessage = "ZipCode Field is required")]
         public string AddressZipcode { get; set; }
 
-       
+        public IFormFile ImageFile { get; set; }
+
+        public IEnumerable<string> Pictures { get; set; }
+
         public Campaign Campaign { get; set; }
         public CampaignCategory Category { get; set; }
         public Organization Org { get; set; }
