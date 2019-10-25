@@ -22,6 +22,7 @@ namespace NonProfitCRM.Models
 
         public int Id { get; set; }
         public string OrgId { get; set; }
+        
 
         //public string BannerPath { get; set; }
 
@@ -41,19 +42,19 @@ namespace NonProfitCRM.Models
 
         [Display(Name = "StartDate")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "Start Date is required")]
-        public DateTime? StartDate { get; set; }
+        public string StartDate { get; set; }
 
-        public string StartTime { get; set; }
 
         [Display(Name = "EndDate")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "End Date is required")]
-        public DateTime? EndDate { get; set; }
+        public string EndDate { get; set; }
 
-        public string EndTime { get; set; }
 
         //[Display(Name = "Description")]
         //[Required(AllowEmptyStrings = false, ErrorMessage = "Description Field is required")]
         public string Description { get; set; }
+
+        public string LongDescription { get; set; }
 
         public string ImagePath { get; set; }
 
@@ -85,6 +86,7 @@ namespace NonProfitCRM.Models
         [Required(AllowEmptyStrings = false, ErrorMessage = "ZipCode Field is required")]
         public string AddressZipcode { get; set; }
 
+       
         public Campaign Campaign { get; set; }
         public CampaignCategory Category { get; set; }
         public Organization Org { get; set; }

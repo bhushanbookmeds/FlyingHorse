@@ -4585,7 +4585,7 @@ dt {
 }
 
 [class^="ti-"], [class*=" ti-"] {
-  color: #f3f6f7;
+    //color: #f3f6f7;
 }
 
 .dtp .p10 > a {

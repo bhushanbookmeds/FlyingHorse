@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using NonProfitCRM.Data;
 using NonProfitCRM.Models;
+
 
 namespace NonProfitCRM.Services
 {
@@ -15,6 +15,10 @@ namespace NonProfitCRM.Services
             _unitOfWork = new UnitOfWork();
 
         }
+        public Country GetCountriesbyPhoneCode(int phoneCode)
+        {
+            return _unitOfWork.CountryRepository.GetFirst(x => x.PhoneCode == phoneCode);
+        }
         public IEnumerable<Country> GetCountries()
         {
             var countries = _unitOfWork.CountryRepository.GetAll();
@@ -25,6 +29,21 @@ namespace NonProfitCRM.Services
         {
             var states = _unitOfWork.StateRepository.GetMany(s => s.CountryId == CountryId);
             return states;
+        }
+
+        public IEnumerable<PhoneCodeModel> GetPhoneCode()
+        {
+            var country = _unitOfWork.CountryRepository.GetAll().ToList();
+
+            var phoneCodes = new List<PhoneCodeModel>();
+
+            country.ForEach(c =>
+            {
+                phoneCodes.Add(new PhoneCodeModel { Id = c.PhoneCode.Value, PhoneCode = c.PhoneCode.Value });
+            });
+
+            return phoneCodes;
+          
         }
     }
 }

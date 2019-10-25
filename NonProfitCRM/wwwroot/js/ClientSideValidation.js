@@ -2,7 +2,7 @@
 
 $(function () {
     $("#Name").keydown(function (e) {
-
+        
         if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 || (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) ||
             (e.keyCode >= 35 && e.keyCode <= 40)) { return; }
         if (e.keyCode < 65 || e.keyCode > 90) {
@@ -14,17 +14,17 @@ $(function () {
 
     });
 
-    $("#PhoneNumber").keydown(function (e) {
-        if (e.which >= 48 && e.which <= 57  || e.which === 8) {
+    //$("#PhoneNumber").keydown(function (e) {
+    //    if (e.which >= 48 && e.which <= 57  || e.which === 8) {
 
            
-            $("#MobileNumber").empty();
-            $("#MobileNumber").html("Please provide a valid phone number");
-            return;
-        }
-        else
-            e.preventDefault();
-    });
+    //        $("#MobileNumber").empty();
+    //        $("#MobileNumber").html("Please provide a valid phone number");
+    //        return;
+    //    }
+    //    else
+    //        e.preventDefault();
+    //});
 
     $("#Email").blur(function (e) {
         var email = $("#Email").val();
@@ -127,8 +127,8 @@ function CheckMandateValidate() {
 
     
 $("#CountryId").change(function () {
-    debugger;
-
+    
+    
     var statevar = $(this).val();
 
     $.ajax({
@@ -136,7 +136,7 @@ $("#CountryId").change(function () {
         type: 'GET',
         data: { CountryId: $("#CountryId").val() },
         success: function (data) {
-            debugger
+            
             $.each(data, function (key, value) {
                 $("#StateAddress").append($("<option></option>").val(value.name).html(value.name));
             
@@ -149,3 +149,54 @@ $("#CountryId").change(function () {
     });
 
 })
+
+//$(function () {
+//    debugger;
+
+//    var contacttype = $("#ContactTypeId").val();
+//    var age = $("#Age").val();
+//    if (contacttype === "2") {
+//        age.hide();
+
+
+//    }
+
+
+//$("#CountryId").change(function () {
+
+    
+//    var countryco = $("#CountryId").val();
+//    var phoneco = $("#NewPhone").val();
+
+
+
+//    $.ajax({
+//        url: "/Contacts/PhoneCode",
+//        type: 'GET',
+//        data: { CountryId: $("#CountryId").val() },
+//        success: function (data) {
+//            debugger;
+       
+//                $("#NewPhone").val($("<select></select>").val(value.name).html(value.phonecode));
+
+//            });
+
+
+            
+
+//        }
+//    });
+
+
+$("#CountryId").change(function () {
+    debugger;
+    var countryCode = $(this).val();
+
+    if (countryCode) {
+        $("#NewPhone").val(countryCode);
+    }
+});
+
+
+
+
