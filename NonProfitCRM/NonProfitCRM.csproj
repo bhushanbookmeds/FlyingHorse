@@ -12,6 +12,12 @@
     <EmbeddedResource Remove="Views\Countries\**" />
     <None Remove="Views\Countries\**" />
   </ItemGroup>
+
+ 
+  <ItemGroup>
+    <None Include="wwwroot\plugins\chartist\js\chartist-plugin-tooltip.min.js" />
+    <None Include="wwwroot\plugins\chartist\js\chartist.min.js" />
+  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="EPPlus" Version="4.5.2" />
     <PackageReference Include="AutoMapper" Version="8.0.0" />
