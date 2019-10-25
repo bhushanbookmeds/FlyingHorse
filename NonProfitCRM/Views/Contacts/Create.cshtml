@@ -27,7 +27,7 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-body">
-                <form method="post" asp-action="Create" id="myform">
+                <form method="post" enctype="multipart/form-data" asp-action="Create" id="myform" >
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="form-group row">
@@ -61,7 +61,10 @@
 
                             <div class="form-group row">
                                 <label for="example-phone-input" class="col-sm-4 col-form-label text-right" asp-for="PhoneNumber">Phone Number <span class="mandate" style="color:red">*</span> </label>
-                                <div class="col-sm-8">
+                                <div class="col-sm-2">
+                                    @Html.DropDownList("PhoneCode", (SelectList)ViewBag.PhoneCode, "Select", new { @class = "form-control", required = true, id = "NewPhone" })
+                                </div>
+                                <div class="col-sm-6" >
                                     <input class="form-control" type="tel" id="PhoneNumber" asp-for="PhoneNumber" required placeholder="Enter your mobile number">
 
                                     <span asp-validation-for="PhoneNumber" id="MobileNumber" class="text-danger"></span>
@@ -134,6 +137,34 @@
                                 </div>
                             </div>
                             <div class="form-group row">
+                                <label class="col-sm-4 col-form-label text-right" asp-for="AddressCountry">Country <span class="mandate" style="color:red">*</span> </label>
+                                <div class="col-sm-8">
+                                    @Html.DropDownList("AddressCountry", (SelectList)ViewBag.AddressCountry, "Select", new { @class = "form-control", required = true, id = "CountryId" })
+
+
+                                    <span asp-validation-for="AddressCountry" id="Country" class="text-danger"> </span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="AddressState">State <span class="mandate" style="color:red">*</span> </label>
+                                <div class="col-sm-8">
+                                    <select class="custom-select" id="StateAddress" asp-for="AddressState">
+                                        <option></option>
+
+                                    </select>
+                                    <span asp-validation-for="AddressState" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="AddressCity">City <span class="mandate" style="color:red">*</span> </label>
+                                <div class="col-sm-8">
+                                    <input class="form-control" type="text" asp-for="AddressCity" required placeholder="Enter your cityname">
+                                    <span asp-validation-for="AddressCity" class="text-danger"></span>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group row">
                                 <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="AddressLine1">Address Line 1 <span class="mandate" style="color:red">*</span> </label>
                                 <div class="col-sm-8">
                                     <input class="form-control" type="text" asp-for="AddressLine1" placeholder="Enter your address here" />
@@ -163,74 +194,60 @@
                                     <span asp-validation-for="AddressStreet" id="streetaddress" class="text-danger"></span>
                                 </div>
                             </div>
+
+
+
+
                             <div class="form-group row">
-                                <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="AddressCity">City <span class="mandate" style="color:red">*</span> </label>
+                                <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="AddressZipcode">Zip code <span class="mandate" style="color:red">*</span> </label>
                                 <div class="col-sm-8">
-                                    <input class="form-control" type="text" asp-for="AddressCity" required placeholder="Enter your cityname">
-                                    <span asp-validation-for="AddressCity" class="text-danger"></span>
+                                    <input class="form-control" type="text" asp-for="AddressZipcode" id="AddressZipcode" required placeholder="Enter a valid zipcode">
+                                    <span asp-validation-for="AddressZipcode" id="zipcode" class="text-danger"></span>
                                 </div>
                             </div>
-                           
-                            <div class="form-group row">
-                                <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="AddressState">State <span class="mandate" style="color:red">*</span> </label>
+
+                            <<div class="form-group row">
+                                <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="ImageFile">Upload Photo</label>
                                 <div class="col-sm-8">
-                                    <select class="custom-select" id="StateAddress" asp-for="AddressState">
-                                        <option>Select</option>
-
-                                    </select>
-                                    <span asp-validation-for="AddressState" class="text-danger"></span>
+                                    <input type="file" class="form-control" asp-for="ImageFile" accept="image/*" onchange="preview_image(event)"  required>
+                                    <img id="output_image" />
                                 </div>
-                                </div>
+                            </div>
 
-
-                                <div class="form-group row">
-                                    <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="AddressZipcode">Zip code <span class="mandate" style="color:red">*</span> </label>
+                            @*<div class="form-group row">
+                                    <label for="example-phone-input" class="col-sm-4 col-form-label text-right" asp-for="PhoneNumber">Phone Number <span class="mandate" style="color:red">*</span> </label>
                                     <div class="col-sm-8">
-                                        <input class="form-control" type="text" asp-for="AddressZipcode" id="AddressZipcode" required placeholder="Enter a valid zipcode">
-                                        <span asp-validation-for="AddressZipcode" id="zipcode" class="text-danger"></span>
+                                        <input class="form-control" type="tel" id="PhoneNumber" asp-for="PhoneNumber" required>
+
+                                        <span asp-validation-for="PhoneNumber" id="MobileNumber" class="text-danger"></span>
                                     </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-4 col-form-label text-right" asp-for="AddressCountry">Country <span class="mandate" style="color:red">*</span> </label>
-                                    <div class="col-sm-8">
-                                        @Html.DropDownList("AddressCountry", (SelectList)ViewBag.AddressCountry, "Select", new { @class = "form-control", required = true,id="CountryId"})
+                                </div>*@
+                            <div class="form-group row">
+                                <div class="col-sm-12 text-right">
 
+                                    <input type="submit" value="Add" class="col-sm-3 btn btn-primary" />
 
-                                        <span asp-validation-for="AddressCountry" id="Country" class="text-danger"> </span>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="ImagePath">Photo <span class="mandate" style="color:red">*</span> </label>
-                                    <div class="col-sm-8">
-                                        <input class="form-control" type="file" asp-for="ImagePath" id="ImagePath" accept="image/.jpg|.png">
-
-                                        <span asp-validation-for="ImagePath" id="img" class="text-danger"></span>
-                                    </div>
-                                </div>
-
-                                @*<div class="form-group row">
-                <label for="example-phone-input" class="col-sm-4 col-form-label text-right" asp-for="PhoneNumber">Phone Number <span class="mandate" style="color:red">*</span> </label>
-                <div class="col-sm-8">
-                    <input class="form-control" type="tel" id="PhoneNumber" asp-for="PhoneNumber" required>
-
-                    <span asp-validation-for="PhoneNumber" id="MobileNumber" class="text-danger"></span>
-                </div>
-            </div>*@
-                                <div class="form-group row">
-                                    <div class="col-sm-12 text-right">
-
-                                        <input type="button" id="submitbtn" onclick="CheckMandateValidate()" value="Add" class="col-sm-3 btn btn-primary" />
-
-                                    </div>
                                 </div>
                             </div>
                         </div>
-            </form>
-        </div><!--end card-body-->
-    </div><!--end card-->
-</div><!--end col-->
+                    </div>
+                </form>
+            </div><!--end card-body-->
+        </div><!--end card-->
+    </div><!--end col-->
 </div>
 
+
+<script>
+    function preview_image(event) {
+        var reader = new FileReader();
+        reader.onload = function () {
+            var output = document.getElementById('output_image');
+            output.src = reader.result;
+        }
+        reader.readAsDataURL(event.target.files[0]);
+    }
+</script>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

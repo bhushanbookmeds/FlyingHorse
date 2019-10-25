@@ -29,8 +29,9 @@
                     <table id="datatable" class="table">
                         <thead>
                             <tr>
-                                <th>Name</th>
-                                <th>Date</th>
+                                <th>Event Name</th>
+                                <th>StartDate</th>
+                                <th>EndtDate</th>
                                 <th>Address</th>
                                 <th>City</th>
                                 <th>Country</th>
@@ -44,19 +45,22 @@
                             {
                                 <tr>
                                     <td>
-                                        <img src="@item.ImagePath" alt="" class="thumb-sm rounded-circle mr-2">
+                                        <img src="@Html.DisplayFor(modelItem => item.ImagePath)" alt="" class="thumb-sm rounded-circle mr-2">
                                         <a asp-action="Details" asp-route-Id=@item.Id style="text-transform: capitalize;">@Html.DisplayFor(modelItem => item.Name)</a>
                                     </td>
 
                                     <td>@Html.DisplayFor(modelItem => item.StartDate)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.EndDate)</td>
                                     <td style="text-transform: capitalize;">@Html.DisplayFor(modelItem => item.AddressStreet)</td>
                                     <td style="text-transform: capitalize;">@Html.DisplayFor(modelItem => item.AddressCity)</td>
                                     <td style="text-transform: capitalize;">@Html.DisplayFor(modelItem => item.AddressCountry)</td>
+                                    
                                     <td>
-                                        <span class="fa-facebook"></span>
-                                        <span class="fa-twitter"></span>
-                                        <span class="fa-instagram"></span>
+                                        <a href="https://www.facebook.com/"><i class="ti-facebook"></i></a>
+                                        <a href="https://twitter.com/"><i class="ti-twitter-alt"></i></a>
+                                        <a href="https://www.instagram.com/"><i class="ti-instagram"></i></a>
                                     </td>
+                            
                                     <td>
                                         <a asp-controller="Events" asp-action="Edit" asp-route-id="@item.Id" class="mr-2">
                                             <i class="fas fa-edit text-info font-16"></i>

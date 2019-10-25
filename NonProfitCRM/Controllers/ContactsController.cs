@@ -23,15 +23,15 @@ namespace NonProfitCRM.Controllers
     {
         private readonly UnitOfWork _unitOfWork;
         private readonly ICommonServices _commonServices;
+        private readonly IImageService _imageService;
 
         private readonly string orgId;
 
-
-        public ContactsController()
+        public ContactsController(IImageService imageService)
         {
             _unitOfWork = new UnitOfWork();
             _commonServices = new CommonServices();
-
+            this._imageService = imageService;
             orgId = "cac8a4ec-edd5-4554-8c91-24574282b9c1";
         }
 
@@ -66,7 +66,10 @@ namespace NonProfitCRM.Controllers
                 ViewBag.ContactTypeId = new SelectList(contactTypes, "Id", "Name");
                 var country = _commonServices.GetCountries();
                 ViewBag.AddressCountry = new SelectList(country, "Id", "Name");
-                    
+               var phoneisd = _commonServices.GetPhoneCode();
+               ViewBag.PhoneCode = new SelectList(phoneisd, "Id", "PhoneCode");
+
+
             return View();
 
         }
@@ -76,7 +79,12 @@ namespace NonProfitCRM.Controllers
             
             return Json(states);
         }
-
+       
+        //public IActionResult PhoneCode(int CountryId)
+        //{
+        //    var phonecode = _commonServices.GetPhoneCode();
+        //    return Json(phonecode);
+        //}
 
 
 
@@ -85,22 +93,30 @@ namespace NonProfitCRM.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,OrgId,Name,ContactTypeId,ParentContactId,PhoneNumber,Email," +
+        public async Task<IActionResult> Create([Bind("Id,OrgId,Name,ContactTypeId,ParentContactId,PhoneCode,PhoneNumber,Email," +
             "DonorScore,ProfilePicture,FacebookProfile,InstagramProfile,TwitterProfile,Age,Gender,AddressLine1,AddressLine2,AddressStreet," +
-            "AddressCity,AddressState,AddressCountry,AddressZipcode")] Contact contact)
+            "AddressCity,AddressState,AddressCountry,AddressZipcode,ImageFile,ImagePath")] Contact contact)
 
 
         {
+
+
+            contact.PhoneNumber = contact.PhoneCode.ToString() + contact.PhoneNumber;
+           
             if (ModelState.IsValid)
             {
+               
                 contact.OrgId = orgId;
+                contact.ImagePath = await _imageService.ImageUpload(contact.ImageFile, "Banners");
 
                 _unitOfWork.ContactRepository.Insert(contact);
                 await _unitOfWork.SaveAsync();
-
+                
                 return RedirectToAction(nameof(Index));
             }
             ViewData["ContactTypeId"] = new SelectList(_unitOfWork.ContactTypeRepository.GetAll(), "Id", "Name", contact.ContactTypeId);
+            ViewData["AddressCountry"] = new SelectList(_commonServices.GetCountries(), "Id","Name", contact.AddressCountry);
+            ViewData["PhoneCode"] = new SelectList(_commonServices.GetPhoneCode(), "Id", "PhoneCode", contact.PhoneCode);
             return View(contact);
         }
 
@@ -112,6 +128,11 @@ namespace NonProfitCRM.Controllers
                 return NotFound();
             }
             var contact = await _unitOfWork.ContactRepository.GetByIDAsync(id);
+            var country = _commonServices.GetCountries();
+            ViewBag.AddressCountry = new SelectList(country, "Id", "Name");
+            var phoneisd = _commonServices.GetPhoneCode();
+            ViewBag.PhoneCode = new SelectList(phoneisd, "Id", "PhoneCode");
+
             if (contact == null)
             {
                 return NotFound();
@@ -120,15 +141,16 @@ namespace NonProfitCRM.Controllers
             return View(contact);
 
         }
-
+        
         // POST: Contacts/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,OrgId,Name,ContactTypeId,ParentContactId,PhoneNumber,Email,DonorScore,ProfilePicture," +
+        public async Task<IActionResult> Edit(int id, [Bind("Id,OrgId,Name,ContactTypeId,ParentContactId,PhoneCode,PhoneNumber,Email,DonorScore,ProfilePicture," +
             "FacebookProfile,InstagramProfile,TwitterProfile,AddressLine1,AddressLine2,AddressStreet,AddressCity,AddressState,AddressCountry,AddressZipcode")] Contact contact)
         {
+            contact.PhoneNumber = contact.PhoneCode.ToString() + contact.PhoneNumber;
             if (id != contact.Id)
             {
                 return NotFound();
@@ -157,6 +179,8 @@ namespace NonProfitCRM.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["ContactTypeId"] = new SelectList(_unitOfWork.ContactTypeRepository.GetAll(), "Id", "Name", contact.ContactTypeId);
+            ViewData["AddressCountry"] = new SelectList(_commonServices.GetCountries(), "Id", "Name", contact.AddressCountry);
+            ViewData["PhoneCode"] = new SelectList(_commonServices.GetPhoneCode(), "Id", "PhoneCode", contact.PhoneCode);
             return View(contact);
         }
 

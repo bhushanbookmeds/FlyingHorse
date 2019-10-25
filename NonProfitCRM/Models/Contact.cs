@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -8,27 +9,30 @@ namespace NonProfitCRM.Models
 {
     public partial class Contact
     {
+       
         public Contact()
         {
             Donation = new HashSet<Donation>();
             Pledge = new HashSet<Pledge>();
         }
 
+        public IFormFile ImageFile { get; set; }
+
         public int Id { get; set; }
         public string OrgId { get; set; }
-        [Required(ErrorMessage="Field can't be empty.")]
+        [Required(ErrorMessage = "Field can't be empty.")]
         [RegularExpression(@"^[\D]*$", ErrorMessage = " Please use alphabets only.")]
         [DisplayName("Name")]
 
         public string Name { get; set; }
-        
-        [Required(ErrorMessage ="Please select contact type")]
+
+        [Required(ErrorMessage = "Please select contact type")]
         public int ContactTypeId { get; set; }
         public int? ParentContactId { get; set; }
         public int PhoneCode { get; set; }
         [Required(ErrorMessage = "Field can't be empty.")]
-        [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Invalid Phone number")]
-        [DisplayName("PhoneNumber")]
+      //  [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Invalid Phone number")]
+       // [DisplayName("PhoneNumber")]
         public string PhoneNumber { get; set; }
         [Required(ErrorMessage = "Field can't be empty.")]
         [RegularExpression("^[a-z0-9_\\+-]+(\\.[a-z0-9_\\+-]+)*@[a-z0-9-]+(\\.[a-z0-9]+)*\\.([a-z]{2,4})$", ErrorMessage = "Invalid email format.")]
@@ -60,7 +64,7 @@ namespace NonProfitCRM.Models
         [DisplayName("Zipcode Address")]
         public string AddressZipcode { get; set; }
         [Required(ErrorMessage = "Field can't be empty.")]
-        [Range(13,100,ErrorMessage ="Please enter age between 13 to 100.")]
+        [Range(13, 100, ErrorMessage = "Please enter age between 13 to 100.")]
         [DisplayName("Age")]
         public int? Age { get; set; }
         [Required(ErrorMessage = "Field can't be empty.")]
@@ -71,6 +75,7 @@ namespace NonProfitCRM.Models
         public string Country { get; set; }
 
         public ContactType ContactType { get; set; }
+        public ICollection<Project> Project { get; set; }
         public ICollection<Donation> Donation { get; set; }
         public ICollection<Pledge> Pledge { get; set; }
     }
