@@ -1,7 +1,4 @@
 ﻿using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace NonProfitCRM.Services
@@ -11,3 +8,4 @@ namespace NonProfitCRM.Services
         Task<string> ImageUpload(IFormFile file, string folderName = null);
     }
 }
+
