@@ -116,13 +116,7 @@ namespace NonProfitCRM.Models
 
                 entity.Property(e => e.DonorScore).HasColumnType("decimal(7, 4)");
 
-                entity.Property(e => e.Email).HasMaxLength(100);
-
-                entity.Property(e => e.Country).HasMaxLength(100);
-
-                entity.Property(e => e.PhoneCode);
-
-                entity.Property(e => e.Age);
+                entity.Property(e => e.Email).HasMaxLength(100);              
 
                 entity.Property(e => e.Name).IsRequired();
 
