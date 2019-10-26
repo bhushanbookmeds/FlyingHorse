@@ -19,11 +19,14 @@ namespace NonProfitCRM.Controllers
         private readonly UnitOfWork _unitOfWork;
         private readonly string orgId;
         private readonly IImageService _imageService;
+        private readonly ICommonServices _commonServices;
+
 
         public EventsController(IImageService imageService)
         {
             _unitOfWork = new UnitOfWork();
             _imageService = imageService;
+            _commonServices = new CommonServices();
             orgId = "cac8a4ec-edd5-4554-8c91-24574282b9c1";
         }
 
@@ -46,40 +49,44 @@ namespace NonProfitCRM.Controllers
 
             var events = await _unitOfWork.EventRepository.GetByIDAsync(id);
             if (events == null)
-            {
-                
-
-                _unitOfWork.EventRepository.Insert(events);
-                await _unitOfWork.SaveAsync();
                 return NotFound();
-            }
+
+            var pictures = await _unitOfWork.PictureRepository.GetManyAsync
+            (p => p.EntityId == events.Id && p.EntityType.Equals("Event"));
+
+            events.Pictures = pictures.Select(p => p.PictureUrl);
 
             return View(events);
         }
 
 
-        // GET: Events/Details-Pictures/5
+        //GET: Events/Details-Pictures/5
         [HttpPost]
-        public async Task<IActionResult>Pictures(IList<IFormFile> files,int id)
+        public async Task<IActionResult> Pictures(UploadFiles files)
         {
 
-            foreach (IFormFile source in files)
+            foreach (IFormFile source in files.Picture)
             {
-               
-                
                 Picture picture = new Picture();
+                picture.EntityId = files.Id;
+                picture.EntityType = "Event";
 
                 picture.PictureUrl = await _imageService.ImageUpload(source, "Pictures");
+
+                _unitOfWork.PictureRepository.Insert(picture);
+                await _unitOfWork.SaveAsync();
             }
 
             return this.View();
 
         }
-        
+
 
         // GET: Events/Create
         public IActionResult Create()
         {
+            var country = _commonServices.GetCountries();
+            ViewBag.AddressCountry = new SelectList(country, "Id", "Name");
             var organization = _unitOfWork.OrganizationRepository.GetAll().ToList();
             ViewBag.Organization = new SelectList(organization, "Id", "Name");
             var campaign = _unitOfWork.CampaignRepository.GetAll().ToList();
@@ -111,7 +118,7 @@ namespace NonProfitCRM.Controllers
                 else
                 {
 
-                    events.ImagePath = await _imageService.ImageUpload(events.ImageFile,"Banners");
+                    events.ImagePath = await _imageService.ImageUpload(events.ImageFile, "Banners");
 
                     _unitOfWork.EventRepository.Insert(events);
                     await _unitOfWork.SaveAsync();
@@ -137,7 +144,8 @@ namespace NonProfitCRM.Controllers
                 return NotFound();
             }
             var events = await _unitOfWork.EventRepository.GetByIDAsync(id);
-
+            var country = _commonServices.GetCountries();
+            ViewBag.AddressCountry = new SelectList(country, "Id", "Name");
             //var campaign = _unitOfWork.CampaignRepository.GetAll().ToList();
             //ViewBag.Campaign = new SelectList(campaign, "Id", "Name");
             //var category = _unitOfWork.CampaignCategoryRepository.GetAll().ToList();

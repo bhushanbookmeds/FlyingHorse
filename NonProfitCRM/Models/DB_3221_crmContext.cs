@@ -479,19 +479,14 @@ namespace NonProfitCRM.Models
                 entity.Property(e => e.PhoneNumber)
                     .HasMaxLength(30)
                     .IsUnicode(false);
-
-
-
                 entity.HasOne(d => d.Org)
-
-                       
                                 .WithMany(p => p.Users)
                                 .HasForeignKey(d => d.OrgId)
                                 .OnDelete(DeleteBehavior.Cascade)
                                 .HasConstraintName("FK_Users_Organization");
 
-
             });
+
             modelBuilder.Entity<Country>(entity =>
             {
                 entity.Property(e => e.TwoLetterISOCode).HasMaxLength(50);
@@ -504,6 +499,7 @@ namespace NonProfitCRM.Models
 
                 entity.Property(e => e.PhoneCode);
             });
+
             modelBuilder.Entity<State>(entity =>
             {
                 entity.Property(e => e.CountryId);
@@ -520,6 +516,5 @@ namespace NonProfitCRM.Models
 
         }
     }
-
 }
 
