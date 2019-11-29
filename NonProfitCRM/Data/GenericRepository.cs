@@ -19,7 +19,6 @@ namespace NonProfitCRM.Data
         internal DbSet<TEntity> DbSet;
         #endregion
 
-
         #region Public Constructor...
         /// <summary>
         /// Public Constructor,initializes privately declared local variables.

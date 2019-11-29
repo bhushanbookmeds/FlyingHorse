@@ -19,17 +19,6 @@ namespace NonProfitCRM.Data
         private GenericRepository<Users> usersRepository;
         private GenericRepository<UserRole> userRoleRepository;
         private GenericRepository<UserRoleMapping> userRoleMappingRepository;
-        private GenericRepository<Contact> contactRepository;
-        private GenericRepository<ContactType> contactTypeRepository;
-        private GenericRepository<Campaign> campaignRepository;
-        private GenericRepository<CampaignCategory> campaignCategoryRepository;
-        private GenericRepository<TransactionType> transactionTypeRepository;
-        private GenericRepository<DonationType> donationTypeRepository;
-        private GenericRepository<Donation> donationRepository;
-        private GenericRepository<Event> eventRepository;
-        private GenericRepository<Pledge> pledgeRepository;
-        private GenericRepository<Project> projectRepository;
-        private GenericRepository<Country> CountriesRepository;
 
         #endregion
 
@@ -59,7 +48,6 @@ namespace NonProfitCRM.Data
             }
         }
 
-        
         public GenericRepository<UserRole> UserRoleRepository
         {
             get
@@ -77,106 +65,6 @@ namespace NonProfitCRM.Data
                 if (this.userRoleMappingRepository == null)
                     this.userRoleMappingRepository = new GenericRepository<UserRoleMapping>(_context);
                 return userRoleMappingRepository;
-            }
-        }
-
-        public GenericRepository<Contact> ContactRepository
-        {
-            get
-            {
-                if (this.contactRepository == null)
-                    this.contactRepository = new GenericRepository<Contact>(_context);
-                return contactRepository;
-            }
-        }
-
-        public GenericRepository<ContactType> ContactTypeRepository
-        {
-            get
-            {
-                if (this.contactTypeRepository == null)
-                    this.contactTypeRepository = new GenericRepository<ContactType>(_context);
-                return contactTypeRepository;
-            }
-        }
-
-        public GenericRepository<Campaign> CampaignRepository
-        {
-            get
-            {
-                if (this.campaignRepository == null)
-                    this.campaignRepository = new GenericRepository<Campaign>(_context);
-                return campaignRepository;
-            }
-        }
-
-        public GenericRepository<CampaignCategory> CampaignCategoryRepository
-        {
-            get
-            {
-                if (this.campaignCategoryRepository == null)
-                    this.campaignCategoryRepository = new GenericRepository<CampaignCategory>(_context);
-                return campaignCategoryRepository;
-            }
-        }
-
-        public GenericRepository<TransactionType> TransactionTypeRepository
-        {
-            get
-            {
-                if (this.transactionTypeRepository == null)
-                    this.transactionTypeRepository = new GenericRepository<TransactionType>(_context);
-                return transactionTypeRepository;
-            }
-        }
-
-        public GenericRepository<DonationType> DonationTypeRepository
-        {
-            get
-            {
-                if (this.donationTypeRepository == null)
-                    this.donationTypeRepository = new GenericRepository<DonationType>(_context);
-                return donationTypeRepository;
-            }
-        }
-
-        public GenericRepository<Donation> DonationRepository
-        {
-            get
-            {
-                if (this.donationRepository == null)
-                    this.donationRepository = new GenericRepository<Donation>(_context);
-                return donationRepository;
-            }
-        }
-
-        public GenericRepository<Event> EventRepository
-        {
-            get
-            {
-                if (this.eventRepository == null)
-                    this.eventRepository = new GenericRepository<Event>(_context);
-                return eventRepository;
-            }
-        }
-
-        public GenericRepository<Pledge> PledgeRepository
-        {
-            get
-            {
-                if (this.pledgeRepository == null)
-                    this.pledgeRepository = new GenericRepository<Pledge>(_context);
-                return pledgeRepository;
-            }
-        }
-
-        public GenericRepository<Project> ProjectRepository
-        {
-            get
-            {
-                if (this.projectRepository == null)
-                    this.projectRepository = new GenericRepository<Project>(_context);
-                return projectRepository;
             }
         }
 
