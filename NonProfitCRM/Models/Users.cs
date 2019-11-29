@@ -7,7 +7,6 @@ namespace NonProfitCRM.Models
     {
         public Users()
         {
-            Campaign = new HashSet<Campaign>();
             UserRoleMapping = new HashSet<UserRoleMapping>();
         }
 
@@ -31,7 +30,6 @@ namespace NonProfitCRM.Models
         public string AddressZipcode { get; set; }
 
         public Organization Org { get; set; }
-        public ICollection<Campaign> Campaign { get; set; }
         public ICollection<UserRoleMapping> UserRoleMapping { get; set; }
     }
 }
