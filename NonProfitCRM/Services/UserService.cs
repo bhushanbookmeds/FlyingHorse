@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
-using NonProfitCRM.Data;
+using Core.Domain;
+using Data;
 using NonProfitCRM.Models;
 using System;
 using System.Collections.Generic;
@@ -10,12 +11,13 @@ namespace NonProfitCRM.Services
 {
     public class UserService : IUserService
     {
-        private readonly UnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IEncryptionService _encryptionService;
 
-        public UserService(IEncryptionService encryptionService)
+        public UserService(IEncryptionService encryptionService,IUnitOfWork unitOfWork
+            )
         {
-            this._unitOfWork = new UnitOfWork();
+            this._unitOfWork = unitOfWork;
             this._encryptionService = encryptionService;
         }
 

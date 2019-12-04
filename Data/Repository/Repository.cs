@@ -1,21 +1,16 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Text;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using NonProfitCRM.Models;
 
-namespace NonProfitCRM.Data
+namespace Data.Repository
 {
-    /// <summary>
-    /// Generic Repository class for Entity Operations
-    /// </summary>
-    /// <typeparam name="TEntity"></typeparam>
-    public class GenericRepository<TEntity> where TEntity : class
-    {
+    public class Repository<TEntity> : IRepository<TEntity> where TEntity : class { 
         #region Private member variables...
-        internal DB_3221_crmContext Context;
+        internal NonProfitCrmDbContext Context;
         internal DbSet<TEntity> DbSet;
         #endregion
 
@@ -24,7 +19,7 @@ namespace NonProfitCRM.Data
         /// Public Constructor,initializes privately declared local variables.
         /// </summary>
         /// <param name="context"></param>
-        public GenericRepository(DB_3221_crmContext context)
+        public Repository(NonProfitCrmDbContext context)
         {
             this.Context = context;
             this.DbSet = context.Set<TEntity>();

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace NonProfitCRM.Models
+namespace Core.Domain
 {
     public enum UserRoleEnum
     {

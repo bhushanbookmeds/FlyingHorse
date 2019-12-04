@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Authentication.Cookies;
+﻿using Data;
+using Data.Repository;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -7,6 +9,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using NonProfitCRM.Services;
+using Service;
+using Service.Interfaces;
 
 namespace NonProfitCRM
 {
@@ -37,6 +41,11 @@ namespace NonProfitCRM
             services.TryAddTransient<IUserService, UserService>();
             services.TryAddTransient<Services.IAuthenticationService, Services.AuthenticationService>();
             services.TryAddTransient<IEncryptionService, EncryptionService>();
+            services.TryAddTransient<NonProfitCrmDbContext, NonProfitCrmDbContext>();
+            services.TryAddTransient<IUnitOfWork, UnitOfWork>();
+            services.TryAddTransient<ICommonService, CommonService>();
+            services.TryAddTransient<IContactService , ContactService>();
+            
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 

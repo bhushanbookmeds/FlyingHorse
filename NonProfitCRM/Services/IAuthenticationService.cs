@@ -1,4 +1,5 @@
-﻿using NonProfitCRM.Models;
+﻿using Core.Domain;
+using NonProfitCRM.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

@@ -1,11 +1,11 @@
-﻿using Microsoft.AspNetCore.Authentication;
+﻿using Core.Domain;
+using Data;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
-using NonProfitCRM.Data;
 using NonProfitCRM.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -13,7 +13,7 @@ namespace NonProfitCRM.Services
 {
     public class AuthenticationService : IAuthenticationService
     {
-        private readonly UnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IEncryptionService _encryptionService;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IUserService _userService;
@@ -22,9 +22,9 @@ namespace NonProfitCRM.Services
 
         public AuthenticationService(IHttpContextAccessor httpContextAccessor,
                                      IEncryptionService encryptionService,
-                                     IUserService userService)
+                                     IUserService userService,IUnitOfWork unitOfWork)
         {
-            _unitOfWork = new UnitOfWork();
+            _unitOfWork = unitOfWork;
             _encryptionService = encryptionService;
             _httpContextAccessor = httpContextAccessor;
             _userService = userService;

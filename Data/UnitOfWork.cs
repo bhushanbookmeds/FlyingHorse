@@ -1,73 +1,113 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Core.Domain;
+using Data.Repository;
+using System;
 using System.Threading.Tasks;
-using NonProfitCRM.Models;
 
-namespace NonProfitCRM.Data
+namespace Data
 {
-    /// <summary>
-    /// Unit of Work class responsible for DB transactions
-    /// </summary>
-    public class UnitOfWork : IDisposable
+    public class UnitOfWork : IDisposable,IUnitOfWork
     {
         #region Private member variables...
 
-        private DB_3221_crmContext _context = new DB_3221_crmContext();
+        private NonProfitCrmDbContext _context;
 
-        private GenericRepository<Organization> organizationRepository;
-        private GenericRepository<Users> usersRepository;
-        private GenericRepository<UserRole> userRoleRepository;
-        private GenericRepository<UserRoleMapping> userRoleMappingRepository;
+        private IRepository<Organization> organizationRepository;  // object is named  
+        private IRepository<Users> usersRepository;
+        private IRepository<UserRole> userRoleRepository;
+        private IRepository<UserRoleMapping> userRoleMappingRepository;
+        private IRepository<Contact> contactRepository ;
+        private IRepository<ContactType> contactTypeRepository ;
+        private IRepository<State> stateRepository;
+        private IRepository<Country> countryRepository;
 
         #endregion
 
 
-        public UnitOfWork()
+        public UnitOfWork(NonProfitCrmDbContext nonProfitCrmDbContext)
         {
-            _context = new DB_3221_crmContext();
+            _context = nonProfitCrmDbContext;
         }
 
-        public GenericRepository<Organization> OrganizationRepository
+        public IRepository<Organization> OrganizationRepository
         {
             get
             {
-                if (this.organizationRepository == null)
-                    this.organizationRepository = new GenericRepository<Organization>(_context);
+                if (this.organizationRepository == null)    // singleton pattern 
+                    this.organizationRepository = new Repository<Organization>(_context);     // object is created is here 
                 return organizationRepository;
             }
         }
 
-        public GenericRepository<Users> UsersRepository
+        public IRepository<Users> UsersRepository
         {
             get
             {
                 if (this.usersRepository == null)
-                    this.usersRepository = new GenericRepository<Users>(_context);
+                    this.usersRepository = new Repository<Users>(_context);
                 return usersRepository;
             }
         }
 
-        public GenericRepository<UserRole> UserRoleRepository
+        public IRepository<UserRole> UserRoleRepository
         {
             get
             {
                 if (this.userRoleRepository == null)
-                    this.userRoleRepository = new GenericRepository<UserRole>(_context);
+                    this.userRoleRepository = new Repository<UserRole>(_context);
                 return userRoleRepository;
             }
         }
 
-        public GenericRepository<UserRoleMapping> UserRoleMappingRepository
+        public IRepository<UserRoleMapping> UserRoleMappingRepository
         {
             get
             {
                 if (this.userRoleMappingRepository == null)
-                    this.userRoleMappingRepository = new GenericRepository<UserRoleMapping>(_context);
+                    this.userRoleMappingRepository = new Repository<UserRoleMapping>(_context);
                 return userRoleMappingRepository;
             }
         }
 
+
+        public IRepository<Contact> ContactRepository
+        {
+            get
+            {
+                if (this.contactRepository == null)
+                    this.contactRepository = new Repository<Contact>(_context);
+                return contactRepository;
+            }
+        }
+
+        public IRepository<ContactType> ContactTypeRepository
+        {
+            get
+            {
+                if (this.contactTypeRepository == null)
+                    this.contactTypeRepository = new Repository<ContactType>(_context);
+                return contactTypeRepository;
+            }
+        }
+
+        public IRepository<State> StateRepository
+        {
+            get
+            {
+                if (this.stateRepository == null)
+                    this.stateRepository = new Repository<State>(_context);
+                return stateRepository;
+            }
+        }
+
+        public IRepository<Country> CountryRepository
+        {
+            get
+            {
+                if (this.countryRepository == null)
+                    this.countryRepository = new Repository<Country>(_context);
+                return countryRepository;
+            }
+        }
         #region Public member methods...
         /// <summary>
         /// Save method.
@@ -144,6 +184,5 @@ namespace NonProfitCRM.Data
             GC.SuppressFinalize(this);
         }
         #endregion
-
     }
 }

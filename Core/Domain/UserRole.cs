@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace NonProfitCRM.Models
-{
+namespace Core.Domain { 
     public partial class UserRole
     {
         public UserRole()

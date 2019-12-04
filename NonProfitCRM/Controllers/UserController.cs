@@ -1,8 +1,9 @@
 ﻿using AutoMapper;
+using Core.Domain;
+using Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using NonProfitCRM.Data;
 using NonProfitCRM.Models;
 using NonProfitCRM.Services;
 using System;
@@ -16,18 +17,19 @@ namespace NonProfitCRM.Controllers
     {
         private readonly IAuthenticationService _authenticationService;
         private readonly IUserService _userService;
-        private readonly UnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IEncryptionService _encryptionService;
         private string OrgId = null;
 
         public UserController(IUserService userService,
                               IAuthenticationService authenticationService,
-                              IEncryptionService encryptionService)
+                              IEncryptionService encryptionService,
+                              IUnitOfWork unitOfWork)
         {
             this._authenticationService = authenticationService;
             this._userService = userService;
             this._encryptionService = encryptionService;
-            this._unitOfWork = new UnitOfWork();
+            this._unitOfWork = unitOfWork;
         }
 
         public async Task<IActionResult> Index()

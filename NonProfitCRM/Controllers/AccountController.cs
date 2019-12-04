@@ -1,7 +1,6 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Authorization;
+﻿using Core.Domain;
+using Data;
 using Microsoft.AspNetCore.Mvc;
-using NonProfitCRM.Data;
 using NonProfitCRM.Models;
 using NonProfitCRM.Services;
 using System.Threading.Tasks;
@@ -11,15 +10,15 @@ namespace NonProfitCRM.Controllers
     public class AccountController : Controller
     {
         private readonly IAuthenticationService _authenticationService;
-        private readonly UnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IUserService _userService;
 
         public AccountController(IAuthenticationService authenticationService,
-                                 IUserService userService)
+                                 IUserService userService,IUnitOfWork unitOfWork)
         {
             _authenticationService = authenticationService;
             _userService = userService;
-            _unitOfWork = new UnitOfWork();
+            _unitOfWork = unitOfWork;
         }
 
         public IActionResult Login()

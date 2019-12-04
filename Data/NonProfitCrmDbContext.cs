@@ -1,30 +1,37 @@
-﻿using System;
+﻿using Core.Domain;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
+using System;
+using System.Collections.Generic;
+using System.Text;
 
-namespace NonProfitCRM.Models
+namespace Data
 {
-    public partial class DB_3221_crmContext : DbContext
+    public class NonProfitCrmDbContext : DbContext
     {
-        public DB_3221_crmContext()
+        public NonProfitCrmDbContext()
         {
         }
 
-        public DB_3221_crmContext(DbContextOptions<DB_3221_crmContext> options)
+        public NonProfitCrmDbContext(DbContextOptions<NonProfitCrmDbContext> options)
             : base(options)
         {
         }
-     
+
         public virtual DbSet<Organization> Organization { get; set; }
         public virtual DbSet<UserRole> UserRole { get; set; }
         public virtual DbSet<UserRoleMapping> UserRoleMapping { get; set; }
         public virtual DbSet<Users> Users { get; set; }
+        public virtual DbSet<Contact> Contact { get; set; }
+        public virtual DbSet<ContactType> ContactType { get; set; }
+        public virtual DbSet<State> States { get; set; }
+        public virtual DbSet<Country> Country { get; set; }
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer(@"Data Source=PCCS-0007\SQLEXPRESS;Initial Catalog=DB_3221_crm;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+                optionsBuilder.UseSqlServer(@"Data Source=tcp:s08.everleap.com;User ID=DB_3221_crm_user;Password=summi786;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
             }
         }
 
@@ -62,7 +69,7 @@ namespace NonProfitCRM.Models
 
                 entity.Property(e => e.StartDate).HasColumnType("datetime");
             });
-           
+
             modelBuilder.Entity<UserRole>(entity =>
             {
                 entity.Property(e => e.Name).HasMaxLength(50);
@@ -114,6 +121,85 @@ namespace NonProfitCRM.Models
                     .HasForeignKey(d => d.OrgId)
                     .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK_Users_Organization");
+            });
+            modelBuilder.Entity<Contact>(entity =>
+            {
+                entity.Property(e => e.AddressCity).HasMaxLength(50);
+
+                entity.Property(e => e.AddressCountry).HasMaxLength(50);
+
+                entity.Property(e => e.AddressLine1).HasMaxLength(128);
+
+                entity.Property(e => e.AddressLine2).HasMaxLength(128);
+
+                entity.Property(e => e.AddressState).HasMaxLength(50);
+
+                entity.Property(e => e.AddressStreet).HasMaxLength(128);
+
+                entity.Property(e => e.AddressZipcode).HasMaxLength(50);
+
+                entity.Property(e => e.DonorScore).HasColumnType("decimal(7, 4)");
+
+                entity.Property(e => e.Email).HasMaxLength(100);
+
+                entity.Property(e => e.Name).IsRequired();
+
+                //entity.Ignore(e => e.PhoneCode);
+
+                //entity.Property(e => e.ImagePath).HasMaxLength(500);
+                //entity.Ignore(e => e.ImageFile);
+
+                entity.Property(e => e.OrgId)
+                    .IsRequired()
+                    .HasMaxLength(128);
+
+                entity.Property(e => e.PhoneNumber)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.HasOne(d => d.ContactType)
+                    .WithMany(p => p.Contacts)
+                    .HasForeignKey(d => d.ContactTypeId)
+                    .HasConstraintName("FK_Contact_ContactType");
+            });
+
+            modelBuilder.Entity<ContactType>(entity =>{
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(50);
+            });
+
+            modelBuilder.Entity<State>(entity =>
+            {
+                entity.Property(e => e.CountryId);
+
+                entity.Property(e => e.Name).HasMaxLength(100);
+
+                entity.Property(e => e.Abbreviation)
+                        .HasMaxLength(100);
+
+                entity.HasOne(s => s.Country)
+                        .WithMany(c => c.States)
+                        .HasForeignKey(s => s.CountryId)
+                        .HasConstraintName("FK_State_Country_CountryId");
+            });
+
+            modelBuilder.Entity<Country>(entity =>
+            {
+                entity.Property(e => e.Id);
+
+                entity.Property(e => e.TwoLetterISOCode)
+                                .HasMaxLength(50);
+
+                entity.Property(e => e.ThreeLetterISOCode)
+                                .HasMaxLength(50);
+
+                entity.Property(e => e.NumericISOCode);
+
+                entity.Property(e => e.Name)
+                                .HasMaxLength(250);
+
+                entity.Property(e => e.PhoneCode);
             });
         }
     }
