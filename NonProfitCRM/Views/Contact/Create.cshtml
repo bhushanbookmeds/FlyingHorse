@@ -188,6 +188,18 @@
                                 </div>
                             </div>
 
+                            <script>
+                                var xhttp = new XMLHttpRequest();
+                                xhttp.onreadystatechange = function () {                   //status of XMLHttpRequest
+                                    if (this.readystate == 4 && this.readystate == 200) {
+                                        document.getElementById("demo").innerHTML = this.responseText;
+                                    }
+                                };
+
+                                xhttp.open("GET", "ajax_info.txt", true);         // send a request to the server 
+                                xhttp.send();
+                            </script>
+
                             <div class="form-group row">
                                 <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="AddressState">State <span class="mandatory" style="color:red;font-size:20px">*</span> </label>
                                 <div class="col-sm-8">

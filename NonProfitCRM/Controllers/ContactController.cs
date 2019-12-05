@@ -92,7 +92,10 @@ namespace NonProfitCRM.Controllers
             ViewBag.AddressCountry = new SelectList(countries, "Id", "Name");
         }
 
-        
+        //private async Task InitializeViewBag()
+        //{
+        //    var states = await _commonService.GetStates()
+        //}
 
     }
 }
