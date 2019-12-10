@@ -7,6 +7,7 @@ using Core.Domain;
 using Data;
 using Service.Interfaces;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using NonProfitCRM.Models;
 
 namespace NonProfitCRM.Controllers
 {
@@ -16,11 +17,27 @@ namespace NonProfitCRM.Controllers
         private readonly ICommonService _commonService;
         private readonly IContactService _contactService;             // injection 
 
-        public ContactController(IUnitOfWork unitOfWork , ICommonService commonService , IContactService contactService)
+        public ContactController(IUnitOfWork unitOfWork, ICommonService commonService, IContactService contactService)
         {
             _unitOfWork = unitOfWork;
             _commonService = commonService;
             _contactService = contactService;
+        }
+
+        public async Task<IActionResult> Index()
+        {
+            var contacts = await _unitOfWork.ContactRepository.GetManyAsync(c => c.Id == Id);
+            var contactsList = new List<Contact>();
+
+            foreach (var contacts in Contact)
+            {
+                volunteer.AddressCountry = _unitOfWork.CountryRepository.GetByID(Convert.ToInt32(volunteer.AddressCountry))?.Name;
+
+                // volunteer.AddressState = _unitOfWork.StateRepository.GetByID(Convert.ToInt32(volunteer.AddressState))?.Name;
+                volunteersList.Add(volunteer);
+            }
+
+            return View(volunteersList.OrderByDescending(v => v.Id));
         }
 
         public async Task<IActionResult> Create()
@@ -86,16 +103,17 @@ namespace NonProfitCRM.Controllers
             return View();
         }
 
+        public IActionResult State(int countryId)
+        {
+            var states = _commonService.GetStates(countryId);
+            return Json(states);
+        }
+
+
         private async Task InitializeViewBag()
         {
             var countries = await _commonService.GetCountries();
             ViewBag.AddressCountry = new SelectList(countries, "Id", "Name");
         }
-
-        //private async Task InitializeViewBag()
-        //{
-        //    var states = await _commonService.GetStates()
-        //}
-
     }
 }

@@ -6,6 +6,8 @@ namespace Core.Domain
 {
     public class Country
     {
+        public static int countryId;
+
         public int Id { get; set; }
         public string Name { get; set; }
         public string TwoLetterISOCode { get; set; }

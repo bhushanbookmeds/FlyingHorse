@@ -23,7 +23,7 @@ namespace Data
         public virtual DbSet<Users> Users { get; set; }
         public virtual DbSet<Contact> Contact { get; set; }
         public virtual DbSet<ContactType> ContactType { get; set; }
-        public virtual DbSet<State> States { get; set; }
+        public virtual DbSet<State> State { get; set; }
         public virtual DbSet<Country> Country { get; set; }
 
 
@@ -31,7 +31,7 @@ namespace Data
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer(@"Data Source=tcp:s08.everleap.com;User ID=DB_3221_crm_user;Password=summi786;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+                optionsBuilder.UseSqlServer(connectionString: @"Data Source=tcp:s08.everleap.com;User ID=DB_3221_crm_user;Password=summi786;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
             }
         }
 

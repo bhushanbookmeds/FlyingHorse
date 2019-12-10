@@ -5,11 +5,11 @@ VisualStudioVersion = 16.0.29519.87
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NonProfitCRM", "NonProfitCRM\NonProfitCRM.csproj", "{A893E157-71F1-4676-B969-BAC14650362D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{A9134F34-3CAE-46EB-A8C0-54B822B7FEA8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "Core\Core.csproj", "{A9134F34-3CAE-46EB-A8C0-54B822B7FEA8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data", "Data\Data.csproj", "{5004A0E5-6DDD-4E98-A60D-0045EF8544F0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data", "Data\Data.csproj", "{5004A0E5-6DDD-4E98-A60D-0045EF8544F0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service", "Service\Service.csproj", "{8A3EB0C7-0216-408B-BCAA-F8DD68BEB2F6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Service", "Service\Service.csproj", "{8A3EB0C7-0216-408B-BCAA-F8DD68BEB2F6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

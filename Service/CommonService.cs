@@ -24,7 +24,7 @@ namespace Service
 
         public async Task<IList<State>> GetStates(int countryId)
         {
-            var states = await _unitOfWork.StateRepository.GetManyAsync(state => state.CountryId == countryId);
+            var states = await _unitOfWork.StateRepository.GetManyAsync(State => State.CountryId == countryId);
             return states.ToList();
         }
     }
