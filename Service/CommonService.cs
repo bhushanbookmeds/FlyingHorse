@@ -27,5 +27,11 @@ namespace Service
             var states = await _unitOfWork.StateRepository.GetManyAsync(State => State.CountryId == countryId);
             return states.ToList();
         }
+
+        public async Task<IList<ContactType>> GetTypes()
+        {
+            var types = await _unitOfWork.ContactTypeRepository.GetAllAsync();
+            return types.ToList();
+        }
     }
 }

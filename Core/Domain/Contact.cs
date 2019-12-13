@@ -8,14 +8,14 @@ namespace Core.Domain
     {
         public int Id { get; set; }
         public string OrgId { get; set; }
-        public int PhoneCode { get; set; }
+        public string PhoneCode { get; set; }
         
         public string Name { get; set; }
-        public int ContactTypeId { get; set; }
-        public int ParentContactId { get; set; }
+        public int? ContactTypeId { get; set; }
+        public int? ParentContactId { get; set; }
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
-        public decimal DonorScore { get; set; }
+        public decimal? DonorScore { get; set; }
         public string ProfilePicture { get; set; }
         public string FacebookProfile { get; set; }
         public string InstagramProfile { get; set; }
@@ -30,7 +30,7 @@ namespace Core.Domain
         public int Age { get; set; }
         public string Gender { get; set; }
 
-        public virtual Organization Organisation { get; set; }
+        //public virtual Organization Organization { get; set; }
         public virtual ContactType ContactType { get; set; }
 
     }

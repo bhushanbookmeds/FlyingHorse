@@ -24,7 +24,7 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-body">
-                <form method="post" enctype="multipart/form-data" asp-controller="Volunteers" asp-action="Create">
+                <form method="post" enctype="multipart/form-data" asp-controller="Contact" asp-action="Create">
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="form-group row">
@@ -92,25 +92,7 @@
 
 
 
-                            @*<div class="form-group row">
-                                    <label class="col-sm-4 col-form-label text-right" asp-for="FacebookProfile">Facebook Profile</label>
-                                    <div class="col-sm-8">
-                                        <input class="form-control" type="text" id="example-text-input" asp-for="FacebookProfile">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="InstagramProfile">Instagram Profile</label>
-                                    <div class="col-sm-8">
-                                        <input class="form-control" type="text" asp-for="InstagramProfile">
-                                    </div>
-                                </div>
-                                        entity.Propert
-                                <div class="form-group row">
-                                    <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="TwitterProfile">Twitter Profile</label>
-                                    <div class="col-sm-8">
-                                        <input class="form-control" type="text" asp-for="TwitterProfile">
-                                    </div>
-                                </div>*@
+                            
 
                             <div class="form-group row">
                                 <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="InstagramProfile">Instagram Profile</label>
@@ -193,58 +175,42 @@
                             <div class="form-group row">
                                 <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="AddressState">State <span class="mandatory" style="color:red;font-size:20px">*</span> </label>
                                 <div class="col-sm-8">
-                                    @Html.DropDownList("AddressState", (IEnumerable<SelectListItem>) ViewBag.AddressState, "Select", new { @class = "form-control", required = true, id = "CountryId" })
+                                    @Html.DropDownList("AddressState", (SelectList)ViewBag.AddressState, "Select", new { @class = "form-control", required = true, id = "CountryId" })
 
 
                                     <span asp-validation-for="AddressState" id="Country" class="text-danger"> </span>
                                 </div>
                             </div>
 
-                            <script>
-                                var xhttp = new XMLHttpRequest();
-                                xhttp.onreadystatechange = function () {                   //status of XMLHttpRequest
-                                    if (this.readystate == 4 && this.readystate == 200) {
-                                        document.getElementById("demo").innerHTML = this.responseText;
-                                    }
-                                };
+                            @*<script>
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {                   //status of XMLHttpRequest
+                if (this.readystate == 4 && this.readystate == 200) {
+                    document.getElementById("demo").innerHTML = this.responseText;
+                }
+            };
 
-                                xhttp.open("GET", "/Contact/State", true);         // send a request to the server
-                                xhttp.send();
-                            </script>
+            xhttp.open("GET", "/Contact/State", true);         // send a request to the server
+            xhttp.send();
+        </script>*@
 
                             <div class="form-group row">
                                 <label class="col-sm-4 col-form-label text-right" asp-for="AddressCountry">Country <span class="mandatory" style="color:red;font-size:20px">*</span> </label>
                                 <div class="col-sm-8" id="demo">
-                                    @Html.DropDownList("AddressCountry", (IEnumerable<SelectListItem>) ViewBag.AddressCountry, "Select", new { @class = "form-control", required = true, id = "CountryId" })
-
-
+                                    @Html.DropDownList("AddressCountry", (SelectList)ViewBag.AddressCountry, "Select", new { @class = "form-control", required = true, id = "CountryId" })
                                     <span asp-validation-for="AddressCountry" id="Country" class="text-danger"> </span>
                                 </div>
                             </div>
-                            @*<div class="form-group row">
-            <label class="col-sm-4 col-form-label text-right" asp-for="AddressCountry">Country<span class="mandatory" style="color:Red;font-size:20px">*</span></label>
-            <div class="col-sm-8">
-                <select class="custom-select" name="AddressCountry" asp-for="AddressCountry" required>
-                    <option selected="">Select</option>
-                    <option value="India">INDIA</option>
-                    <option value="USA">USA</option>
-                    <option value="CHINA">CHINA</option>
-                    <option value="INDONESIA">INDONESIA</option>
-                    <option value="PAKISTAN">PAKISTAN</option>
-                    <option value="BRAZIL">BRAZIL</option>
-                    <option value="NIGERIA">NIGERIA</option>
-                    <option value="BANGLADESH">BANGLADESH</option>
-                    <option value="RUSSIA">RUSSIA</option>
-                    <option value="MAXICO">MAXICO</option>
-                    <option value="JAPAN">JAPAN</option>
-                    <option value="ETHIOPIA">ETHIOPIA</option>
-                    <option value="PHILIPPINES">PHILIPPINES</option>
-                    <option value="EGYPT">EGYPT</option>
-                    <option value="VIETNAM">VIETNAM</option>
-                </select>
-                <span asp-validation-for="AddressCountry" class="text-danger"></span>
-            </div>
-        </div>*@
+                           
+
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-form-label text-right" asp-for="ContactType">ContactType <span class="mandatory" style="color:red;font-size:20px">*</span> </label>
+                                <div class="col-sm-8" id="demo">
+                                    @Html.DropDownList("ContactTypeId", (SelectList)ViewBag.ContactType, "Select", new { @class = "form-control", required = true , id = "Id" })
+                                    <span asp-validation-for="ContactType" id="ContactType" class="text-danger"> </span>
+                                </div>
+                            </div>
+
                             <div class="form-group row">
                                 <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="AddressZipcode" onkeydown="validateZipCode">Zip code<span class="mandatory" style="color:Red;font-size:20px">*</span></label>
                                 <div class="col-sm-8">
@@ -254,12 +220,12 @@
                             </div>
 
                             <!--   <div class="form-group row">
-           <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="ImageFile">Upload Photo<span class="mandatory" style="color:Red;font-size:20px">*</span></label>
-           <div class="col-sm-8">
-               <input multiple type="file" class="form-control" name="ImageFile" accept="image/*" onchange="preview_image(event)" required>
-               <img id="output_image" />
-           </div>
-       </div>-->
+        <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="ImageFile">Upload Photo<span class="mandatory" style="color:Red;font-size:20px">*</span></label>
+        <div class="col-sm-8">
+            <input multiple type="file" class="form-control" name="ImageFile" accept="image/*" onchange="preview_image(event)" required>
+            <img id="output_image" />
+        </div>
+    </div>-->
                             @*<div class="form-group row">
             <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="ImagePath">Profile Photo <span class="mandate" style="color:red;font-size:20px">*</span> </label>
             <div class="col-sm-8">

@@ -138,7 +138,7 @@ namespace Data
 
                 entity.Property(e => e.AddressZipcode).HasMaxLength(50);
 
-                entity.Property(e => e.DonorScore).HasColumnType("decimal(7, 4)");
+                
 
                 entity.Property(e => e.Email).HasMaxLength(100);
 
@@ -167,6 +167,9 @@ namespace Data
                 entity.Property(e => e.Name)
                     .IsRequired()
                     .HasMaxLength(50);
+
+                entity.Property(e => e.Id)
+                    .IsRequired();
             });
 
             modelBuilder.Entity<State>(entity =>

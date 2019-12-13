@@ -10,5 +10,6 @@ namespace Service.Interfaces
     {
         Task<IList<State>> GetStates(int countryId);
         Task<IList<Country>> GetCountries();
+        Task<IList<ContactType>> GetTypes();
     }
 }

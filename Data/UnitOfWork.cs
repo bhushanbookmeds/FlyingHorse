@@ -114,27 +114,27 @@ namespace Data
         /// </summary>
         public void Save()
         {
-            _context.SaveChanges();
+            int v = _context.SaveChanges();
 
-            //try
-            //{
-            //    _context.SaveChanges();
-            //}
-            //catch (DbEntityValidationException e)
-            //{
+            ////try
+            ////{
+            ////    _context.SaveChanges();
+            ////}
+            ////catch (DbEntityValidationException e)
+            ////{
 
-            //    var outputLines = new List<string>();
-            //    foreach (var eve in e.EntityValidationErrors)
-            //    {
-            //        outputLines.Add(string.Format("{0}: Entity of type \"{1}\" in state \"{2}\" has the following validation errors:", DateTime.Now, eve.Entry.Entity.GetType().Name, eve.Entry.State));
-            //        foreach (var ve in eve.ValidationErrors)
-            //        {
-            //            outputLines.Add(string.Format("- Property: \"{0}\", Error: \"{1}\"", ve.PropertyName, ve.ErrorMessage));
-            //        }
-            //    }
-            //    System.IO.File.AppendAllLines(@"C:\errors.txt", outputLines);
+            ////    var outputLines = new List<string>();
+            ////    foreach (var eve in e.EntityValidationErrors)
+            ////    {
+            ////        outputLines.Add(string.Format("{0}: Entity of type \"{1}\" in state \"{2}\" has the following validation errors:", DateTime.Now, eve.Entry.Entity.GetType().Name, eve.Entry.State));
+            ////        foreach (var ve in eve.ValidationErrors)
+            ////        {
+            ////            outputLines.Add(string.Format("- Property: \"{0}\", Error: \"{1}\"", ve.PropertyName, ve.ErrorMessage));
+            ////        }
+            ////    }
+            ////    System.IO.File.AppendAllLines(@"C:\errors.txt", outputLines);
 
-            //    throw e;
+            ////    throw e;
             //}
 
         }
