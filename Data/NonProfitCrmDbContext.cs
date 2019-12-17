@@ -147,7 +147,7 @@ namespace Data
                 //entity.Ignore(e => e.PhoneCode);
 
                 //entity.Property(e => e.ImagePath).HasMaxLength(500);
-                //entity.Ignore(e => e.ImageFile);
+                entity.Ignore(e => e.ImageFile);
 
                 entity.Property(e => e.OrgId)
                     .IsRequired()

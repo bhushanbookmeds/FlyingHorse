@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Http;
 
 namespace Core.Domain
 {
@@ -29,6 +31,9 @@ namespace Core.Domain
         public string AddressZipcode { get; set; }
         public int Age { get; set; }
         public string Gender { get; set; }
+
+        [DisplayName("Upload File")]
+        public IFormFile ImageFile { get; set; }
 
         //public virtual Organization Organization { get; set; }
         public virtual ContactType ContactType { get; set; }

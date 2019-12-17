@@ -6,9 +6,8 @@
 }
 <!--Contacts Edit Page-->
 
-<h2>Edit</h2>
+<h2>Edit Contact</h2>
 
-<h4>Contacts</h4>
 <hr />
 
 <div class="row">
@@ -19,7 +18,7 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="form-group row">
-                                <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="Name">Name</label>
+                                <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="Name">Name<span class="mandatory" id="nameStar" style="color:Red;font-size:20px">*</span></label>
                                 <div class="col-sm-8">
                                     <input class="form-control" type="text" name="Name" id="Name" asp-for="Name" required="required" placeholder="Type your name here" onkeyup="disablestarkey()">
                                     <span asp-validation-for="Name" class="text-danger"></span>
@@ -42,31 +41,47 @@
                                 </div>
                             </div>
 
-                            
+
                             <div class="form-group row">
 
-                                <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="Gender">Gender</label>
+                                <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="Gender">Gender<span class="mandatory" id="nameStar" style="color:Red;font-size:20px">*</span></label>
 
                                 <div class="col-sm-6" id="Gender">
 
-                                    <input asp-for="Gender" type="radio" value="Male" />  Male
-                                    <input asp-for="Gender" type="radio" value="Female" /> Female
-                                    <input asp-for="Gender" type="radio" value="Others" /> Others
+                                    <input name="Gender" type="radio" value="Male" style="margin-right:1px" />  Male
+                                    <input name="Gender" type="radio" value="Female" style="margin-left:15px" /> Female
+                                    <input name="Gender" type="radio" value="Others" style="margin-left:15px" /> Others
                                     <span asp-validation-for="Gender" id="radioGender" class="text-danger"></span>
                                 </div>
                             </div>
 
+                            <style>
+
+                                .col-sm-6 {
+                                    padding-top: 14px;
+                                }
+
+                                /*input[type="radio"]{
+                                    margin-right : 7px;
+                                }*/
+
+                                /*.col-sm-8{
+                                    background-color :lightcoral;
+                                }*/
+
+                            </style>
+
                             <div class="form-group row">
-                                <label for="example-age-input" class="col-sm-4 col-form-label text-right" asp-for="Age">Age<span class="mandatory" style="color:Red;font-size:20px"></span></label>
+                                <label for="example-age-input" class="col-sm-4 col-form-label text-right" asp-for="Age">Age<span class="mandate" style="color:red;font-size:20px">*</span></label>
                                 <div class="col-sm-8">
                                     <input class="form-control" type="text" id="Age" asp-for="Age" required="required" placeholder="Enter your Age here">
                                     <span asp-validation-for="Age" class="text-danger"></span>
                                 </div>
                             </div>
-                            
+
 
                             <div class="form-group row">
-                                <label for="example-email-input" class="col-sm-4 col-form-label text-right" asp-for="Email">Email</label>
+                                <label for="example-email-input" class="col-sm-4 col-form-label text-right" asp-for="Email">Email<span class="mandatory" id="nameStar" style="color:Red;font-size:20px">*</span></label>
                                 <div class="col-sm-8">
                                     <input class="form-control" type="email" id="example-date-input" asp-for="Email" required>
                                     <span asp-validation-for="Email" class="text-danger"></span>
@@ -116,21 +131,21 @@
 
 
                             <div class="form-group row">
-                                <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="AddressLine1">Address Line 1</label>
+                                <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="AddressLine1">Address Line 1<span class="mandatory" id="nameStar" style="color:Red;font-size:20px">*</span></label>
                                 <div class="col-sm-8">
                                     <input class="form-control" type="text" asp-for="AddressLine1">
                                     <span asp-validation-for="AddressLine1" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="AddressLine2">Address Line 2</label>
+                                <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="AddressLine2">Address Line 2<span class="mandatory" id="nameStar" style="color:Red;font-size:20px">*</span></label>
                                 <div class="col-sm-8">
                                     <input class="form-control" type="text" asp-for="AddressLine2">
                                     <span asp-validation-for="AddressLine2" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="AddressStreet">Street</label>
+                                <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="AddressStreet">Street<span class="mandatory" id="nameStar" style="color:Red;font-size:20px">*</span></label>
                                 <div class="col-sm-8">
                                     <input class="form-control" type="text" asp-for="AddressStreet">
                                     <span asp-validation-for="AddressStreet" class="text-danger"></span>
@@ -139,7 +154,7 @@
 
                            
                             <div class="form-group row">
-                                <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="AddressCity">City<span class="mandatory" style="color:Red;font-size:20px"></span></label>
+                                <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="AddressCity">City<span class="mandatory" style="color:Red;font-size:20px">*</span></label>
                                 <div class="col-sm-8">
                                     <input class="form-control" type="text" name="AddressCity" asp-for="AddressCity" required="required" placeholder="Enter your City here" onkeyup="disablestarkey()">
                                     <span asp-validation-for="AddressCity" class="text-danger"></span>
@@ -181,7 +196,7 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="AddressZipcode">Zip code</label>
+                                <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="AddressZipcode">Zip code<span class="mandate" style="color:red;font-size:20px">*</span></label>
                                 <div class="col-sm-8">
                                     <input class="form-control" type="text" asp-for="AddressZipcode" required>
                                     <span asp-validation-for="AddressZipcode" class="text-danger"></span>
