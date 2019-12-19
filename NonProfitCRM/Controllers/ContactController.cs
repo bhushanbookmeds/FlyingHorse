@@ -10,15 +10,17 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using NonProfitCRM.Models;
 using System.Collections;
 using Microsoft.EntityFrameworkCore;
+using static Microsoft.AspNetCore.Hosting.Internal.HostingApplication;
 
 namespace NonProfitCRM.Controllers
 {
     public class ContactController : Controller
     {
+        private NonProfitCrmDbContext db = new NonProfitCrmDbContext();
         private readonly IUnitOfWork _unitOfWork;
         private readonly ICommonService _commonService;
-        private readonly IContactService _contactService;
-        private readonly string orgId;                                 // injection 
+        private readonly IContactService _contactService;               // injection
+        private readonly string orgId;                                  
         private readonly int CountryId;
 
         public ContactController(IUnitOfWork unitOfWork, ICommonService commonService, IContactService contactService)
@@ -43,6 +45,19 @@ namespace NonProfitCRM.Controllers
             }
 
             return View(contactList.OrderByDescending(v => v.Id));
+        }
+
+        public async Task<IActionResult> Index1(string searchBy , string search)
+        {
+            if(searchBy == "Name")
+            {
+                return View(db.Contact.Where(c=> c.Name.Contains(search)).ToList());
+            }
+            else
+            {
+                int id = Convert.ToInt32(search);
+                return View(db.Contact.Where(c => c.Id == id).ToList());
+            }
         }
 
         // GET: Contact/Details
@@ -216,32 +231,16 @@ namespace NonProfitCRM.Controllers
         }
 
         // GET: Volunteers/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
 
-            var contacts = await _unitOfWork.ContactRepository.GetByIDAsync(id);
-            if (contacts == null)
-            {
-                return NotFound();
-            }
-
-            return View(contacts);
-        }
 
         // POST: Volunteers/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        [HttpDelete]
+        public async Task Delete(int id)
         {
             var contacts = await _unitOfWork.ContactRepository.GetByIDAsync(id);
             _unitOfWork.ContactRepository.Delete(contacts);
             await _unitOfWork.SaveAsync();
 
-            return RedirectToAction(nameof(Index));
         }
 
         private bool ContactsExists(int id)

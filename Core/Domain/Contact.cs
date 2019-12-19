@@ -32,7 +32,6 @@ namespace Core.Domain
         public int Age { get; set; }
         public string Gender { get; set; }
 
-        [DisplayName("Upload File")]
         public IFormFile ImageFile { get; set; }
 
         //public virtual Organization Organization { get; set; }

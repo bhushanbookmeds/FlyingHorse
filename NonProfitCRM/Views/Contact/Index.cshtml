@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_SiteLayout.cshtml";
 }
 
-<!--Volunteers Index Page-->
+<!--Contacts Index Page-->
 
 <!-- Page-Title -->
 <div class="row">
@@ -13,18 +13,27 @@
         <div class="page-title-box">
             <div class="float-right">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="javascript:void(0);">Volunteer</a></li>
+                    <li class="breadcrumb-item"><a href="javascript:void(0);">Contact</a></li>
                     <li class="breadcrumb-item active">View All</li>
                 </ol>
             </div>
      
           
-               
-                    <input type="text" placeholder="Search.." class="form-control" style="box-sizing:border-box">
-                    <a href=""><i class="fas fa-search"></i></a>
-                
-           
-            <h4 class="page-title">Volunteers</h4>
+            
+            <p>
+                @using (Html.BeginForm("Index1", "Contact", FormMethod.Get))
+                {
+                    <b> Search by:</b>
+                    @Html.RadioButton("searchBy", "Name", true) <text>Name </text>
+                    @Html.RadioButton("searchBy", "Id") <text>Id</text>
+                    <br/>
+                    @Html.TextBox("Search") 
+                    <input type="submit" value="Search" />
+                }
+
+            </p>
+
+            <h2 class="page-title">Contacts</h2>
         </div><!--end page-title-box-->
     </div><!--end col-->
 </div>
@@ -41,7 +50,7 @@
         <div class="card">
             <div class="card-body">
                 <a asp-action="Create" class="btn btn-primary px-4 btn-rounded float-right mt-0 mb-3">+ Add New</a>
-                <h4 class="header-title mt-0">Volunteers Details</h4>
+                <h4 class="header-title mt-0">Contacts Details</h4>
                 <div class="table-responsive dash-social">
                     <table id="datatable" class="table">
                         <thead>
@@ -68,14 +77,8 @@
                             @foreach (var item in Model)
                             {
                             <tr>
-                                <td>
-                                    @*<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-        <img src="../assets/images/users/user-10.jpg" class="thumb-sm rounded-circle mr-2"><a asp-action="Details" asp-route-Id=@item.Id>
-                                    <img src="@Html.DisplayFor(modelItem => item.ImagePath)" alt="" class="thumb-sm rounded-circle mr-2">
-                                    <a asp-action="Details" class="Name" asp-route-Id=@item.Id style="text-transform: capitalize;">@Html.DisplayFor(modelItem => item.Name)</a>
-     
-                                </td>*@
-                                @*<td> @Html.DisplayFor(modelItem => item.Name)</td>*@
+                                @*<td>@Html.DisplayFor(modelItem => item.)</td>*@
+                                <td> @Html.DisplayFor(modelItem => item.Name)</td>
                                 <td>@Html.DisplayFor(modelItem => item.Email)</td>
                                 <td>@Html.DisplayFor(modelItem => item.PhoneNumber)</td>
                             
@@ -87,22 +90,15 @@
            </span>
         </td>*@
                                 <td>@Html.DisplayFor(modelItem => item.Age)</td>
-                                @*<td>@Html.DisplayFor(modelItem => item.AddressLine1)</td>*@
                                 <td>
-                                    @{ var address = item.AddressLine1 + " " + item.AddressLine2 + " " + item.AddressStreet + " " + item.AddressCity + " " + item.AddressState + " " + item.AddressCountry + " " + item.AddressZipcode; }
+                                    @{ var address = item.AddressLine1 + " " + item.AddressCity + " " + item.AddressCountry ; }
                                     <span class="elipse">
                                         @address
                                     </span>
                                     </td>
                                 <td>@Html.DisplayFor(modelItem => item.Gender)</td>
                                
-                                @*@Html.DisplayFor(modelItem => item.AddressLine1)<br>
-            @Html.DisplayFor(modelItem => item.AddressLine2)<br>
-            @Html.DisplayFor(modelItem => item.AddressStreet)<br>
-            @Html.DisplayFor(modelItem => item.AddressCity)<br>
-        <td>@Html.DisplayFor(modelItem => item.AddressState)</td>
-        <td>@Html.DisplayFor(modelItem => item.AddressCountry)</td>*@
-                                @*<td>@Html.DisplayFor(modelItem => item.AddressZipcode)</td>*@
+                                
                                
                                 <td>
                                     @if (!string.IsNullOrWhiteSpace(item.FacebookProfile))
@@ -121,8 +117,8 @@
                                 </td>
                                        
                                 <td>
-                                    <a asp-controller="Volunteers" asp-action="Edit" asp-route-Id=@item.Id class="mr-2"><i class="fas fa-edit text-info font-16"></i></a>
-                                    <a asp-controller="Volunteers" asp-action="Delete" asp-route-Id="@item.Id"><i class="fas fa-trash-alt text-danger font-16" onclick="return confirm('Are you sure to delete the record')"></i></a>
+                                    <a asp-controller="Contact" asp-action="Edit" asp-route-Id=@item.Id class="mr-2"><i class="fas fa-edit text-info font-16"></i></a>
+                                    <a onclick="Delete(@item.Id)"><i class="fas fa-trash-alt text-danger font-16" onclick="return confirm('Are you sure to delete the record')"></i></a>
                                 </td>
 
                             </tr><!--end tr-->
@@ -134,3 +130,10 @@
         </div><!--end card-->
     </div> <!--end col-->
 </div><!--end row-->
+<script>
+
+    function Delete(id) {
+        $.ajax({        url: "/Contact/Delete",            type: 'Delete',            data: { id },            success: function (data) {                window.location.href = window.location.origin + "/Contact/Index";        }    });
+    }
+
+</script>

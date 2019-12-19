@@ -137,13 +137,15 @@
                                     <span asp-validation-for="AddressLine1" class="text-danger"></span>
                                 </div>
                             </div>
+
                             <div class="form-group row">
-                                <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="AddressLine2">Address Line 2<span class="mandatory" id="nameStar" style="color:Red;font-size:20px">*</span></label>
+                                <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="AddressLine2">Address Line 2</label>
                                 <div class="col-sm-8">
                                     <input class="form-control" type="text" asp-for="AddressLine2">
-                                    <span asp-validation-for="AddressLine2" class="text-danger"></span>
+                                    @*<span asp-validation-for="AddressLine2" class="text-danger"></span>*@ 
                                 </div>
                             </div>
+
                             <div class="form-group row">
                                 <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="AddressStreet">Street<span class="mandatory" id="nameStar" style="color:Red;font-size:20px">*</span></label>
                                 <div class="col-sm-8">
@@ -152,7 +154,7 @@
                                 </div>
                             </div>
 
-                           
+
                             <div class="form-group row">
                                 <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="AddressCity">City<span class="mandatory" style="color:Red;font-size:20px">*</span></label>
                                 <div class="col-sm-8">
@@ -161,12 +163,12 @@
                                 </div>
                             </div>
 
-                            
+
 
                             <div class="form-group row">
                                 <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="AddressState">State <span class="mandatory" style="color:red;font-size:20px">*</span> </label>
                                 <div class="col-sm-8">
-                                    
+
                                     @Html.DropDownList("AddressState", (SelectList)ViewBag.AddressState, "Select", new { @class = "form-control", required = true, id = "CountryId" })
 
                                     <span asp-validation-for="AddressState" class="text-danger"></span>
@@ -184,13 +186,13 @@
                             </div>
 
 
-                            
+
 
 
                             <div class="form-group row">
                                 <label class="col-sm-4 col-form-label text-right" asp-for="ContactTypeId">ContactType <span class="mandatory" style="color:red;font-size:20px">*</span> </label>
                                 <div class="col-sm-8" id="demo">
-                                    @Html.DropDownList("ContactTypeId",(SelectList)ViewBag.ContactTypeId, "Select", new { @class = "form-control", required = true , id = "Id" })
+                                    @Html.DropDownList("ContactTypeId", (SelectList)ViewBag.ContactTypeId, "Select", new { @class = "form-control", required = true, id = "Id" })
                                     <span asp-validation-for="ContactTypeId" id="ContactTypeId" class="text-danger"> </span>
                                 </div>
                             </div>
@@ -202,23 +204,23 @@
                                     <span asp-validation-for="AddressZipcode" class="text-danger"></span>
                                 </div>
                             </div>
-                            @*<div class="form-group row">
-                                    <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="ImageFile">Upload Photo</label>
-                                    <div class="col-sm-8">
-                                        <input multiple type="file" class="form-control" asp-for="ImageFile" accept="image/*" onchange="preview_image(event)" required>
-                                        <img id="output_image" />
-                                    </div>
-                                </div>
-
                             <div class="form-group row">
-                                <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="ImageFile">Upload Photo</label>
+                                <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="ImageFile">Profile Picture</label>
                                 <div class="col-sm-8">
-                                    <img src="@Html.DisplayFor(modelItem => item.ImagePath)" alt="" class="thumb-sm rounded-circle mr-2">
-                                    <input multiple type="file" class="form-control" name="ImageFile" accept="image/*" onchange="preview_image(event)">
-                                    <img src="@Model.ImagePath" id="output_image" />
-                                   <img src="C:\\Users\\sai\\Pictures\\Jellyfish.jpg" />*@
-
+                                    <input multiple type="file" class="form-control" name="ImageFile" accept="image/*">
+                                    <img id="output_image" />
                                 </div>
+                            </div>
+
+                            @*<div class="form-group row">
+        <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="ImageFile">Upload Photo</label>
+        <div class="col-sm-8">
+            <img src="@Html.DisplayFor(modelItem => item.ImagePath)" alt="" class="thumb-sm rounded-circle mr-2">
+            <input multiple type="file" class="form-control" name="ImageFile" accept="image/*" onchange="preview_image(event)">
+            <img src="@Model.ImagePath" id="output_image" />
+           <img src="C:\\Users\\sai\\Pictures\\Jellyfish.jpg" />*@
+
+                        </div>
                             </div>
 
                             <div class="form-group row">

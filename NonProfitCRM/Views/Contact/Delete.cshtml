@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_SiteLayout.cshtml";
 }
 
 <h2>Delete</h2>
@@ -11,13 +12,13 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-body">
-                <form method="post" enctype="multipart/form-data" asp-controller="Contact" asp-action="Edit">
+                <form method="post" enctype="multipart/form-data" asp-controller="Contact" asp-action="Delete">
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="form-group row">
-                                <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="Name">Name</label>
+                                <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="Name">Name<span class="mandatory" style="color:Red;font-size:20px">*</span></label>
                                 <div class="col-sm-8">
-                                    <input class="form-control" type="text" name="Name" id="Name" asp-for="Name" required="required" placeholder="Type your name here" onkeyup="disablestarkey()">
+                                    <input class="form-control" type="text" disabled name="Name" id="Name" asp-for="Name" required="required" placeholder="Type your name here" onkeyup="disablestarkey()">
                                     <span asp-validation-for="Name" class="text-danger"></span>
                                 </div>
                             </div>
@@ -25,14 +26,14 @@
                             <div class="form-group row">
                                 <label for="example-phone-input" class="col-sm-4 col-form-label text-right">Phone Number<span class="mandatory" style="color:Red;font-size:20px">*</span></label>
                                 <div class="col-sm-3">
-                                    <input class="form-control" type="text" id="PhoneCode" asp-for="PhoneCode" required="required" placeholder="Code">
+                                    <input class="form-control" type="text" disabled id="PhoneCode" asp-for="PhoneCode" required="required" placeholder="Code">
                                     <span asp-validation-for="PhoneCode" class="text-danger"></span>
 
                                 </div>
 
                                 <div class="col-sm-5">
 
-                                    <input class="form-control" type="tel" name="PhoneNumber" id="PhoneNumber" asp-for="PhoneNumber" required="required" placeholder="Enter you Phone Number here">
+                                    <input class="form-control" type="tel" disabled name="PhoneNumber" id="PhoneNumber" asp-for="PhoneNumber" required="required" placeholder="Enter you Phone Number here">
                                     <span asp-validation-for="PhoneNumber" id="PhoneNumber" class="text-danger"></span>
                                     <span asp-validation-for="PhoneNumber" class="text-danger"></span>
                                 </div>
@@ -41,7 +42,7 @@
 
                             <div class="form-group row">
 
-                                <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="Gender">Gender</label>
+                                <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="Gender">Gender<span class="mandatory" style="color:Red;font-size:20px">*</span></label>
 
                                 <div class="col-sm-6" id="Gender">
 
@@ -53,18 +54,18 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="example-age-input" class="col-sm-4 col-form-label text-right" asp-for="Age">Age<span class="mandatory" style="color:Red;font-size:20px"></span></label>
+                                <label for="example-age-input" class="col-sm-4 col-form-label text-right" asp-for="Age">Age<span class="mandatory" style="color:Red;font-size:20px">*</span></label>
                                 <div class="col-sm-8">
-                                    <input class="form-control" type="text" id="Age" asp-for="Age" required="required" placeholder="Enter your Age here">
+                                    <input class="form-control" type="text" disabled id="Age" asp-for="Age" required="required" placeholder="Enter your Age here">
                                     <span asp-validation-for="Age" class="text-danger"></span>
                                 </div>
                             </div>
 
 
                             <div class="form-group row">
-                                <label for="example-email-input" class="col-sm-4 col-form-label text-right" asp-for="Email">Email</label>
+                                <label for="example-email-input" class="col-sm-4 col-form-label text-right" asp-for="Email">Email<span class="mandatory" style="color:Red;font-size:20px">*</span></label>
                                 <div class="col-sm-8">
-                                    <input class="form-control" type="email" id="example-date-input" asp-for="Email" required>
+                                    <input class="form-control" disabled type="email" id="example-date-input" asp-for="Email" required>
                                     <span asp-validation-for="Email" class="text-danger"></span>
                                 </div>
                             </div>
@@ -77,7 +78,7 @@
                                         <span class="input-group-prepend text-danger">
                                             <picture type="picture" class="btn btn-primary"><i class="fab fa-instagram"></i></picture>
                                         </span>
-                                        <input class="form-control" type="text" id="instagram" asp-for="InstagramProfile">
+                                        <input class="form-control" disabled type="text" id="instagram" asp-for="InstagramProfile">
                                     </div>
                                 </div>
                             </div>
@@ -89,7 +90,7 @@
                                         <span class="input-group-prepend">
                                             <picture type="picture" class="btn btn-primary"><i class="fab fa-facebook"></i></picture>
                                         </span>
-                                        <input class="form-control" type="text" id="face" asp-for="FacebookProfile">
+                                        <input class="form-control" disabled type="text" id="face" asp-for="FacebookProfile">
                                     </div>
                                 </div>
                             </div>
@@ -101,7 +102,7 @@
                                         <span class="input-group-prepend">
                                             <picture type="picture" class="btn btn-primary"><i class="fab fa-twitter"></i></picture>
                                         </span>
-                                        <input class="form-control" type="text" id="twitter" asp-for="TwitterProfile">
+                                        <input class="form-control" disabled type="text" id="twitter" asp-for="TwitterProfile">
                                     </div>
                                 </div>
                             </div>
@@ -112,32 +113,32 @@
 
 
                             <div class="form-group row">
-                                <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="AddressLine1">Address Line 1</label>
+                                <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="AddressLine1">AddressLine1<span class="mandatory" style="color:Red;font-size:20px">*</span></label>
                                 <div class="col-sm-8">
-                                    <input class="form-control" type="text" asp-for="AddressLine1">
+                                    <input class="form-control" type="text" disabled asp-for="AddressLine1">
                                     <span asp-validation-for="AddressLine1" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="AddressLine2">Address Line 2</label>
+                                <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="AddressLine2">AddressLine2<span class="mandatory" style="color:Red;font-size:20px">*</span></label>
                                 <div class="col-sm-8">
-                                    <input class="form-control" type="text" asp-for="AddressLine2">
+                                    <input class="form-control" type="text" disabled asp-for="AddressLine2">
                                     <span asp-validation-for="AddressLine2" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="AddressStreet">Street</label>
+                                <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="AddressStreet">AddressStreet<span class="mandatory" style="color:Red;font-size:20px">*</span></label>
                                 <div class="col-sm-8">
-                                    <input class="form-control" type="text" asp-for="AddressStreet">
+                                    <input class="form-control" type="text" disabled asp-for="AddressStreet">
                                     <span asp-validation-for="AddressStreet" class="text-danger"></span>
                                 </div>
                             </div>
 
 
                             <div class="form-group row">
-                                <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="AddressCity">City<span class="mandatory" style="color:Red;font-size:20px"></span></label>
+                                <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="AddressCity">AddressCity<span class="mandatory" style="color:Red;font-size:20px">*</span></label>
                                 <div class="col-sm-8">
-                                    <input class="form-control" type="text" name="AddressCity" asp-for="AddressCity" required="required" placeholder="Enter your City here" onkeyup="disablestarkey()">
+                                    <input class="form-control" type="text" disabled name="AddressCity" asp-for="AddressCity" required="required" placeholder="Enter your City here" onkeyup="disablestarkey()">
                                     <span asp-validation-for="AddressCity" class="text-danger"></span>
                                 </div>
                             </div>
@@ -145,21 +146,17 @@
 
 
                             <div class="form-group row">
-                                <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="AddressState">State <span class="mandatory" style="color:red;font-size:20px">*</span> </label>
+                                <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="AddressState">AddressState <span class="mandatory" style="color:red;font-size:20px">*</span> </label>
                                 <div class="col-sm-8">
-
-                                    @Html.DropDownList("AddressState", (SelectList)ViewBag.AddressState, "Select", new { @class = "form-control", required = true, id = "CountryId" })
-
-                                    <span asp-validation-for="AddressState" class="text-danger"></span>
+                                    <input class="form-control" disabled name="AddressState" asp-for="AddressState" required="required"/>
+                                    <span asp-validation-for="AddressState" id="Country" class="text-danger"> </span>
                                 </div>
                             </div>
 
                             <div class="form-group row">
-                                <label class="col-sm-4 col-form-label text-right" asp-for="AddressCountry">Country <span class="mandate" style="color:red;font-size:20px">*</span> </label>
-                                <div class="col-sm-8">
-                                    @Html.DropDownList("AddressCountry", (SelectList)ViewBag.AddressCountry, "Select", new { @class = "form-control", required = true, id = "CountryId" })
-
-
+                                <label class="col-sm-4 col-form-label text-right" asp-for="AddressCountry">AddressCountry <span class="mandatory" style="color:red;font-size:20px">*</span> </label>
+                                <div class="col-sm-8" id="demo">
+                                    <input class="form-control" disabled name="AddressCountry" asp-for="AddressCountry" required="required"/>
                                     <span asp-validation-for="AddressCountry" id="Country" class="text-danger"> </span>
                                 </div>
                             </div>
@@ -171,33 +168,41 @@
                             <div class="form-group row">
                                 <label class="col-sm-4 col-form-label text-right" asp-for="ContactTypeId">ContactType <span class="mandatory" style="color:red;font-size:20px">*</span> </label>
                                 <div class="col-sm-8" id="demo">
-                                    @Html.DropDownList("ContactTypeId", (SelectList)ViewBag.ContactTypeId, "Select", new { @class = "form-control", required = true, id = "Id" })
+                                    <input class="form-control" disabled name="ContactTypeId" asp-for="ContactTypeId" required="required" />
                                     <span asp-validation-for="ContactTypeId" id="ContactTypeId" class="text-danger"> </span>
                                 </div>
                             </div>
 
                             <div class="form-group row">
-                                <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="AddressZipcode">Zip code</label>
+                                <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="AddressZipcode">AddressZipcode<span class="mandatory" style="color:Red;font-size:20px">*</span></label>
                                 <div class="col-sm-8">
-                                    <input class="form-control" type="text" asp-for="AddressZipcode" required>
+                                    <input class="form-control" type="text" disabled asp-for="AddressZipcode" required>
                                     <span asp-validation-for="AddressZipcode" class="text-danger"></span>
                                 </div>
                             </div>
-                            @*<div class="form-group row">
-                                        <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="ImageFile">Upload Photo</label>
-                                        <div class="col-sm-8">
-                                            <input multiple type="file" class="form-control" asp-for="ImageFile" accept="image/*" onchange="preview_image(event)" required>
-                                            <img id="output_image" />
-                                        </div>
-                                    </div>
 
-                                <div class="form-group row">
-                                    <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="ImageFile">Upload Photo</label>
-                                    <div class="col-sm-8">
-                                        <img src="@Html.DisplayFor(modelItem => item.ImagePath)" alt="" class="thumb-sm rounded-circle mr-2">
-                                        <input multiple type="file" class="form-control" name="ImageFile" accept="image/*" onchange="preview_image(event)">
-                                        <img src="@Model.ImagePath" id="output_image" />
-                                       <img src="C:\\Users\\sai\\Pictures\\Jellyfish.jpg" />*@
+                            <div class="form-group row">
+                                <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="ImageFile">Profile Picture<span class="mandatory" style="color:Red;font-size:20px">*</span></label>
+                                <div class="col-sm-8">
+                                    <input multiple type="file" asp-for="ImageFile" disabled class="form-control" name="ImageFile" accept="image/*" required>
+                                    <img id="output_image" />
+                                </div>
+                            </div>
+                            @*<div class="form-group row">
+                <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="ImageFile">Upload Photo</label>
+                <div class="col-sm-8">
+                    <input multiple type="file" class="form-control" asp-for="ImageFile" accept="image/*" onchange="preview_image(event)" required>
+                    <img id="output_image" />
+                </div>
+            </div>
+
+        <div class="form-group row">
+            <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="ImageFile">Upload Photo</label>
+            <div class="col-sm-8">
+                <img src="@Html.DisplayFor(modelItem => item.ImagePath)" alt="" class="thumb-sm rounded-circle mr-2">
+                <input multiple type="file" class="form-control" name="ImageFile" accept="image/*" onchange="preview_image(event)">
+                <img src="@Model.ImagePath" id="output_image" />
+               <img src="C:\\Users\\sai\\Pictures\\Jellyfish.jpg" />*@
 
                         </div>
                     </div>

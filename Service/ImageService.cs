@@ -8,6 +8,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
+using Core.Domain;
+using ContextHelper = Core.Domain.ContextHelper;
 
 namespace Service
 {
@@ -34,5 +36,4 @@ namespace Service
             return Path.Combine(ContextHelper.GetHostingUrl(), folderName, FileName);
         }
     }
-}
 }

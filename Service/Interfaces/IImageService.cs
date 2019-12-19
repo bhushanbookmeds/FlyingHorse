@@ -8,6 +8,6 @@ namespace Service.Interfaces
 {
     interface IImageService
     {
-        Task<string> ImageUpload(IFormFile file);
+        Task<string> ImageUpload(IFormFile file,string a);
     }
 }
