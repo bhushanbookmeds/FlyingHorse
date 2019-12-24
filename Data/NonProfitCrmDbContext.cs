@@ -25,7 +25,7 @@ namespace Data
         public virtual DbSet<ContactType> ContactType { get; set; }
         public virtual DbSet<State> State { get; set; }
         public virtual DbSet<Country> Country { get; set; }
-
+        public virtual DbSet<Donation> Donation { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -203,6 +203,35 @@ namespace Data
                                 .HasMaxLength(250);
 
                 entity.Property(e => e.PhoneCode);
+            });
+
+            modelBuilder.Entity<Donation>(entity =>
+            {
+                entity.Property(e => e.Id);
+
+                entity.Property(e => e.OrgId);
+
+                entity.Property(e => e.EventId);
+
+                entity.Property(e => e.CampaignId);
+
+                entity.Property(e => e.ContactId);
+
+                entity.Property(e => e.GuestEmail)
+                        .HasMaxLength(50);
+
+                entity.Property(e => e.Amount)
+                        .IsRequired();
+
+                entity.Property(e => e.RecurringDonation);
+
+                entity.Property(e => e.Date)
+                        .IsRequired();
+
+                entity.Property(e => e.TransactionTypeId);
+
+                entity.Property(e => e.DonationTypeId);
+
             });
         }
     }

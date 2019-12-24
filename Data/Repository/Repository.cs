@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.Collections.Generic;                 // implementing the interface(IRepository) here i.e providing implementation to the methods defined 
+using System.Linq;                                // in interface(IRepository)
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;

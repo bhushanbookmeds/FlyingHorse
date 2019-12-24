@@ -18,21 +18,33 @@
                 </ol>
             </div>
      
-          
+            @*<form role="search" class="">
+                <input type="text" placeholder="Search..." class="form-control">
+                <a href=""><i class="fas fa-search"></i></a>
+            </form>*@
             
-            <p>
-                @using (Html.BeginForm("Index1", "Contact", FormMethod.Get))
+        <p>
+            @using (Html.BeginForm("Index1", "Contact", FormMethod.Get))
+            {
+                @Html.TextBox("Search", "", new { style= "float: left; display: block;color: black;text-align: left; width: 300px;  border-color: steelblue; padding: 5px;font-style: italic;border-radius: 50px;border-width: medium;  " })
+
+
+                @Html.DropDownList("val", new List<SelectListItem>
                 {
-                    <b> Search by:</b>
-                    @Html.RadioButton("searchBy", "Name", true) <text>Name </text>
-                    @Html.RadioButton("searchBy", "Id") <text>Id</text>
-                    <br/>
-                    @Html.TextBox("Search") 
-                    <input type="submit" value="Search" />
-                }
+                    new SelectListItem { Text = "Name", Value = "1" , Selected = true },
+                    new SelectListItem { Text = "Phone", Value = "2"},
+                    new SelectListItem { Text = "Email", Value = "3"}
+                }, "Search By..." , new { style = "font-style: italic;box-sizing: border-box;border-color: steelblue;width: 150px;height: 33px;border-radius: 50px;border-width: medium;" })
 
-            </p>
+                <input type="submit" value="Search" style="cursor: pointer;border-radius: 50px;border-color: steelblue;border-width: medium;height: 28px;"/>
+                
+            }
 
+            
+
+        </p>
+
+        
             <h2 class="page-title">Contacts</h2>
         </div><!--end page-title-box-->
     </div><!--end col-->
@@ -78,7 +90,7 @@
                             {
                             <tr>
                                 @*<td>@Html.DisplayFor(modelItem => item.)</td>*@
-                                <td> @Html.DisplayFor(modelItem => item.Name)</td>
+                                <td>@Html.ActionLink(item.Name , "Details" , "Contact" , new { Id = item.Id })</td>
                                 <td>@Html.DisplayFor(modelItem => item.Email)</td>
                                 <td>@Html.DisplayFor(modelItem => item.PhoneNumber)</td>
                             

@@ -19,6 +19,7 @@ namespace Data
         private IRepository<ContactType> contactTypeRepository ;
         private IRepository<State> stateRepository;
         private IRepository<Country> countryRepository;
+        
 
         #endregion
 
@@ -108,6 +109,16 @@ namespace Data
                 return countryRepository;
             }
         }
+
+        public IRepository<Donation> DonationRepository
+        {
+            get
+            {
+                if (this.donationRepository == null)
+                    this.donationRepository = new Repository<Donation>(_context);
+                return DonationRepository;
+            }
+        }
         #region Public member methods...
         /// <summary>
         /// Save method.
@@ -156,6 +167,7 @@ namespace Data
 
         #region private dispose variable declaration...
         private bool disposed = false;
+        private object donationRepository;
         #endregion
 
         /// <summary>

@@ -1,0 +1,145 @@
+﻿@model Core.Domain.Donation
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_SiteLayout.cshtml";
+}
+}
+
+<h2>Donation</h2>
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="page-title-box">
+            <div class="float-right">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="javascript:void(0);">Contact</a></li>
+                    <li class="breadcrumb-item active">Add New</li>
+                </ol>
+            </div>
+            <h2 class="page-title">Add a Donation</h2>
+        </div><!--end page-title-box-->
+    </div><!--end col-->
+</div>
+
+<hr />
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <form method="post" enctype="multipart/form-data" asp-controller="Donation" asp-action="Create">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group row">
+                                <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="OrgId">OrgId<span class="mandatory" style="color:Red;font-size:20px">*</span></label>
+                                <div class="col-sm-8">
+                                    <input class="form-control" type="text" name="OrgId" id="Name" asp-for="OrgId" required="required" placeholder="Enter your OrgId" onkeyup="check()" />
+                                    <span asp-validation-for="OrgId" class="text-danger"></span>
+
+                                </div>
+                            </div>
+
+                            @*<script type="text/javascript">
+            function check() {
+                var a = document.getElementById("Name").value;
+                document.getElementById("Name").value = a.toUpperCase();
+            }
+        </script>*@
+
+
+
+
+
+
+                            <div class="form-group row">
+                                <label for="example-age-input" class="col-sm-4 col-form-label text-right" asp-for="EventId">Event Id</label>
+                                <div class="col-sm-8">
+                                    <input class="form-control" type="number" id="EventId" asp-for="EventId" required="required" placeholder="Enter Event Id">
+                                    <span asp-validation-for="EventId" class="text-danger"></span>
+                                </div>
+                            </div>
+
+
+
+                            <div class="form-group row">
+                                <label for="example-email-input" class="col-sm-4 col-form-label text-right" asp-for="CampaignId">Campaign Id</label>
+                                <div class="col-sm-8">
+                                    <input class="form-control" type="number" name="CampaignId" id="example-date-input" asp-for="CampaignId" required="required" placeholder="Enter Campaign Id">
+                                    <span asp-validation-for="CampaignId" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="example-email-input" class="col-sm-4 col-form-label text-right" asp-for="ContactId">Contact Id</label>
+                                <div class="col-sm-8">
+                                    <input class="form-control" type="number" name="ContactId" id="example-date-input" asp-for="ContactId" required="required" placeholder="Enter Contact Id">
+                                    <span asp-validation-for="ContactId" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="col-lg-6">
+
+
+
+                            <div class="form-group row">
+                                <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="GuestDonation">Guest Donation</label>
+                                <div class="col-sm-8">
+                                    <input class="form-control" type="number" name="GuestDonation" asp-for="GuestDonation" required="required" placeholder="Enter Guest Donation">
+                                    <span asp-validation-for="GuestDonation" class="text-danger"></span>
+                                </div>
+                            </div>
+
+
+
+                            <div class="form-group row">
+                                <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="GuestEmail">Guest Email</label>
+                                <div class="col-sm-8">
+                                    <input class="form-control" type="email" asp-for="GuestEmail" required="required" placeholder="Enter your Email">
+                                    <span asp-validation-for="GuestEmail" class="text-danger"></span>
+                                </div>
+                            </div>
+
+
+
+                            <div class="form-group row">
+                                <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="Amount">Amount<span class="mandatory" style="color:Red;font-size:20px">*</span></label>
+                                <div class="col-sm-8">
+                                    <input class="form-control" type="number" name="Amount" asp-for="Amount" required="required" placeholder="Enter Amount">
+                                    <span asp-validation-for="Amount" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="example-text-input" class="col-sm-4 col-form-label text-right" asp-for="Date">Date<span class="mandatory" style="color:Red;font-size:20px">*</span></label>
+                                <div class="col-sm-8">
+                                    <input class="form-control" type="date" name="Date" asp-for="Date" required="required"  onkeyup="disablestarkey()">
+                                    <span asp-validation-for="Date" class="text-danger"></span>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group row">
+                                <div class="col-sm-12 text-right">
+                                    <input type="submit" value="Add" class="col-sm-3 btn btn-primary" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div><!--end card-body-->
+        </div><!--end card-->
+    </div><!--end col-->
+</div>
+
+<!--Prive image after upload on same page-->
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

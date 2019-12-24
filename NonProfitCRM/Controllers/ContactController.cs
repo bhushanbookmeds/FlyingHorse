@@ -47,16 +47,21 @@ namespace NonProfitCRM.Controllers
             return View(contactList.OrderByDescending(v => v.Id));
         }
 
-        public async Task<IActionResult> Index1(string searchBy , string search)
+        public async Task<IActionResult> Index1(int val , string search)
         {
-            if(searchBy == "Name")
+            //int toFind = Convert.ToInt32(val);
+            if(val == 1)
             {
                 return View(db.Contact.Where(c=> c.Name.Contains(search)).ToList());
             }
+            else if(val == 2)
+            {
+                //int phone = Convert.ToInt32(search);
+                return View(db.Contact.Where(c => c.PhoneNumber.Contains(search)).ToList());
+            }
             else
             {
-                int id = Convert.ToInt32(search);
-                return View(db.Contact.Where(c => c.Id == id).ToList());
+                return View(db.Contact.Where(c => c.Email.Contains(search)).ToList());
             }
         }
 

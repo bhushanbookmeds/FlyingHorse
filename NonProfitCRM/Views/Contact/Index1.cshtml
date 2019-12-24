@@ -22,13 +22,21 @@
             <p>
                 @using (Html.BeginForm("Index1", "Contact", FormMethod.Get))
                 {
-                    <b> Search by:</b>
-                    @Html.RadioButton("searchBy", "Name", true) <text>Name </text>
-                    @Html.RadioButton("searchBy", "Id") <text>Id</text>
-                    <br />
-                    @Html.TextBox("Search")
-                    <input type="submit" value="Search" />
+                    @Html.TextBox("Search", "", new { style = "float: left; display: block;color: black;text-align: left; width: 300px;  border-color: steelblue; padding: 5px;font-style: italic;border-radius: 50px;border-width: medium;  " })
+
+
+                    @Html.DropDownList("val", new List<SelectListItem>
+                    {
+                        new SelectListItem { Text = "Name", Value = "1" , Selected = true },
+                        new SelectListItem { Text = "Phone", Value = "2"},
+                        new SelectListItem { Text = "Email", Value = "3"}
+                    }, "Search By...", new { style = "font-style: italic;box-sizing: border-box;border-color: steelblue;width: 150px;height: 33px;border-radius: 50px;border-width: medium;" })
+
+                    <input type="submit" value="Search" style="cursor: pointer;border-radius: 50px;border-color: steelblue;border-width: medium;height: 28px;" />
+
                 }
+
+
 
             </p>
 

@@ -17,7 +17,7 @@ namespace Data
         IRepository<ContactType> ContactTypeRepository { get; }
         IRepository<State> StateRepository { get; }
         IRepository<Country> CountryRepository { get; }
-
+        IRepository<Donation> DonationRepository { get; }
         void Save();
         Task SaveAsync();
 
