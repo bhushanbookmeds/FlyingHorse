@@ -44,7 +44,7 @@ namespace NonProfitCRM.Controllers
                 contactList.Add(contact);
             }
 
-            return View(contactList.OrderByDescending(v => v.Id));
+            return View(contactList.OrderByDescending(v => v.Name));
         }
 
         public async Task<IActionResult> Index1(int val , string search)

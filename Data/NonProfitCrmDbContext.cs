@@ -223,15 +223,14 @@ namespace Data
                 entity.Property(e => e.Amount)
                         .IsRequired();
 
-                entity.Property(e => e.RecurringDonation);
+                //entity.Property(e => e.RecurringDonation);
 
-                entity.Property(e => e.Date)
-                        .IsRequired();
+                //entity.Property(e => e.Date)
+                //        .IsRequired();
 
-                entity.Property(e => e.TransactionTypeId);
+                //entity.Property(e => e.TransactionTypeId);
 
-                entity.Property(e => e.DonationTypeId);
-
+                //entity.Property(e => e.DonationTypeId);
             });
         }
     }

@@ -1,0 +1,84 @@
+﻿@model IEnumerable<Core.Domain.Donation>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_SiteLayout.cshtml";
+}
+
+<!--Contacts Index Page-->
+<!-- Page-Title -->
+<div class="row">
+    <div class="col-sm-12">
+        <div class="page-title-box">
+            <div class="float-right">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="javascript:void(0);">Donation</a></li>
+                    <li class="breadcrumb-item active">View All</li>
+                </ol>
+            </div>
+
+            @*<form role="search" class="">
+                    <input type="text" placeholder="Search..." class="form-control">
+                    <a href=""><i class="fas fa-search"></i></a>
+                </form>*@
+
+
+            <h2 class="page-title">Donation</h2>
+        </div><!--end page-title-box-->
+    </div><!--end col-->
+</div>
+
+@*<li class="hide-phone app-search">
+        <form role="search" class="">
+            <input type="text" placeholder="Search..." class="form-control">
+            <a href=""><i class="fas fa-search"></i></a>
+        </form>
+    </li>*@
+<!-- end page title end breadcrumb -->
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <a asp-action="Create" class="btn btn-primary px-4 btn-rounded float-right mt-0 mb-3">+ Add New</a>
+                <h4 class="header-title mt-0">Donation Details</h4>
+                <div class="table-responsive dash-social">
+                    <table id="datatable" class="table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Amount</th>
+                                <th>Email</th>
+                                <th>Date</th>
+                                <th>Recurring Donation</th>
+                                <th>Donation Type Id</th>
+                                @*<th>Address2</th>
+                                    <th>Street</th>
+                                    <th>City</th>*@
+                                @*<th>State</th>
+                                    <th>Country</th>
+                                    <th>ZipCode</th>*@
+
+                            </tr><!--end tr-->
+                        </thead>
+
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    @*<td>@Html.DisplayFor(modelItem => item.)</td>*@
+                                    <td>@Html.DisplayFor(modelItem => item.Id)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Amount)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.GuestEmail)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Date)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.RecurringDonation)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.DonationTypeId)</td>
+
+                                </tr><!--end tr-->
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div><!--end card-body-->
+        </div><!--end card-->
+    </div> <!--end col-->
+</div><!--end row-->
