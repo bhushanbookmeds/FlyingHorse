@@ -73,5 +73,14 @@ namespace NonProfitCRM.Controllers
 
             return View(donation);
         }
+
+        public JsonResult GetDonations(string term)
+        {
+            List<string> donations;
+            
+            donations = db.Contact.Where(x => x.Name.StartsWith(term)).Select(y => y.Name).ToList();
+
+            return Json(donations);
+        }
     }
 }

@@ -257,5 +257,12 @@ namespace NonProfitCRM.Controllers
             }
             return true;
         }
+
+        public JsonResult GetContacts(string term)
+        {
+            List<string> contacts;
+            contacts = db.Contact.Where(x => x.Name.StartsWith(term)).Select(y => y.Name).ToList();
+            return Json(contacts);
+        }
     }
 }

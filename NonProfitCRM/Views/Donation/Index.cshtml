@@ -4,7 +4,19 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_SiteLayout.cshtml";
 }
+<script src="~/js/jquery-ui.js"></script>
+<link href="~/css/jquery-ui.theme.min.css" rel="stylesheet" />
+<script src="~/js/jquery-ui.min.js"></script>
 
+<script type="text/javascript">
+
+    $(function () {
+        $("#textSearch").autocomplete({
+            source: '@Url.Action("GetDonations")'
+        });
+    });
+
+</script>
 <!--Contacts Index Page-->
 <!-- Page-Title -->
 <div class="row">
@@ -35,6 +47,15 @@
         </form>
     </li>*@
 <!-- end page title end breadcrumb -->
+<p>
+    @using (Html.BeginForm())
+    {
+        <b>Contact Name </b>
+        @Html.TextBox("searchTerm", null, new { id = "textSearch" })
+        <input type="submit" value="Search" />
+    }
+
+</p>
 <div class="row">
     <div class="col-12">
         <div class="card">

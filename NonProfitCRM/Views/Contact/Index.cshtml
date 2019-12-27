@@ -6,7 +6,30 @@
 }
 
 <!--Contacts Index Page-->
+<script src="~/js/jquery-ui.js"></script>
+<link href="~/css/jquery-ui.theme.min.css" rel="stylesheet" />
+<script src="~/js/jquery-ui.min.js"></script>
 
+<script type="text/javascript">
+
+        $('#txtSearch').autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: 'Url.Action("GetContacts" , "Contact")',
+                    dataType: "Json",
+                    data: { search: $("#txtSearch").val() },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                        }))
+                    },
+                    error: function (xhr, status, error) {
+                        alert("Error");
+                    }
+                });
+            }
+        });
+
+</script>
 <!-- Page-Title -->
 <div class="row">
     <div class="col-sm-12">
@@ -17,45 +40,45 @@
                     <li class="breadcrumb-item active">View All</li>
                 </ol>
             </div>
-     
+
             @*<form role="search" class="">
-                <input type="text" placeholder="Search..." class="form-control">
-                <a href=""><i class="fas fa-search"></i></a>
-            </form>*@
-            
-        <p>
-            @using (Html.BeginForm("Index1", "Contact", FormMethod.Get))
-            {
-                @Html.TextBox("Search", "", new { style= "float: left; display: block;color: black;text-align: left; width: 300px;  border-color: steelblue; padding: 5px;font-style: italic;border-radius: 50px;border-width: medium;  " })
+                    <input type="text" placeholder="Search..." class="form-control">
+                    <a href=""><i class="fas fa-search"></i></a>
+                </form>*@
 
-
-                @Html.DropDownList("val", new List<SelectListItem>
+            <p>
+                @using (Html.BeginForm("Index1", "Contact", FormMethod.Get))
                 {
-                    new SelectListItem { Text = "Name", Value = "1" , Selected = true },
-                    new SelectListItem { Text = "Phone", Value = "2"},
-                    new SelectListItem { Text = "Email", Value = "3"}
-                }, "Search By..." , new { style = "font-style: italic;box-sizing: border-box;border-color: steelblue;width: 150px;height: 33px;border-radius: 50px;border-width: medium;" })
+                    @Html.TextBox("Search", "", new { id = " txtSearch" , style = "float: left; display: block;color: black;text-align: left; width: 300px;  border-color: steelblue; padding: 5px;font-style: italic;border-radius: 50px;border-width: medium;  " })
 
-                <input type="submit" value="Search" style="cursor: pointer;border-radius: 50px;border-color: steelblue;border-width: medium;height: 28px;"/>
-                
-            }
 
-            
+                    @Html.DropDownList("val", new List<SelectListItem>
+                    {
+                        new SelectListItem { Text = "Name", Value = "1" , Selected = true },
+                        new SelectListItem { Text = "Phone", Value = "2"},
+                        new SelectListItem { Text = "Email", Value = "3"}
+                    }, "Search By...", new { style = "font-style: italic;box-sizing: border-box;border-color: steelblue;width: 150px;height: 33px;border-radius: 50px;border-width: medium;" })
 
-        </p>
+                    <input type="submit" value="Search" style="cursor: pointer;border-radius: 50px;border-color: steelblue;border-width: medium;height: 28px;" />
 
-        
+                }
+
+
+
+            </p>
+
+
             <h2 class="page-title">Contacts</h2>
         </div><!--end page-title-box-->
     </div><!--end col-->
 </div>
 
 @*<li class="hide-phone app-search">
-    <form role="search" class="">
-        <input type="text" placeholder="Search..." class="form-control">
-        <a href=""><i class="fas fa-search"></i></a>
-    </form>
-</li>*@
+        <form role="search" class="">
+            <input type="text" placeholder="Search..." class="form-control">
+            <a href=""><i class="fas fa-search"></i></a>
+        </form>
+    </li>*@
 <!-- end page title end breadcrumb -->
 <div class="row">
     <div class="col-12">
@@ -76,11 +99,11 @@
                                 <th>Social</th>
                                 <th>Action</th>
                                 @*<th>Address2</th>
-                                <th>Street</th>
-                                <th>City</th>*@
+                                    <th>Street</th>
+                                    <th>City</th>*@
                                 @*<th>State</th>
-                                <th>Country</th>
-                                <th>ZipCode</th>*@
+                                    <th>Country</th>
+                                    <th>ZipCode</th>*@
 
                             </tr><!--end tr-->
                         </thead>
@@ -88,52 +111,52 @@
                         <tbody>
                             @foreach (var item in Model)
                             {
-                            <tr>
-                                @*<td>@Html.DisplayFor(modelItem => item.)</td>*@
-                                <td>@Html.ActionLink(item.Name , "Details" , "Contact" , new { Id = item.Id })</td>
-                                <td>@Html.DisplayFor(modelItem => item.Email)</td>
-                                <td>@Html.DisplayFor(modelItem => item.PhoneNumber)</td>
-                            
-                                @*<td>@Html.DisplayFor(modelItem =>item.PhoneCode)</td>*@
-                                @*<td>
-             @{ var phonenumber = item.PhoneCode + " " + item.PhoneNumber;}
-           <span class="elipse">
-               @phonenumber
-           </span>
-        </td>*@
-                                <td>@Html.DisplayFor(modelItem => item.Age)</td>
-                                <td>
-                                    @{ var address = item.AddressLine1 + " " + item.AddressCity + " " + item.AddressCountry ; }
-                                    <span class="elipse">
-                                        @address
-                                    </span>
+                                <tr>
+                                    @*<td>@Html.DisplayFor(modelItem => item.)</td>*@
+                                    <td>@Html.ActionLink(item.Name, "Details", "Contact", new { Id = item.Id })</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.PhoneNumber)</td>
+
+                                    @*<td>@Html.DisplayFor(modelItem =>item.PhoneCode)</td>*@
+                                    @*<td>
+                                             @{ var phonenumber = item.PhoneCode + " " + item.PhoneNumber;}
+                                           <span class="elipse">
+                                               @phonenumber
+                                           </span>
+                                        </td>*@
+                                    <td>@Html.DisplayFor(modelItem => item.Age)</td>
+                                    <td>
+                                        @{ var address = item.AddressLine1 + " " + item.AddressCity + " " + item.AddressCountry; }
+                                        <span class="elipse">
+                                            @address
+                                        </span>
                                     </td>
-                                <td>@Html.DisplayFor(modelItem => item.Gender)</td>
-                               
-                                
-                               
-                                <td>
-                                    @if (!string.IsNullOrWhiteSpace(item.FacebookProfile))
-                                    {
-                                        <a href="//@item.FacebookProfile" target="_blank"><i class="w3-large fab fa-facebook"></i></a>
-                                    }
-                                    @if (!string.IsNullOrWhiteSpace(item.TwitterProfile))
-                                    {
-                                        <a href="//@item.TwitterProfile" target="_blank"><i style="color:deepskyblue" class="w3-large fab fa-twitter-square"></i></a>
-                                    }
-                                    @if (!string.IsNullOrWhiteSpace(item.InstagramProfile))
-                                    {
-                                        <a href="//@item.InstagramProfile" target="_blank"><i class="w3-large fab fa-instagram "></i></a>
-                                    }
+                                    <td>@Html.DisplayFor(modelItem => item.Gender)</td>
 
-                                </td>
-                                       
-                                <td>
-                                    <a asp-controller="Contact" asp-action="Edit" asp-route-Id=@item.Id class="mr-2"><i class="fas fa-edit text-info font-16"></i></a>
-                                    <a onclick="Delete(@item.Id)"><i class="fas fa-trash-alt text-danger font-16" onclick="return confirm('Are you sure to delete the record')"></i></a>
-                                </td>
 
-                            </tr><!--end tr-->
+
+                                    <td>
+                                        @if (!string.IsNullOrWhiteSpace(item.FacebookProfile))
+                                        {
+                                            <a href="//@item.FacebookProfile" target="_blank"><i class="w3-large fab fa-facebook"></i></a>
+                                        }
+                                        @if (!string.IsNullOrWhiteSpace(item.TwitterProfile))
+                                        {
+                                            <a href="//@item.TwitterProfile" target="_blank"><i style="color:deepskyblue" class="w3-large fab fa-twitter-square"></i></a>
+                                        }
+                                        @if (!string.IsNullOrWhiteSpace(item.InstagramProfile))
+                                        {
+                                            <a href="//@item.InstagramProfile" target="_blank"><i class="w3-large fab fa-instagram "></i></a>
+                                        }
+
+                                    </td>
+
+                                    <td>
+                                        <a asp-controller="Contact" asp-action="Edit" asp-route-Id=@item.Id class="mr-2"><i class="fas fa-edit text-info font-16"></i></a>
+                                        <a onclick="Delete(@item.Id)"><i class="fas fa-trash-alt text-danger font-16" onclick="return confirm('Are you sure to delete the record')"></i></a>
+                                    </td>
+
+                                </tr><!--end tr-->
                             }
                         </tbody>
                     </table>
@@ -145,7 +168,14 @@
 <script>
 
     function Delete(id) {
-        $.ajax({        url: "/Contact/Delete",            type: 'Delete',            data: { id },            success: function (data) {                window.location.href = window.location.origin + "/Contact/Index";        }    });
+        $.ajax({
+            url: "/Contact/Delete",
+            type: 'Delete',
+            data: { id },
+            success: function (data) {
+                window.location.href = window.location.origin + "/Contact/Index";
+            }
+        });
     }
 
 </script>
