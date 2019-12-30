@@ -14,7 +14,7 @@ namespace Core.Domain
         public int? CampaignId { get; set; }
         public int? ContactId { get; set; }
         public bool? GuestDonation { get; set; }
-        public string GuestEmail { get; set; }
+        public string GuestEmail { get; set; }  
         public decimal? Amount { get; set; }
         public bool? RecurringDonation { get; set; }
         public DateTime Date { get; set; }

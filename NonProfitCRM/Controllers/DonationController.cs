@@ -53,6 +53,16 @@ namespace NonProfitCRM.Controllers
             }
             
         }
+
+        public async Task<IActionResult> Index1(string searchTerm)
+        {
+            List<int> requiredID = db.Contact.Where(e => e.Name.Contains(searchTerm)).Select(y => y.Id).ToList();
+            foreach (var a in requiredID)
+            {
+                Donation donation = 
+            }
+            return View(donation);
+        }
         public async Task<IActionResult> Create()
         {
             return View();
@@ -60,7 +70,7 @@ namespace NonProfitCRM.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,OrgId,EventId,CampaignId,ContactId,GuestDonation,GuestEmail,Amount,RecurringDonation,Date,TransactionTypeId,DonationTypeId")] Donation donation)
+        public async Task<IActionResult> Create([Bind("Amount,Date,RecurringDonation,GuestEmail")] Donation donation)
         {
             if (ModelState.IsValid)
             {
@@ -81,6 +91,40 @@ namespace NonProfitCRM.Controllers
             donations = db.Contact.Where(x => x.Name.StartsWith(term)).Select(y => y.Name).ToList();
 
             return Json(donations);
+        }
+
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if(id == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                Donation donation = _unitOfWork.DonationRepository.GetByID(id);
+                return View(donation);
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int? Id , [Bind("Amount,Date,RecurringDonation,GuestEmail")] Donation donation)
+        {
+            if (ModelState.IsValid)
+            {
+                donation.OrgId = orgId;
+                _unitOfWork.DonationRepository.Update(donation);
+                await _unitOfWork.SaveAsync();
+            }
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpDelete]
+        public async Task Delete(int id)
+        {
+            var donations = await _unitOfWork.DonationRepository.GetByIDAsync(id);
+            _unitOfWork.DonationRepository.Delete(id);
+            await _unitOfWork.SaveAsync();
         }
     }
 }

@@ -48,11 +48,11 @@
     </li>*@
 <!-- end page title end breadcrumb -->
 <p>
-    @using (Html.BeginForm())
+    @using (Html.BeginForm("Index1" , "Donation" , FormMethod.Get))
     {
         <b>Contact Name </b>
-        @Html.TextBox("searchTerm", null, new { id = "textSearch" })
-        <input type="submit" value="Search" />
+        @Html.TextBox("searchTerm", null, new { id = "textSearch" , style = "border-radius: 50px;border-color: teal;text-align: left;font-style: italic;padding:5px" })
+        <input type="submit" value="Search" style="border-radius: 50px;border-color: teal;text-align: left;font-style: italic;padding:5px" />
     }
 
 </p>
@@ -72,6 +72,7 @@
                                 <th>Date</th>
                                 <th>Recurring Donation</th>
                                 <th>Donation Type Id</th>
+                                <th>Action</th>
                                 @*<th>Address2</th>
                                     <th>Street</th>
                                     <th>City</th>*@
@@ -93,7 +94,10 @@
                                     <td>@Html.DisplayFor(modelItem => item.Date)</td>
                                     <td>@Html.DisplayFor(modelItem => item.RecurringDonation)</td>
                                     <td>@Html.DisplayFor(modelItem => item.DonationTypeId)</td>
-
+                                    <td>
+                                        <a asp-controller="Donation" asp-action="Edit" asp-route-Id=@item.Id class="mr-2"><i class="fas fa-edit text-info font-16"></i></a>
+                                        <a onclick="Delete(@item.Id)"><i class="fas fa-trash-alt text-danger font-16" onclick="return confirm('Are you sure to delete the record')"></i></a>
+                                    </td>
                                 </tr><!--end tr-->
                             }
                         </tbody>
@@ -103,3 +107,18 @@
         </div><!--end card-->
     </div> <!--end col-->
 </div><!--end row-->
+
+<script>
+
+    function Delete(id) {
+        $.ajax({
+            url: "/Donation/Delete",
+            type: 'Delete',
+            data: { id },
+            success: function (data) {
+                window.location.href = window.location.origin + "/Donation/Index";
+            }
+        });
+    }
+
+</script>
